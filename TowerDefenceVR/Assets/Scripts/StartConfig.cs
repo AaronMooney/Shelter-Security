@@ -10,7 +10,7 @@ public class StartConfig : MonoBehaviour {
 	void Start () {
         isTopDownView = false;
 
-        this.gameObject.AddComponent<VRTK_HeightAdjustTeleport>();
+        this.gameObject.AddComponent<VRTK_BasicTeleport>();
 	}
 
     private void Update()

@@ -78,11 +78,11 @@ public class WeaponShoot : MonoBehaviour {
 
         if (Physics.Raycast(shootRay, out shootHit, range))
         {
-            //EnemyHealth enemyHealth = shootHit.collider.GetComponent<EnemyHealth>();
-            //if (enemyHealth != null)
-            //{
-            //    enemyHealth.TakeDamage(damagePerShot, shootHit.point);
-            //}
+            EnemyHealth enemyHealth = shootHit.collider.GetComponent<EnemyHealth>();
+            if (enemyHealth != null)
+            {
+                enemyHealth.TakeDamage(damagePerShot, shootHit.point);
+            }
             gunLine.SetPosition(1, shootHit.point);
         }
         else
