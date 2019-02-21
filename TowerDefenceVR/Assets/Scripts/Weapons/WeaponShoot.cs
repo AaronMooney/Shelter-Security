@@ -1,8 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
-public class WeaponShoot : MonoBehaviour {
+public class WeaponShoot : MonoBehaviour
+{
 
     public VRTK.VRTK_ControllerEvents controllerEvents;
 
@@ -20,6 +22,8 @@ public class WeaponShoot : MonoBehaviour {
     public Light faceLight;
     float effectsDisplayTime = 0.2f;
     bool canShoot = true;
+    KeyCode fireKey = KeyCode.Mouse0;
+    private string fpsCam = "PlayerCamera";
 
     void Awake()
     {
@@ -30,16 +34,18 @@ public class WeaponShoot : MonoBehaviour {
     }
 
     // Use this for initialization
-    void Start () {
-        
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    void Start()
+    {
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
 
         timer += Time.deltaTime;
 
-        if (controllerEvents.triggerPressed && canShoot && timer >= fireRate && Time.timeScale != 0)
+        if ((controllerEvents.triggerPressed || Input.GetKeyDown(fireKey)) && canShoot && timer >= fireRate && Time.timeScale != 0)
         {
             Shoot();
         }
@@ -74,7 +80,13 @@ public class WeaponShoot : MonoBehaviour {
         gunLine.SetPosition(0, transform.position);
 
         shootRay.origin = transform.position;
-        shootRay.direction = transform.forward;
+        if (VRConfig.VREnabled)
+        {
+            shootRay.direction = transform.forward;
+        } else
+        {
+            shootRay.direction = GameObject.Find(fpsCam).transform.forward;
+        }
 
         if (Physics.Raycast(shootRay, out shootHit, range))
         {
