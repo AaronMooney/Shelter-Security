@@ -104,7 +104,7 @@ public class Turret : MonoBehaviour {
             EnemyHealth enemyHealth = shootHit.collider.GetComponent<EnemyHealth>();
             if (enemyHealth != null)
             {
-                enemyHealth.TakeDamage(50, shootHit.point);
+                enemyHealth.TakeDamage(50);
             }
             fireLine.SetPosition(1, shootHit.point);
         }

@@ -5,10 +5,9 @@ using UnityEditor;
 
 public class WeaponShoot : MonoBehaviour
 {
-
     public VRTK.VRTK_ControllerEvents controllerEvents;
 
-    public int damagePerShot = 10;
+    public float damagePerShot = 10f;
     public float fireRate = 0.5f;
     public float range = 100f;
 
@@ -30,13 +29,13 @@ public class WeaponShoot : MonoBehaviour
         gunParticles = GetComponent<ParticleSystem>();
         gunLine = GetComponent<LineRenderer>();
         gunAudio = GetComponent<AudioSource>();
-        gunLight = GetComponent<Light>();
+        //gunLight = GetComponent<Light>();
     }
 
     // Use this for initialization
     void Start()
     {
-
+        DisableEffects();
     }
 
     // Update is called once per frame
@@ -45,7 +44,7 @@ public class WeaponShoot : MonoBehaviour
 
         timer += Time.deltaTime;
 
-        if ((controllerEvents.triggerPressed || Input.GetKeyDown(fireKey)) && canShoot && timer >= fireRate && Time.timeScale != 0)
+        if ((controllerEvents.triggerPressed || Input.GetKey(fireKey)) && canShoot && timer >= fireRate && Time.timeScale != 0)
         {
             Shoot();
         }
@@ -60,8 +59,8 @@ public class WeaponShoot : MonoBehaviour
     public void DisableEffects()
     {
         gunLine.enabled = false;
-        faceLight.enabled = false;
-        gunLight.enabled = false;
+        //faceLight.enabled = false;
+        //gunLight.enabled = false;
     }
 
     void Shoot()
@@ -70,8 +69,8 @@ public class WeaponShoot : MonoBehaviour
 
         gunAudio.Play();
 
-        gunLight.enabled = true;
-        faceLight.enabled = true;
+        //gunLight.enabled = true;
+        //faceLight.enabled = true;
 
         gunParticles.Stop();
         gunParticles.Play();
@@ -93,7 +92,7 @@ public class WeaponShoot : MonoBehaviour
             EnemyHealth enemyHealth = shootHit.collider.GetComponent<EnemyHealth>();
             if (enemyHealth != null)
             {
-                enemyHealth.TakeDamage(damagePerShot, shootHit.point);
+                enemyHealth.TakeDamage(damagePerShot);
             }
             gunLine.SetPosition(1, shootHit.point);
         }

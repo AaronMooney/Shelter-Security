@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour {
 
-    public int maxHealth = 100;
-    public int currentHealth;
+    public float maxHealth = 100f;
+    public float currentHealth;
     BoxCollider boxCollider;
     bool isDead;
 
@@ -25,7 +25,7 @@ public class EnemyHealth : MonoBehaviour {
 		
 	}
 
-    public void TakeDamage(int amount, Vector3 hitPoint)
+    public void TakeDamage(float amount)
     {
         print("hit");
         if (isDead)
