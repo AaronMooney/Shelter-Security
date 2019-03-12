@@ -8,7 +8,7 @@ public class StunTurret : MonoBehaviour
     private List<Transform> targets;
     public float range = 15f;
     public string enemyTag = "Enemy";
-    public float fireRate = 1f;
+    public float fireRate = 2.5f;
 
 
     Ray shootRay = new Ray();
@@ -29,7 +29,7 @@ public class StunTurret : MonoBehaviour
     void Start()
     {
         InvokeRepeating("UpdateTarget", 0f, 0.5f);
-        StartCoroutine("Stun");
+        //StartCoroutine("Stun");
     }
 
     //Issue lies in this funtion
@@ -54,25 +54,39 @@ public class StunTurret : MonoBehaviour
         //    }
         //}
 
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, range);
-        List<Transform> transforms = new List<Transform>();
-        foreach (Collider col in hitColliders){
-            Debug.Log("COL: " + col.name);
-            if(col.tag.Contains("Enemy")) transforms.Add(col.transform);
-        }
-        targets = transforms;
+        //Collider[] hitColliders = Physics.OverlapSphere(transform.position, range);
+        //List<Transform> transforms = new List<Transform>();
+        //foreach (Collider col in hitColliders){
+        //    if (col.tag.Contains("Enemy"))
+        //    {
+        //        transforms.Add(col.transform);
+        //        Debug.Log("COL: " + col.name);
+        //    }
+        //}
+        //targets = transforms;
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, range);
+        List<Transform> transforms = new List<Transform>();
+        foreach (Collider col in hitColliders)
+        {
+            if (col.tag.Contains("Enemy"))
+            {
+                transforms.Add(col.transform);
+                Debug.Log("COL: " + col.name);
+            }
+        }
+        targets = transforms;
 
         timer += Time.deltaTime;
         //works if i remove targets.count
         if (timer >= fireRate && Time.timeScale != 0 && targets.Count > 0)
         {
             Shoot();
-
         }
 
     }
@@ -91,7 +105,6 @@ public class StunTurret : MonoBehaviour
             //Debug.Log(hits[i].collider.name);
             if (!hits[i].collider.tag.Contains("Enemy")) continue;
             if (hits[i].collider.GetComponent<EnemyAI>().isImmune || hits[i].collider.GetComponent<EnemyAI>().stunned) continue;
-            Debug.Log("STUNNED ENEMY");
             targets.Add(hits[i].collider.transform);
             hits[i].collider.GetComponent<EnemyAI>().stunned = true;
             hits[i].collider.GetComponent<EnemyAI>().isImmune = true;
@@ -115,28 +128,27 @@ public class StunTurret : MonoBehaviour
         //}
     }
 
-    IEnumerator Stun()
-    {
-        while (true)
-        {
-            foreach (Transform enemyTransform in targets)
-            {
-                Debug.Log("Name: " + enemyTransform.gameObject.name);
-                if (!enemyTransform.GetComponent<EnemyAI>().stunned) continue;
+    //IEnumerator Stun()
+    //{
+    //    while (true)
+    //    {
+    //        foreach (Transform enemyTransform in targets)
+    //        {
+    //            Debug.Log("Name: " + enemyTransform.gameObject.name);
+    //            if (!enemyTransform.GetComponent<EnemyAI>().stunned) continue;
 
-                enemyTransform.GetComponent<EnemyAI>().StunTime -= Time.deltaTime;
-                if (enemyTransform.GetComponent<EnemyAI>().StunTime <= 0.5f)
-                {
-                    enemyTransform.GetComponent<EnemyAI>().StunTime = 0;
-                    enemyTransform.GetComponent<EnemyAI>().stunned = false;
-                    enemyTransform.GetComponent<EnemyAI>().isImmune = true;
+    //            enemyTransform.GetComponent<EnemyAI>().StunTime -= Time.deltaTime;
+    //            if (enemyTransform.GetComponent<EnemyAI>().StunTime <= 0.5f)
+    //            {
+    //                enemyTransform.GetComponent<EnemyAI>().StunTime = 0;
+    //                enemyTransform.GetComponent<EnemyAI>().stunned = false;
+    //                enemyTransform.GetComponent<EnemyAI>().isImmune = true;
 
-                }
-            }
-            yield return null;
+    //            }
+    //        }
+    //        yield return null;
 
-        }
-    }
+    //}
 
     private void OnDrawGizmosSelected()
     {

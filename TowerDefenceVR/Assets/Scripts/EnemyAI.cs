@@ -68,6 +68,10 @@ public class EnemyAI : MonoBehaviour
         {
             StartCoroutine("ImmuneTimer");
         }
+        if (stunned)
+        {
+            StartCoroutine("RemoveStun");
+        }
 
         //if (!GetComponent<EnemyHealth>().isDead)
         //{
@@ -97,6 +101,13 @@ public class EnemyAI : MonoBehaviour
     {
         yield return new WaitForSeconds(10f);
         isImmune = false;
+        yield return null;
+    }
+
+    IEnumerator RemoveStun()
+    {
+        yield return new WaitForSeconds(3f);
+        stunned = false;
         yield return null;
     }
 
