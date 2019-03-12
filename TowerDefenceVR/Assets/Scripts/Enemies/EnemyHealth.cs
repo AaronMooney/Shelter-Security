@@ -2,32 +2,39 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyHealth : MonoBehaviour {
+public class EnemyHealth : MonoBehaviour
+{
 
     public float maxHealth = 100f;
     public float currentHealth;
     BoxCollider boxCollider;
-    bool isDead;
+    public bool isDead;
+    Animator anim;
 
     void Awake()
     {
         boxCollider = GetComponent<BoxCollider>();
         currentHealth = maxHealth;
+        anim = GetComponent<Animator>();
+        anim.SetFloat("health", maxHealth);
     }
 
     // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    void Start()
+    {
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
 
     public void TakeDamage(float amount)
     {
         print("hit");
+        anim.SetFloat("health", anim.GetFloat("health") - amount);
         if (isDead)
             return;
 
@@ -41,10 +48,12 @@ public class EnemyHealth : MonoBehaviour {
 
     void Die()
     {
+        anim.SetBool("walking", false);
+        anim.SetBool("attacking", false);
         isDead = true;
 
         boxCollider.isTrigger = true;
 
-        Destroy(gameObject);
+        Destroy(gameObject, 5f);
     }
 }
