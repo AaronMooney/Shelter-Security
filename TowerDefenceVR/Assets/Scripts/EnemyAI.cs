@@ -73,19 +73,19 @@ public class EnemyAI : MonoBehaviour
             StartCoroutine("RemoveStun");
         }
 
-        //if (!GetComponent<EnemyHealth>().isDead)
-        //{
-        //    if (Vector3.Distance(transform.position, target) <= 2)
-        //    {
-        //        anim.SetBool("walking", false);
-        //        anim.SetBool("attacking", true);
-        //    }
-        //}
-        //else
-        //{
-        //    anim.SetBool("walking", false);
-        //    anim.SetBool("attacking", false);
-        //}
+        if (!GetComponent<EnemyHealth>().isDead)
+        {
+            if (Vector3.Distance(transform.position, target) <= 2)
+            {
+                anim.SetBool("walking", false);
+                anim.SetBool("attacking", true);
+            }
+        }
+        else
+        {
+            anim.SetBool("walking", false);
+            anim.SetBool("attacking", false);
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
