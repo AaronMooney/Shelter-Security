@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyAI : MonoBehaviour
 {
     Vector3 target;
+    private float defaultMoveSpeed = 6;
     public float moveSpeed = 6;
     public bool stunned = false;
     Vector3[] path;
@@ -12,9 +13,9 @@ public class EnemyAI : MonoBehaviour
     Animator anim;
     AnimatorStateInfo info;
     public bool isImmune = false;
+    public bool isSlowed = false;
     GameObject targetObject;
 
-    public float StunTime { get; set; }
 
     void Start()
     {
@@ -23,6 +24,7 @@ public class EnemyAI : MonoBehaviour
         PathRequestController.RequestPath(transform.position, target, OnPathFound);
         anim = GetComponent<Animator>();
         info = anim.GetCurrentAnimatorStateInfo(0);
+        defaultMoveSpeed = moveSpeed;
     }
 
     public void OnPathFound(Vector3[] newPath, bool pathSuccess)
@@ -66,17 +68,22 @@ public class EnemyAI : MonoBehaviour
     {
         if (isImmune)
         {
-            StartCoroutine("ImmuneTimer");
+            Invoke("RemoveImmunity", 10f);
         }
         if (stunned)
         {
-            StartCoroutine("RemoveStun");
+            Invoke("RemoveStun", 3f);
+        }
+        if (isSlowed)
+        {
+            Invoke("RemoveSlow", 5f);
         }
 
         if (!GetComponent<EnemyHealth>().isDead)
         {
-            if (Vector3.Distance(transform.position, target) <= 2)
+            if (Vector3.Distance(transform.position, target) <= 3)
             {
+                Debug.Log("Attack");
                 anim.SetBool("walking", false);
                 anim.SetBool("attacking", true);
             }
@@ -90,25 +97,28 @@ public class EnemyAI : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (!GetComponent<EnemyHealth>().isDead && collision.collider.tag.Contains("Base"))
+        if (!GetComponent<EnemyHealth>().isDead && collision.collider.tag == "Base")
         {
+            Debug.Log("hit base");
             anim.SetBool("walking", false);
             anim.SetBool("attacking", true);
         }
     }
 
-    IEnumerator ImmuneTimer()
+    void RemoveImmunity()
     {
-        yield return new WaitForSeconds(10f);
         isImmune = false;
-        yield return null;
     }
 
-    IEnumerator RemoveStun()
+    void RemoveStun()
     {
-        yield return new WaitForSeconds(3f);
         stunned = false;
-        yield return null;
+    }
+
+    void RemoveSlow()
+    {
+        moveSpeed = defaultMoveSpeed;
+        isSlowed = false;
     }
 
     public void OnDrawGizmos()
@@ -135,8 +145,8 @@ public class EnemyAI : MonoBehaviour
     public static Vector3 RandomPointInBounds(Bounds bounds)
     {
         return new Vector3(
-            Random.Range(bounds.min.x - 12, bounds.max.x -12),
-            Random.Range(bounds.min.y, bounds.max.y),
+            bounds.min.x - 12,
+            0f,
             Random.Range(bounds.min.z, bounds.max.z)
         );
     }
