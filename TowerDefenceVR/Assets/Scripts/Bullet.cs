@@ -8,6 +8,7 @@ public class Bullet : MonoBehaviour {
     public float speed = 70f;
     public GameObject impactEffect;
     public float BulletDamage { get; set; }
+    public float explosionRadius = 0;
 
     public void Focus(Transform newTarget)
     {
@@ -32,18 +33,43 @@ public class Bullet : MonoBehaviour {
         }
 
         transform.Translate(direction.normalized * (speed * Time.deltaTime), Space.World);
-
+        transform.LookAt(target);
 
 	}
 
     void HitTarget()
     {
         GameObject instance = (GameObject)Instantiate(impactEffect, transform.position, transform.rotation);
-        Destroy(instance, 2f);
+        Destroy(instance, 5f);
         Destroy(gameObject);
-        if (target.gameObject.tag.Contains("Enemy"))
+        if (target.gameObject.tag == "Enemy")
         {
-            target.gameObject.GetComponent<EnemyHealth>().TakeDamage(BulletDamage);
+            if (explosionRadius > 0f)
+            {
+                Explode();
+            }
+            else
+            {
+                target.gameObject.GetComponent<EnemyHealth>().TakeDamage(BulletDamage);
+            }
         }
+    }
+
+    void Explode()
+    {
+        Collider[] hits = Physics.OverlapSphere(transform.position, explosionRadius);
+        foreach (Collider col in hits)
+        {
+            if (col.tag == "Enemy")
+            {
+                col.GetComponent<EnemyHealth>().TakeDamage(BulletDamage);
+            }
+        }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, explosionRadius);
     }
 }
