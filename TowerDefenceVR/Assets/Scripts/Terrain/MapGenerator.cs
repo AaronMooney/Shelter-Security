@@ -5,122 +5,118 @@ using UnityEngine;
 
 public class MapGenerator : MonoBehaviour {
 
-    public enum DrawMode { NoiseMap, ColorMap, Mesh, FalloffMap };
+    public enum DrawMode { NoiseMap, Mesh, FalloffMap };
     public DrawMode drawMode;
+
+    public TerrainData terrainData;
+    public NoiseData noiseData;
+    public TextureData textureData;
 
     public int mapWidth;
     public int mapHeight;
-    public float noiseScale;
+    public Material terrainMaterial;
+
     public bool autoUpdate;
-    public bool useFalloff;
-    public float meshHeightMultiplier;
-    public AnimationCurve meshHeightCurve;
 
-    public float av;
-    public float bv;
-
-    public int octaves;
-    [Range(0,1)]
-    public float persistance;
-    public float lacunarity;
-
-    public int seed;
-    public Vector2 offset;
-    public bool isIsland;
-
-    public TerrainType[] regions;
     float[,] falloffMap;
 
     private void Awake()
     {
-        falloffMap = FalloffGenerator.GenerateFalloffMap(mapWidth, av, bv);
+        falloffMap = FalloffGenerator.GenerateFalloffMap(mapWidth, terrainData.av, terrainData.bv);
+        terrainMaterial = (Material)AssetDatabase.LoadAssetAtPath("Assets/Materials/MeshMaterial.mat", typeof(Material));
         GenerateMap();
     }
 
     public void GenerateMap()
     {
 
-        float[,] noiseMap = Noise.GenerateNoiseMap(mapWidth, mapHeight, seed, noiseScale, octaves, persistance, lacunarity, offset);
+        MapData mapData = GenerateMapData();
 
-        Color[] colorMap = new Color[mapWidth * mapHeight];
+        MapDisplay display = FindObjectOfType<MapDisplay>();
+        if (drawMode == DrawMode.NoiseMap)
+        {
+            display.DrawTexture(TextureGenerator.TextureFromHeightMap(mapData.heightMap));
+        } else if (drawMode == DrawMode.Mesh)
+        {
+            display.DrawMesh(MeshGenerator.GenerateTerrainMesh(mapData.heightMap, terrainData.meshHeightMultiplier, terrainData.meshHeightCurve));
+        } else if (drawMode == DrawMode.FalloffMap)
+        {
+            display.DrawTexture(TextureGenerator.TextureFromHeightMap(FalloffGenerator.GenerateFalloffMap(mapWidth, terrainData.av, terrainData.bv), terrainData.isIsland));
+        }
+
+    }
+
+    MapData GenerateMapData()
+    {
+        float[,] noiseMap = Noise.GenerateNoiseMap(mapWidth, mapHeight, noiseData.seed, noiseData.noiseScale, noiseData.octaves, noiseData.persistance, noiseData.lacunarity, noiseData.offset);
+
         for (int y = 0; y < mapHeight; y++)
         {
             for (int x = 0; x < mapWidth; x++)
             {
-                if (useFalloff)
+                if (terrainData.useFalloff)
                 {
-                    if (isIsland)
+                    if (terrainData.isIsland)
                     {
                         noiseMap[x, y] = noiseMap[x, y] * (1 - falloffMap[x, y]);
-                    } else
+                    }
+                    else
                     {
                         noiseMap[x, y] = falloffMap[x, y] * (1 - noiseMap[x, y]);
-                    }
-                }
-                float currentHeight = noiseMap[x, y];
-                for (int i = 0; i < regions.Length; i++)
-                {
-                    if (currentHeight <= regions[i].height)
-                    {
-                        colorMap[y * mapWidth + x] = regions[i].color;
-                        break;
                     }
                 }
             }
         }
 
-        MapDisplay display = FindObjectOfType<MapDisplay>();
-        if (drawMode == DrawMode.NoiseMap)
-        {
-            display.DrawTexture(TextureGenerator.TextureFromHeightMap(noiseMap));
-        } else if (drawMode == DrawMode.ColorMap)
-        {
-            display.DrawTexture(TextureGenerator.TextureFromColorMap(colorMap, mapWidth, mapHeight));
-        } else if (drawMode == DrawMode.Mesh)
-        {
-            display.DrawMesh(MeshGenerator.GenerateTerrainMesh(noiseMap, meshHeightMultiplier, meshHeightCurve), TextureGenerator.TextureFromColorMap(colorMap, mapWidth, mapHeight));
-        } else if (drawMode == DrawMode.FalloffMap)
-        {
-            display.DrawTexture(TextureGenerator.TextureFromHeightMap(FalloffGenerator.GenerateFalloffMap(mapWidth, av, bv), isIsland));
-        }
-
+        textureData.ApplyToMaterial(terrainMaterial);
+        textureData.UpdateMeshHeights(terrainMaterial, terrainData.MinHeight, terrainData.MaxHeight);
+        return new MapData(noiseMap);
     }
 
     void OnValidate()
     {
-        if (mapWidth < 1)
+        
+        if (terrainData != null)
         {
-            mapWidth = 1;
+            terrainData.OnValuesUpdated -= OnValuesUpdated;
+            terrainData.OnValuesUpdated += OnValuesUpdated;
+            falloffMap = FalloffGenerator.GenerateFalloffMap(mapWidth, terrainData.av, terrainData.bv);
         }
-        if (mapHeight < 1)
+        if (noiseData != null)
         {
-            mapHeight = 1;
+            noiseData.OnValuesUpdated -= OnValuesUpdated;
+            noiseData.OnValuesUpdated += OnValuesUpdated;
         }
-        if (lacunarity < 1)
+        if (textureData != null)
         {
-            lacunarity = 1;
+            textureData.OnValuesUpdated -= OnValuesUpdated;
+            textureData.OnValuesUpdated += OnValuesUpdated;
         }
-        if (octaves < 0)
-        {
-            octaves = 0;
-        }
-        if (av < 0.01f)
-        {
-            av = 0.01f;
-        }
-        if (bv < 0.01f)
-        {
-            bv = 0.01f;
-        }
-        falloffMap = FalloffGenerator.GenerateFalloffMap(mapWidth, av, bv);
     }
 
-    [System.Serializable]
-    public struct TerrainType
+    void OnTextureValuesUpdated()
     {
-        public string name;
-        public float height;
-        public Color color;
+        textureData.ApplyToMaterial(terrainMaterial);
+    }
+
+    void OnValuesUpdated()
+    {
+        if (!Application.isPlaying)
+        {
+            GenerateMap();
+        }
+    }
+
+
+    public struct MapData
+    {
+        public float[,] heightMap;
+
+
+        public MapData(float[,] heightMap)
+        {
+            this.heightMap = heightMap;
+        }
     }
 
 }
