@@ -32,6 +32,15 @@ public class EnemyAI : MonoBehaviour
             if (pathSuccess)
             {
                 path = newPath;
+<<<<<<< Updated upstream
+=======
+
+                for (int i = 0; i < path.Length; i++)
+                {
+                    path[i] = new Vector3(path[i].x, -1, path[i].z);
+                }
+
+>>>>>>> Stashed changes
                 StopCoroutine("FollowPath");
                 StartCoroutine("FollowPath");
             }
@@ -49,6 +58,8 @@ public class EnemyAI : MonoBehaviour
             if (GetComponent<EnemyHealth>().isDead) break;
             if (transform.position == currentWaypoint)
             {
+                if (transform.position.z < 40 )
+                    transform.position = new Vector3(transform.position.x, -0.5f, transform.position.z);
                 targetIndex++;
                 if (targetIndex >= path.Length)
                 {
