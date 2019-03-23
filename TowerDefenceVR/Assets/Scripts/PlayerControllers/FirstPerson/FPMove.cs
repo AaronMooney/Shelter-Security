@@ -22,6 +22,15 @@ public class FPMove : MonoBehaviour {
 	void Update ()
     {
         PlayerMove();
+
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            moveSpeed = 9;
+        }
+        else
+        {
+            moveSpeed = 6;
+        }
 	}
 
     private void PlayerMove()

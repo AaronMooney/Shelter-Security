@@ -15,7 +15,7 @@ public class WeaponSelection : MonoBehaviour {
 
         int previousWeapon = currentWeapon;
 
-		if (Input.GetAxis(cycleKey) > 0.0f)
+		if (Input.GetAxis(cycleKey) < 0.0f)
         {
             if (currentWeapon >= transform.childCount - 1)
             {
@@ -26,7 +26,7 @@ public class WeaponSelection : MonoBehaviour {
             }
         }
 
-        if (Input.GetAxis(cycleKey) < 0.0f)
+        if (Input.GetAxis(cycleKey) > 0.0f)
         {
             if (currentWeapon <= 0)
             {

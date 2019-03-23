@@ -11,10 +11,16 @@ public class WeaponShoot : MonoBehaviour
     public float fireRate = 0.5f;
     public float range = 100f;
 
+    public int maxAmmo = 10;
+    private int currentAmmo;
+    public float reloadTime = 1f;
+    private bool isReloading = false;
+    public Animator animator;
+
     float timer;
     Ray shootRay = new Ray();
     RaycastHit shootHit;
-    ParticleSystem gunParticles;
+    public ParticleSystem gunParticles;
     LineRenderer gunLine;
     AudioSource gunAudio;
     Light gunLight;
@@ -22,14 +28,14 @@ public class WeaponShoot : MonoBehaviour
     float effectsDisplayTime = 0.2f;
     bool canShoot = true;
     KeyCode fireKey = KeyCode.Mouse0;
-    private string fpsCam = "PlayerCamera";
+    public Camera fpsCam;
     public GameObject impactEffect;
     public float damage;
     public string enemyTag = "Enemy";
 
     void Awake()
     {
-        gunParticles = GetComponent<ParticleSystem>();
+        //gunParticles = GetComponent<ParticleSystem>();
         gunLine = GetComponent<LineRenderer>();
         gunAudio = GetComponent<AudioSource>();
         //gunLight = GetComponent<Light>();
@@ -39,6 +45,7 @@ public class WeaponShoot : MonoBehaviour
     void Start()
     {
         DisableEffects();
+        currentAmmo = maxAmmo;
     }
 
     // Update is called once per frame
@@ -46,6 +53,21 @@ public class WeaponShoot : MonoBehaviour
     {
 
         timer += Time.deltaTime;
+
+        if (isReloading) return;
+
+        if (currentAmmo <= 0)
+        {
+            
+            StartCoroutine(Reload());
+            return;
+        }
+
+        if (!isReloading && currentAmmo < maxAmmo && Input.GetKeyDown(KeyCode.R))
+        {
+            StartCoroutine(Reload());
+            return;
+        }
 
         if ((controllerEvents.triggerPressed || Input.GetKey(fireKey)) && canShoot && timer >= fireRate && Time.timeScale != 0)
         {
@@ -75,12 +97,13 @@ public class WeaponShoot : MonoBehaviour
         ////gunLight.enabled = true;
         ////faceLight.enabled = true;
 
-        //gunParticles.Stop();
-        //gunParticles.Play();
+        gunParticles.Stop();
+        gunParticles.Play();
 
         //gunLine.enabled = true;
         //gunLine.SetPosition(0, transform.position);
 
+        currentAmmo--;
         
         if (VRConfig.VREnabled)
         {
@@ -89,8 +112,8 @@ public class WeaponShoot : MonoBehaviour
         }
         else
         {
-            shootRay.origin = GameObject.Find(fpsCam).transform.position;
-            shootRay.direction = GameObject.Find(fpsCam).transform.forward;
+            shootRay.origin = fpsCam.transform.position;
+            shootRay.direction = fpsCam.transform.forward;
         }
 
         if (Physics.Raycast(shootRay, out shootHit, range))
@@ -108,5 +131,23 @@ public class WeaponShoot : MonoBehaviour
         {
             //gunLine.SetPosition(1, shootRay.origin + shootRay.direction * range);
         }
+    }
+
+    IEnumerator Reload()
+    {
+        isReloading = true;
+        Debug.Log("Reloading...");
+        animator.SetBool("Reloading", true);
+        yield return new WaitForSeconds(reloadTime - 0.25f);
+        animator.SetBool("Reloading", false);
+        yield return new WaitForSeconds(0.25f);
+        currentAmmo = maxAmmo;
+        isReloading = false;
+    }
+
+    void OnEnable()
+    {
+        isReloading = false;
+        animator.SetBool("Reloading", false);
     }
 }
