@@ -54,7 +54,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4206960503046640}
   m_Layer: 0
-  m_Name: PlasmaRifle
+  m_Name: PlasmaSniper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1050,6 +1050,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controllerEvents: {fileID: 0}
+  fireType: 0
   damagePerShot: 50
   fireRate: 0.45
   range: 100

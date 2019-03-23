@@ -34,6 +34,7 @@ public class EnemyAI : MonoBehaviour
             if (pathSuccess)
             {
                 path = newPath;
+
                 StopCoroutine("FollowPath");
                 StartCoroutine("FollowPath");
             }
@@ -129,7 +130,6 @@ public class EnemyAI : MonoBehaviour
             {
                 Gizmos.color = Color.black;
                 Gizmos.DrawCube(path[i], Vector3.one);
-
                 if (i == targetIndex)
                 {
                     Gizmos.DrawLine(transform.position, path[i]);

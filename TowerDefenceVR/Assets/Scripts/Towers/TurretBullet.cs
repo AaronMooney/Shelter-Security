@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour {
+public class TurretBullet : MonoBehaviour {
 
     private Transform target;
     public float speed = 70f;

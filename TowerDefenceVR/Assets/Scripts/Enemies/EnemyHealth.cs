@@ -28,7 +28,6 @@ public class EnemyHealth : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
     }
 
     public void TakeDamage(float amount)

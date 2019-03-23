@@ -7,6 +7,9 @@ public class WeaponShoot : MonoBehaviour
 {
     public VRTK.VRTK_ControllerEvents controllerEvents;
 
+    public enum FireType { Ray, Sniper, Launcher };
+    public FireType fireType;
+
     public float damagePerShot = 10f;
     public float fireRate = 0.5f;
     public float range = 100f;
@@ -16,6 +19,7 @@ public class WeaponShoot : MonoBehaviour
     public float reloadTime = 1f;
     private bool isReloading = false;
     public Animator animator;
+    [SerializeField] GameObject projectile;
 
     float timer;
     Ray shootRay = new Ray();
@@ -35,7 +39,6 @@ public class WeaponShoot : MonoBehaviour
 
     void Awake()
     {
-        //gunParticles = GetComponent<ParticleSystem>();
         gunLine = GetComponent<LineRenderer>();
         gunAudio = GetComponent<AudioSource>();
         //gunLight = GetComponent<Light>();
@@ -71,7 +74,13 @@ public class WeaponShoot : MonoBehaviour
 
         if ((controllerEvents.triggerPressed || Input.GetKey(fireKey)) && canShoot && timer >= fireRate && Time.timeScale != 0)
         {
-            Shoot();
+            if (fireType == FireType.Ray)
+            {
+                ShootRay();
+            } else
+            {
+                ShootProjectile();
+            }
         }
 
         if (timer >= fireRate * effectsDisplayTime)
@@ -88,7 +97,7 @@ public class WeaponShoot : MonoBehaviour
         //gunLight.enabled = false;
     }
 
-    void Shoot()
+    void ShootRay()
     {
         timer = 0f;
 
@@ -131,6 +140,40 @@ public class WeaponShoot : MonoBehaviour
         {
             //gunLine.SetPosition(1, shootRay.origin + shootRay.direction * range);
         }
+    }
+
+    void ShootProjectile()
+    {
+        timer = 0f;
+
+        gunAudio.Play();
+
+        ////gunLight.enabled = true;
+        ////faceLight.enabled = true;
+
+        gunParticles.Stop();
+        gunParticles.Play();
+        currentAmmo--;
+
+        GameObject _proj = (GameObject)Instantiate(projectile, transform.position, transform.rotation);
+        _proj.GetComponent<Rigidbody>().AddForce(transform.forward * 2000);
+        PlayerProjectile bullet = _proj.GetComponent<PlayerProjectile>();
+        bullet.BulletDamage = damage;
+
+        if (fireType == FireType.Sniper)
+        {
+            if (bullet != null)
+            {
+                
+            }
+        } else
+        {
+            if (bullet != null)
+            {
+
+            }
+        }
+
     }
 
     IEnumerator Reload()

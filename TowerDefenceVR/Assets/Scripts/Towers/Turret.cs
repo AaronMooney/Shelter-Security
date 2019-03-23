@@ -97,7 +97,7 @@ public class Turret : MonoBehaviour {
     void Shoot()
     {
         GameObject newBullet = (GameObject)Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
-        Bullet bullet = newBullet.GetComponent<Bullet>();
+        TurretBullet bullet = newBullet.GetComponent<TurretBullet>();
         bullet.BulletDamage = damage;
         if(bullet != null)
         {
