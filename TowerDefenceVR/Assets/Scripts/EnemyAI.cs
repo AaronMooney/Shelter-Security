@@ -35,6 +35,11 @@ public class EnemyAI : MonoBehaviour
             {
                 path = newPath;
 
+                for (int i = 0; i < path.Length; i++)
+                {
+                    path[i] = new Vector3(path[i].x, -1, path[i].z);
+                }
+
                 StopCoroutine("FollowPath");
                 StartCoroutine("FollowPath");
             }
@@ -85,8 +90,11 @@ public class EnemyAI : MonoBehaviour
             if (Vector3.Distance(transform.position, target) <= 3)
             {
                 Debug.Log("Attack");
+                if (transform.position.z < 40)
+                    transform.position = new Vector3(transform.position.x, -0.5f, transform.position.z);
                 anim.SetBool("walking", false);
                 anim.SetBool("attacking", true);
+
             }
         }
         else
