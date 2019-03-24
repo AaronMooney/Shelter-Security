@@ -6,8 +6,9 @@ using UnityEditor;
 public class WeaponShoot : MonoBehaviour
 {
     public VRTK.VRTK_ControllerEvents controllerEvents;
+    public bool VR = false;
 
-    public enum FireType { Ray, Sniper, PlasmaSniper, Launcher };
+    public enum FireType { Ray, VRNonScoped, Sniper, PlasmaSniper, Launcher };
     public FireType fireType;
 
     public float damagePerShot = 10f;
@@ -30,14 +31,14 @@ public class WeaponShoot : MonoBehaviour
     Ray shootRay = new Ray();
     RaycastHit shootHit;
     public ParticleSystem gunParticles;
-    AudioSource gunAudio;
+    private AudioSource gunAudio;
     public Light faceLight;
     float effectsDisplayTime = 0.2f;
     KeyCode fireKey = KeyCode.Mouse0;
     public Camera fpsCam;
     public GameObject impactEffect;
     public string enemyTag = "Enemy";
-    private AnimatorStateInfo info;
+    private AnimatorStateInfo info; 
 
     public delegate void OnScopedChangedDelegate(bool newBool);
     public event OnScopedChangedDelegate OnScopedChanged;
@@ -54,27 +55,24 @@ public class WeaponShoot : MonoBehaviour
         }
     }
 
-    void Awake()
-    {
-        gunAudio = GetComponent<AudioSource>();
-    }
-
     // Use this for initialization
     void Start()
     {
+        if (gameObject.name.Contains("VR")) VR = true;
         currentAmmo = maxAmmo;
         OnScopedChanged += ScopedChangedHandler;
+        gunAudio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        info = animator.GetCurrentAnimatorStateInfo(0);
+        if (!VR) info = animator.GetCurrentAnimatorStateInfo(0);
         timer += Time.deltaTime;
 
         if (isReloading) return;
 
-        if (currentAmmo <= 0)
+        if (currentAmmo <= 0 && !VR)
         {
             
             StartCoroutine(Reload());
@@ -110,14 +108,17 @@ public class WeaponShoot : MonoBehaviour
 
     private void FixedUpdate()
     {
-        AnimatorStateInfo info = animator.GetCurrentAnimatorStateInfo(0);
+        if (!VR)
+        {
+            AnimatorStateInfo info = animator.GetCurrentAnimatorStateInfo(0);
 
-        if (info.IsName("WeaponShoot")) animator.SetBool("Shoot", false);
+            if (info.IsName("WeaponShoot")) animator.SetBool("Shoot", false);
+        }
     }
 
     public void DisableShooting()
     {
-        animator.SetBool("Shooting", false);
+        if (!VR) animator.SetBool("Shooting", false);
     }
 
     void ShootRay()
@@ -125,7 +126,7 @@ public class WeaponShoot : MonoBehaviour
         timer = 0f;
 
         gunAudio.Play();
-        animator.SetBool("Shoot", true);
+        if (!VR) animator.SetBool("Shoot", true);
         ////gunLight.enabled = true;
         ////faceLight.enabled = true;
 
@@ -167,11 +168,13 @@ public class WeaponShoot : MonoBehaviour
 
     void ShootProjectile()
     {
+
+        Debug.Log("firew");
         timer = 0f;
 
         if (!info.IsName("SniperScoped") && !info.IsName("PlasmaScoped") && !info.IsName("LauncherScoped"))
         {
-            animator.SetBool("Shoot", true);
+            if (!VR) animator.SetBool("Shoot", true);
         }
 
         if (fireType == FireType.Launcher)
@@ -195,7 +198,7 @@ public class WeaponShoot : MonoBehaviour
         if (fireType == FireType.Launcher)
         {
             _proj.GetComponent<Rigidbody>().AddForce(transform.forward * 2000);
-        } else
+        } else if (fireType == FireType.PlasmaSniper || fireType == FireType.Sniper)
         {
             Vector3 forceDir = new Vector3();
             if (IsScoped)
@@ -203,6 +206,9 @@ public class WeaponShoot : MonoBehaviour
             else
                 forceDir = transform.forward;
             _proj.GetComponent<Rigidbody>().AddForce(forceDir * 4000);
+        } else
+        {
+            _proj.GetComponent<Rigidbody>().AddForce(transform.forward * 4000);
         }
         PlayerProjectile bullet = _proj.GetComponent<PlayerProjectile>();
         bullet.BulletDamage = damagePerShot;
@@ -231,22 +237,25 @@ public class WeaponShoot : MonoBehaviour
         IsScoped = false;
         timer = fireRate;
         isReloading = false;
-        animator.SetBool("Reloading", false);
+        if (!VR) animator.SetBool("Reloading", false);
     }
 
     private void ScopedChangedHandler(bool newBool)
     {
-        if (fireType == FireType.Launcher)
+        if (!VR)
         {
-            SetScoped("LauncherScoped", newBool);
-        }
-        else if (fireType == FireType.PlasmaSniper)
-        {
-            SetScoped("PlasmaScoped", newBool);
-        }
-        else if (fireType == FireType.Sniper)
-        {
-            SetScoped("SniperScoped", newBool);
+            if (fireType == FireType.Launcher)
+            {
+                SetScoped("LauncherScoped", newBool);
+            }
+            else if (fireType == FireType.PlasmaSniper)
+            {
+                SetScoped("PlasmaScoped", newBool);
+            }
+            else if (fireType == FireType.Sniper)
+            {
+                SetScoped("SniperScoped", newBool);
+            }
         }
     }
 

@@ -217,11 +217,7 @@ public class ControllerEventListener : MonoBehaviour
         DebugLogger(VRTK_ControllerReference.GetRealIndex(e.controllerReference), "BUTTON TWO", "pressed down", e);
         if (this.gameObject.name == "LeftController")
         {
-            GameObject.Find("PlayAreaScripts").GetComponent<StartConfig>().isTopDownView = !GameObject.Find("PlayAreaScripts").GetComponent<StartConfig>().isTopDownView;
-            if (!GameObject.Find("PlayAreaScripts").GetComponent<StartConfig>().isTopDownView)
-            {
-                GameObject.Find("PlayerCamera").transform.position = new Vector3(GameObject.Find("PlayerCamera").transform.position.x, 15.47f, GameObject.Find("PlayerCamera").transform.position.z);
-            }
+            
         }
     }
 

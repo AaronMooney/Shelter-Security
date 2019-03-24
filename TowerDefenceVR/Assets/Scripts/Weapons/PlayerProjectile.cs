@@ -22,7 +22,8 @@ public class PlayerProjectile : MonoBehaviour {
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (!hasHit)
+        Debug.Log(collision.collider.name);
+        if (!hasHit && collision.collider.tag != "Weapons")
         {
             GameObject instance = (GameObject)Instantiate(impactEffect, transform.position, transform.rotation);
             Destroy(instance, 5f);

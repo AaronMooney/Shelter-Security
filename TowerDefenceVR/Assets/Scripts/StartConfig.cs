@@ -5,48 +5,34 @@ using VRTK;
 
 public class StartConfig : MonoBehaviour {
 
-    public bool isTopDownView;
-    // Use this for initialization
 
-
-    private void Awake()
-    {
-        //isTopDownView = false;
-
-        //this.gameObject.AddComponent<VRTK_BasicTeleport>();
-        //if (VRConfig.VREnabled)
-        //{
-        //    GameObject.Find("FPSController").gameObject.SetActive(false);
-        //    GameObject.Find("[VRTK_SDKManager]").gameObject.SetActive(true);
-        //    GameObject.Find("GunVR").gameObject.SetActive(true);
-        //    GameObject.Find("VRTKScripts").gameObject.SetActive(true);
-
-        //} else
-        //{
-        //    GameObject.Find("FPSController").gameObject.SetActive(true);
-        //    GameObject.Find("[VRTK_SDKManager]").gameObject.SetActive(false);
-        //    GameObject.Find("GunVR").gameObject.SetActive(false);
-        //    GameObject.Find("VRTKScripts").gameObject.SetActive(false);
-        //}
-    }
+    public GameObject SDKManager;
+    public GameObject weaponHolder;
+    public GameObject scripts;
+    public GameObject crosshair;
+    public GameObject noVRPlayer;
 
     void Start () {
 
         Debug.Log(VRConfig.VREnabled);
         if (VRConfig.VREnabled)
         {
-            GameObject.Find("FPSController").gameObject.SetActive(false);
-            GameObject.Find("[VRTK_SDKManager]").gameObject.SetActive(true);
-            GameObject.Find("GunVR").gameObject.SetActive(true);
-            GameObject.Find("VRTKScripts").gameObject.SetActive(true);
+            noVRPlayer.SetActive(false);
+            crosshair.SetActive(false);
+            //GameObject.Find("[VRTK_SDKManager]").gameObject.SetActive(true);
+            SDKManager.SetActive(true);
+            weaponHolder.gameObject.SetActive(true);
+            scripts.gameObject.SetActive(true);
 
         }
         else
         {
-            GameObject.Find("FPSController").gameObject.SetActive(true);
-            GameObject.Find("[VRTK_SDKManager]").gameObject.SetActive(false);
-            GameObject.Find("GunVR").gameObject.SetActive(false);
-            GameObject.Find("VRTKScripts").gameObject.SetActive(false);
+            noVRPlayer.SetActive(true);
+            crosshair.SetActive(true);
+            //GameObject.Find("[VRTK_SDKManager]").gameObject.SetActive(false);
+            SDKManager.SetActive(false);
+            weaponHolder.SetActive(false);
+            scripts.gameObject.SetActive(false);
         }
     }
 
