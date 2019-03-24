@@ -19,15 +19,18 @@ public class WeaponShoot : MonoBehaviour
     public float reloadTime = 1f;
     private bool isReloading = false;
     public Animator animator;
-    [SerializeField] GameObject projectile;
+    [SerializeField] private GameObject projectile;
+    [SerializeField] private GameObject scopeOverlay;
+    public GameObject weaponCamera;
+
+    public float scopedFov = 15f;
+    private float normalFov;
 
     float timer;
     Ray shootRay = new Ray();
     RaycastHit shootHit;
     public ParticleSystem gunParticles;
-    LineRenderer gunLine;
     AudioSource gunAudio;
-    Light gunLight;
     public Light faceLight;
     float effectsDisplayTime = 0.2f;
     KeyCode fireKey = KeyCode.Mouse0;
@@ -53,15 +56,12 @@ public class WeaponShoot : MonoBehaviour
 
     void Awake()
     {
-        gunLine = GetComponent<LineRenderer>();
         gunAudio = GetComponent<AudioSource>();
-        //gunLight = GetComponent<Light>();
     }
 
     // Use this for initialization
     void Start()
     {
-        DisableEffects();
         currentAmmo = maxAmmo;
         OnScopedChanged += ScopedChangedHandler;
     }
@@ -106,11 +106,6 @@ public class WeaponShoot : MonoBehaviour
             }
         }
 
-        if (timer >= fireRate * effectsDisplayTime)
-        {
-            DisableEffects();
-        }
-
     }
 
     private void FixedUpdate()
@@ -123,13 +118,6 @@ public class WeaponShoot : MonoBehaviour
     public void DisableShooting()
     {
         animator.SetBool("Shooting", false);
-    }
-
-    public void DisableEffects()
-    {
-        gunLine.enabled = false;
-        //faceLight.enabled = false;
-        //gunLight.enabled = false;
     }
 
     void ShootRay()
@@ -209,7 +197,12 @@ public class WeaponShoot : MonoBehaviour
             _proj.GetComponent<Rigidbody>().AddForce(transform.forward * 2000);
         } else
         {
-            _proj.GetComponent<Rigidbody>().AddForce(transform.forward * 4000);
+            Vector3 forceDir = new Vector3();
+            if (IsScoped)
+                forceDir = Quaternion.AngleAxis(-1, transform.right) * transform.forward;
+            else
+                forceDir = transform.forward;
+            _proj.GetComponent<Rigidbody>().AddForce(forceDir * 4000);
         }
         PlayerProjectile bullet = _proj.GetComponent<PlayerProjectile>();
         bullet.BulletDamage = damagePerShot;
@@ -245,15 +238,43 @@ public class WeaponShoot : MonoBehaviour
     {
         if (fireType == FireType.Launcher)
         {
-            animator.SetBool("LauncherScoped", newBool);
+            SetScoped("LauncherScoped", newBool);
         }
         else if (fireType == FireType.PlasmaSniper)
         {
-            animator.SetBool("PlasmaScoped", newBool);
+            SetScoped("PlasmaScoped", newBool);
         }
         else if (fireType == FireType.Sniper)
         {
-            animator.SetBool("SniperScoped", newBool);
+            SetScoped("SniperScoped", newBool);
         }
+    }
+
+    private void SetScoped(string animName, bool scoped)
+    {
+        animator.SetBool(animName, scoped);
+
+        if (scoped)
+            StartCoroutine(OnScoped());
+        else
+            OnUnScoped();
+    }
+
+    private IEnumerator OnScoped()
+    {
+        yield return new WaitForSeconds(.15f);
+        scopeOverlay.SetActive(true);
+        weaponCamera.SetActive(false);
+
+        normalFov = fpsCam.fieldOfView;
+        fpsCam.fieldOfView = scopedFov;
+    }
+
+    private void OnUnScoped()
+    {
+        scopeOverlay.SetActive(false);
+        weaponCamera.SetActive(true);
+
+        fpsCam.fieldOfView = normalFov;
     }
 }
