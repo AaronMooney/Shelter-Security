@@ -72,7 +72,7 @@ public class WeaponShoot : MonoBehaviour
 
         if (isReloading) return;
 
-        if (currentAmmo <= 0 && !VR)
+        if (currentAmmo <= 0)
         {
             
             StartCoroutine(Reload());
@@ -219,9 +219,9 @@ public class WeaponShoot : MonoBehaviour
     {
         isReloading = true;
         Debug.Log("Reloading...");
-        animator.SetBool("Reloading", true);
+        if (!VR) animator.SetBool("Reloading", true);
         yield return new WaitForSeconds(reloadTime - 0.25f);
-        animator.SetBool("Reloading", false);
+        if (!VR) animator.SetBool("Reloading", false);
         yield return new WaitForSeconds(0.25f);
         currentAmmo = maxAmmo;
         isReloading = false;
