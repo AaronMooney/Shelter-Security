@@ -83,7 +83,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1790065752897598
 GameObject:
   m_ObjectHideFlags: 1
@@ -120,14 +120,14 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1749594347239282}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: -0.024432095, y: 0, z: 0, w: 0.9997015}
   m_LocalPosition: {x: 0.585, y: -0.36100006, z: 0.251}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children:
   - {fileID: 4653032572104448}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -2.8, y: 0, z: 0}
 --- !u!4 &4653032572104448
 Transform:
   m_ObjectHideFlags: 1
@@ -135,7 +135,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1223664065852796}
   m_LocalRotation: {x: -0.017958613, y: -0, z: 0.99983877, w: 0}
-  m_LocalPosition: {x: -0.03, y: 1.17, z: 14.74}
+  m_LocalPosition: {x: -0.04, y: 1.17, z: 15.14}
   m_LocalScale: {x: 0.040000033, y: 0.04, z: 0.03999999}
   m_Children:
   - {fileID: 4661746699572954}
@@ -220,9 +220,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: f76efce6b0012eb4d9177cfaa322ddb0, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 3943d3ded1e5228408a0a9ed7dcefc24, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.47
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -278,7 +278,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -389,18 +389,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controllerEvents: {fileID: 0}
+  fireType: 2
   damagePerShot: 50
-  fireRate: 0.45
+  fireRate: 1.5
   range: 100
-  maxAmmo: 10
-  reloadTime: 1
+  maxAmmo: 5
+  reloadTime: 3
   animator: {fileID: 0}
+  projectile: {fileID: 1048393321023100, guid: ee53f211db8f866409228af3270191bd, type: 2}
   gunParticles: {fileID: 198050205884529872}
   faceLight: {fileID: 108411274074735340}
   fpsCam: {fileID: 0}
   impactEffect: {fileID: 1705167270438248, guid: fec3a1f57d19a704c9bdb8c28fa4ffe3,
     type: 2}
-  damage: 50
   enemyTag: Enemy
 --- !u!114 &114690662887565910
 MonoBehaviour:
@@ -513,7 +514,7 @@ ParticleSystem:
   lengthInSec: 1
   simulationSpeed: 1
   stopAction: 0
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 0
   useUnscaledTime: 0
@@ -3871,7 +3872,7 @@ ParticleSystem:
   lengthInSec: 1
   simulationSpeed: 1
   stopAction: 0
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 0
   useUnscaledTime: 0

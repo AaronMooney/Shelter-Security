@@ -42,7 +42,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1275936144707030
 GameObject:
   m_ObjectHideFlags: 0
@@ -464,9 +464,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: f76efce6b0012eb4d9177cfaa322ddb0, type: 3}
+  m_audioClip: {fileID: 8300000, guid: d420ca22e1b81624e91ab4609c95910b, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.45
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -475,7 +475,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 50
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -504,7 +504,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 2
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -522,7 +522,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -632,18 +632,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controllerEvents: {fileID: 0}
-  damagePerShot: 50
-  fireRate: 0.45
-  range: 100
-  maxAmmo: 10
-  reloadTime: 1
+  fireType: 1
+  damagePerShot: 75
+  fireRate: 1
+  range: 300
+  maxAmmo: 5
+  reloadTime: 2
   animator: {fileID: 0}
+  projectile: {fileID: 1470531940010452, guid: 792026b27a82f19459deed81aceb30e8, type: 2}
   gunParticles: {fileID: 198436405897781702}
   faceLight: {fileID: 108846110784797084}
   fpsCam: {fileID: 0}
   impactEffect: {fileID: 1705167270438248, guid: fec3a1f57d19a704c9bdb8c28fa4ffe3,
     type: 2}
-  damage: 50
   enemyTag: Enemy
 --- !u!120 &120521681023548176
 LineRenderer:
@@ -4161,7 +4162,7 @@ ParticleSystem:
   lengthInSec: 1
   simulationSpeed: 1
   stopAction: 0
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 0
   useUnscaledTime: 0
@@ -7519,7 +7520,7 @@ ParticleSystem:
   lengthInSec: 1
   simulationSpeed: 1
   stopAction: 0
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 0
   useUnscaledTime: 0

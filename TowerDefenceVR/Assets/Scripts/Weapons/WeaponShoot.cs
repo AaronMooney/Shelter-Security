@@ -7,7 +7,7 @@ public class WeaponShoot : MonoBehaviour
 {
     public VRTK.VRTK_ControllerEvents controllerEvents;
 
-    public enum FireType { Ray, Sniper, Launcher };
+    public enum FireType { Ray, Sniper, PlasmaSniper, Launcher };
     public FireType fireType;
 
     public float damagePerShot = 10f;
@@ -30,12 +30,26 @@ public class WeaponShoot : MonoBehaviour
     Light gunLight;
     public Light faceLight;
     float effectsDisplayTime = 0.2f;
-    bool canShoot = true;
     KeyCode fireKey = KeyCode.Mouse0;
     public Camera fpsCam;
     public GameObject impactEffect;
-    public float damage;
     public string enemyTag = "Enemy";
+    private AnimatorStateInfo info;
+
+    public delegate void OnScopedChangedDelegate(bool newBool);
+    public event OnScopedChangedDelegate OnScopedChanged;
+    private bool m_isScoped = false;
+    public bool IsScoped
+    {
+        get { return m_isScoped; }
+        set
+        {
+            if (m_isScoped == value) return;
+            m_isScoped = value;
+            if (OnScopedChanged != null)
+                OnScopedChanged(m_isScoped);
+        }
+    }
 
     void Awake()
     {
@@ -49,12 +63,13 @@ public class WeaponShoot : MonoBehaviour
     {
         DisableEffects();
         currentAmmo = maxAmmo;
+        OnScopedChanged += ScopedChangedHandler;
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        info = animator.GetCurrentAnimatorStateInfo(0);
         timer += Time.deltaTime;
 
         if (isReloading) return;
@@ -66,14 +81,22 @@ public class WeaponShoot : MonoBehaviour
             return;
         }
 
+        if (Input.GetKeyDown(KeyCode.Mouse1))
+        {
+            IsScoped = !IsScoped;
+        }
+
+        
+
         if (!isReloading && currentAmmo < maxAmmo && Input.GetKeyDown(KeyCode.R))
         {
             StartCoroutine(Reload());
             return;
         }
 
-        if ((controllerEvents.triggerPressed || Input.GetKey(fireKey)) && canShoot && timer >= fireRate && Time.timeScale != 0)
+        if ((controllerEvents.triggerPressed || Input.GetKey(fireKey)) && timer >= fireRate && Time.timeScale != 0)
         {
+            
             if (fireType == FireType.Ray)
             {
                 ShootRay();
@@ -90,6 +113,18 @@ public class WeaponShoot : MonoBehaviour
 
     }
 
+    private void FixedUpdate()
+    {
+        AnimatorStateInfo info = animator.GetCurrentAnimatorStateInfo(0);
+
+        if (info.IsName("WeaponShoot")) animator.SetBool("Shoot", false);
+    }
+
+    public void DisableShooting()
+    {
+        animator.SetBool("Shooting", false);
+    }
+
     public void DisableEffects()
     {
         gunLine.enabled = false;
@@ -102,7 +137,7 @@ public class WeaponShoot : MonoBehaviour
         timer = 0f;
 
         gunAudio.Play();
-
+        animator.SetBool("Shoot", true);
         ////gunLight.enabled = true;
         ////faceLight.enabled = true;
 
@@ -146,7 +181,20 @@ public class WeaponShoot : MonoBehaviour
     {
         timer = 0f;
 
-        gunAudio.Play();
+        if (!info.IsName("SniperScoped") && !info.IsName("PlasmaScoped") && !info.IsName("LauncherScoped"))
+        {
+            animator.SetBool("Shoot", true);
+        }
+
+        if (fireType == FireType.Launcher)
+        {
+            gunAudio.time = 0f;
+            gunAudio.Play();
+            gunAudio.SetScheduledEndTime(AudioSettings.dspTime + (0.55f - 0f));
+        } else
+        {
+            gunAudio.Play();
+        }
 
         ////gunLight.enabled = true;
         ////faceLight.enabled = true;
@@ -156,23 +204,15 @@ public class WeaponShoot : MonoBehaviour
         currentAmmo--;
 
         GameObject _proj = (GameObject)Instantiate(projectile, transform.position, transform.rotation);
-        _proj.GetComponent<Rigidbody>().AddForce(transform.forward * 2000);
-        PlayerProjectile bullet = _proj.GetComponent<PlayerProjectile>();
-        bullet.BulletDamage = damage;
-
-        if (fireType == FireType.Sniper)
+        if (fireType == FireType.Launcher)
         {
-            if (bullet != null)
-            {
-                
-            }
+            _proj.GetComponent<Rigidbody>().AddForce(transform.forward * 2000);
         } else
         {
-            if (bullet != null)
-            {
-
-            }
+            _proj.GetComponent<Rigidbody>().AddForce(transform.forward * 4000);
         }
+        PlayerProjectile bullet = _proj.GetComponent<PlayerProjectile>();
+        bullet.BulletDamage = damagePerShot;
 
     }
 
@@ -188,9 +228,32 @@ public class WeaponShoot : MonoBehaviour
         isReloading = false;
     }
 
+    private void OnDisable()
+    {
+        IsScoped = false;
+    }
+
     void OnEnable()
     {
+        IsScoped = false;
+        timer = fireRate;
         isReloading = false;
         animator.SetBool("Reloading", false);
+    }
+
+    private void ScopedChangedHandler(bool newBool)
+    {
+        if (fireType == FireType.Launcher)
+        {
+            animator.SetBool("LauncherScoped", newBool);
+        }
+        else if (fireType == FireType.PlasmaSniper)
+        {
+            animator.SetBool("PlasmaScoped", newBool);
+        }
+        else if (fireType == FireType.Sniper)
+        {
+            animator.SetBool("SniperScoped", newBool);
+        }
     }
 }

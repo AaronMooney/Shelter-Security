@@ -267,7 +267,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1839312243614606
 GameObject:
   m_ObjectHideFlags: 0
@@ -1026,7 +1026,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -1123,18 +1123,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controllerEvents: {fileID: 0}
-  damagePerShot: 50
-  fireRate: 0.45
+  fireType: 0
+  damagePerShot: 15
+  fireRate: 0.1
   range: 100
-  maxAmmo: 10
+  maxAmmo: 15
   reloadTime: 1
   animator: {fileID: 0}
+  projectile: {fileID: 0}
   gunParticles: {fileID: 198023339371495324}
   faceLight: {fileID: 108221692407402136}
   fpsCam: {fileID: 0}
   impactEffect: {fileID: 1705167270438248, guid: fec3a1f57d19a704c9bdb8c28fa4ffe3,
     type: 2}
-  damage: 50
   enemyTag: Enemy
 --- !u!114 &114955983343183598
 MonoBehaviour:
@@ -1247,7 +1248,7 @@ ParticleSystem:
   lengthInSec: 1
   simulationSpeed: 1
   stopAction: 0
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 0
   useUnscaledTime: 0
@@ -4605,7 +4606,7 @@ ParticleSystem:
   lengthInSec: 1
   simulationSpeed: 1
   stopAction: 0
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 0
   useUnscaledTime: 0

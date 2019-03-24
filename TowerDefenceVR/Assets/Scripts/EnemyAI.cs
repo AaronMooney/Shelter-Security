@@ -8,6 +8,8 @@ public class EnemyAI : MonoBehaviour
     private float defaultMoveSpeed = 6;
     public float moveSpeed = 6;
     public bool stunned = false;
+    public float turnDist = 5;
+    public float turnSpeed = 3;
     Vector3[] path;
     int targetIndex;
     Animator anim;
@@ -27,13 +29,13 @@ public class EnemyAI : MonoBehaviour
         defaultMoveSpeed = moveSpeed;
     }
 
-    public void OnPathFound(Vector3[] newPath, bool pathSuccess)
+    public void OnPathFound(Vector3[] waypoints, bool pathSuccess)
     {
         if (!GetComponent<EnemyHealth>().isDead)
         {
             if (pathSuccess)
             {
-                path = newPath;
+                path = waypoints;
 
                 for (int i = 0; i < path.Length; i++)
                 {
