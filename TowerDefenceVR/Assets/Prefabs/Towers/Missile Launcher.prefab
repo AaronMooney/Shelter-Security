@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 114695018045170888}
   m_Layer: 8
   m_Name: Missile Launcher
-  m_TagString: Untagged
+  m_TagString: Turret
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -37,7 +37,7 @@ GameObject:
   - component: {fileID: 4819409551109296}
   m_Layer: 8
   m_Name: Swivel
-  m_TagString: Untagged
+  m_TagString: Turret
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 64569181506906620}
   m_Layer: 8
   m_Name: Base
-  m_TagString: Untagged
+  m_TagString: Turret
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -73,7 +73,7 @@ GameObject:
   - component: {fileID: 64089527771351298}
   m_Layer: 8
   m_Name: Head
-  m_TagString: Untagged
+  m_TagString: Turret
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 4806053488955952}
   m_Layer: 8
   m_Name: MissileSpawn
-  m_TagString: Untagged
+  m_TagString: Turret
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -288,6 +288,10 @@ MonoBehaviour:
   range: 25
   fireRate: 0.25
   damage: 100
+  useLaser: 0
+  lineRenderer: {fileID: 0}
+  impact: {fileID: 0}
+  impactLight: {fileID: 0}
   enemyTag: Enemy
   swivel: {fileID: 4819409551109296}
   turnSpeed: 8

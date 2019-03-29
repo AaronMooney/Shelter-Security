@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 64209537403373872}
   m_Layer: 8
   m_Name: Base
-  m_TagString: Untagged
+  m_TagString: Turret
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 4932387801757754}
   m_Layer: 8
   m_Name: Swivel
-  m_TagString: Untagged
+  m_TagString: Turret
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 114894207360753508}
   m_Layer: 8
   m_Name: Canon
-  m_TagString: Untagged
+  m_TagString: Turret
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -73,7 +73,7 @@ GameObject:
   - component: {fileID: 64948184345268508}
   m_Layer: 8
   m_Name: Head
-  m_TagString: Untagged
+  m_TagString: Turret
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 4413024958785482}
   m_Layer: 8
   m_Name: BulletSpawn
-  m_TagString: Untagged
+  m_TagString: Turret
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -113,7 +113,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1555445408795738}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 59.892582, y: -0.9721787, z: -34.06523}
+  m_LocalPosition: {x: 84.853096, y: -0.4912234, z: 57.018936}
   m_LocalScale: {x: 6.741039, y: 6.7410483, z: 6.7410483}
   m_Children:
   - {fileID: 4932387801757754}
@@ -289,6 +289,10 @@ MonoBehaviour:
   range: 15
   fireRate: 1
   damage: 30
+  useLaser: 0
+  lineRenderer: {fileID: 0}
+  impact: {fileID: 0}
+  impactLight: {fileID: 0}
   enemyTag: Enemy
   swivel: {fileID: 4932387801757754}
   turnSpeed: 8

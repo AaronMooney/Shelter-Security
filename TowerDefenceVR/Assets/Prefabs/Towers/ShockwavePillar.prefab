@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 23751998709996200}
   m_Layer: 8
   m_Name: Head
-  m_TagString: Untagged
+  m_TagString: Turret
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 114519424004011712}
   m_Layer: 8
   m_Name: Focus
-  m_TagString: Untagged
+  m_TagString: Turret
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -56,7 +56,7 @@ GameObject:
   - component: {fileID: 4732065010662504}
   m_Layer: 8
   m_Name: ShockwavePillar
-  m_TagString: Untagged
+  m_TagString: Turret
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -73,7 +73,7 @@ GameObject:
   - component: {fileID: 23178921887659678}
   m_Layer: 8
   m_Name: Temperature
-  m_TagString: Untagged
+  m_TagString: Turret
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 23569829575638208}
   m_Layer: 8
   m_Name: Body
-  m_TagString: Untagged
+  m_TagString: Turret
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -298,6 +298,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91c78e375ea4cbb4b81e44f5e0603ede, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  towerType: 0
   range: 10
   enemyTag: Enemy
   fireRate: 1.5
@@ -361,7 +362,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: -1654529404
+  randomSeed: -1032051354
   InitialModule:
     serializedVersion: 3
     enabled: 1

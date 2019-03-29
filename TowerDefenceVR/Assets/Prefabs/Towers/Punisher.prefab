@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4462193487345684}
   m_Layer: 8
   m_Name: BulletSpawn
-  m_TagString: Untagged
+  m_TagString: Turret
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 23647728027838784}
   m_Layer: 8
   m_Name: Head
-  m_TagString: Untagged
+  m_TagString: Turret
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 23209937498243066}
   m_Layer: 8
   m_Name: Body
-  m_TagString: Untagged
+  m_TagString: Turret
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -71,7 +71,7 @@ GameObject:
   - component: {fileID: 114717128092500456}
   m_Layer: 8
   m_Name: Punisher
-  m_TagString: Untagged
+  m_TagString: Turret
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -86,7 +86,7 @@ GameObject:
   - component: {fileID: 4523535027194916}
   m_Layer: 8
   m_Name: Swivel
-  m_TagString: Untagged
+  m_TagString: Turret
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -103,7 +103,7 @@ GameObject:
   - component: {fileID: 23507124927111404}
   m_Layer: 8
   m_Name: Temperature
-  m_TagString: Untagged
+  m_TagString: Turret
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -169,7 +169,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1707371599891572}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 61.3, y: -0.6303882, z: 49.3}
+  m_LocalPosition: {x: 61.3, y: -0.79, z: 49.3}
   m_LocalScale: {x: 5.6971445, y: 5.6971536, z: 5.6971536}
   m_Children:
   - {fileID: 4544315304991196}
@@ -328,6 +328,10 @@ MonoBehaviour:
   range: 75
   fireRate: 0.25
   damage: 50
+  useLaser: 0
+  lineRenderer: {fileID: 0}
+  impact: {fileID: 0}
+  impactLight: {fileID: 0}
   enemyTag: Enemy
   swivel: {fileID: 4523535027194916}
   turnSpeed: 8
