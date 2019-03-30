@@ -16,13 +16,15 @@ public class EnemyAI : MonoBehaviour
     AnimatorStateInfo info;
     public bool isImmune = false;
     public bool isSlowed = false;
+    GameObject[] targetObjects;
     GameObject targetObject;
 
 
     void Start()
     {
-        targetObject = GameObject.Find("Target");
-        target = RandomPointInBounds(GameObject.Find("Target").gameObject.GetComponent<BoxCollider>().bounds);
+        targetObjects = GameObject.FindGameObjectsWithTag("Base");
+        targetObject = targetObjects[Random.Range(0, targetObjects.Length)];
+        target = RandomPointInBounds(targetObject.GetComponent<BoxCollider>().bounds);
         PathRequestController.RequestPath(transform.position, target, OnPathFound);
         anim = GetComponent<Animator>();
         info = anim.GetCurrentAnimatorStateInfo(0);
