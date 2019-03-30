@@ -67,7 +67,11 @@ public class WeaponShoot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!VR) info = animator.GetCurrentAnimatorStateInfo(0);
+        if (!VR)
+        {
+            info = animator.GetCurrentAnimatorStateInfo(0);
+        }
+
         timer += Time.deltaTime;
 
         if (isReloading) return;
@@ -92,16 +96,15 @@ public class WeaponShoot : MonoBehaviour
             return;
         }
 
-        if ((controllerEvents.triggerPressed || Input.GetKey(fireKey)) && timer >= fireRate && Time.timeScale != 0)
+        if ((Input.GetKey(fireKey)))
         {
-            
-            if (fireType == FireType.Ray)
-            {
-                ShootRay();
-            } else
-            {
-                ShootProjectile();
-            }
+
+            Fire();
+        }
+
+        if (VR && GetComponentInParent<VRTK.VRTK_InteractableObject>().IsGrabbed() && controllerEvents.triggerPressed)
+        {
+            Fire();
         }
 
     }
@@ -113,6 +116,21 @@ public class WeaponShoot : MonoBehaviour
             AnimatorStateInfo info = animator.GetCurrentAnimatorStateInfo(0);
 
             if (info.IsName("WeaponShoot")) animator.SetBool("Shoot", false);
+        }
+    }
+
+    private void Fire()
+    {
+        if (timer >= fireRate && Time.timeScale != 0)
+        {
+            if (fireType == FireType.Ray)
+            {
+                ShootRay();
+            }
+            else
+            {
+                ShootProjectile();
+            }
         }
     }
 
@@ -201,11 +219,17 @@ public class WeaponShoot : MonoBehaviour
         } else if (fireType == FireType.PlasmaSniper || fireType == FireType.Sniper)
         {
             Vector3 forceDir = new Vector3();
-            if (IsScoped)
+            if (IsScoped || VR)
+            {
                 forceDir = Quaternion.AngleAxis(-1, transform.right) * transform.forward;
+            }
+            //if (VR)
+            //{
+            //    forceDir = Quaternion.AngleAxis(-50, transform.right) * transform.forward;
+            //}
             else
                 forceDir = transform.forward;
-            _proj.GetComponent<Rigidbody>().AddForce(forceDir * 4000);
+            _proj.GetComponent<Rigidbody>().AddForce(forceDir * 6000);
         } else
         {
             _proj.GetComponent<Rigidbody>().AddForce(transform.forward * 4000);
