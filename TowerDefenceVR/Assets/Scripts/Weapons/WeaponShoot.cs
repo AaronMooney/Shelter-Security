@@ -14,26 +14,23 @@ public class WeaponShoot : MonoBehaviour
     public float damagePerShot = 10f;
     public float fireRate = 0.5f;
     public float range = 100f;
-
     public int maxAmmo = 10;
     private int currentAmmo;
     public float reloadTime = 1f;
     private bool isReloading = false;
+    public float scopedFov = 15f;
+    private float normalFov;
+
     public Animator animator;
     [SerializeField] private GameObject projectile;
     [SerializeField] private GameObject scopeOverlay;
     public GameObject weaponCamera;
-
-    public float scopedFov = 15f;
-    private float normalFov;
 
     float timer;
     Ray shootRay = new Ray();
     RaycastHit shootHit;
     public ParticleSystem gunParticles;
     private AudioSource gunAudio;
-    public Light faceLight;
-    float effectsDisplayTime = 0.2f;
     KeyCode fireKey = KeyCode.Mouse0;
     public Camera fpsCam;
     public GameObject impactEffect;
@@ -145,14 +142,10 @@ public class WeaponShoot : MonoBehaviour
 
         gunAudio.Play();
         if (!VR) animator.SetBool("Shoot", true);
-        ////gunLight.enabled = true;
-        ////faceLight.enabled = true;
 
         gunParticles.Stop();
         gunParticles.Play();
 
-        //gunLine.enabled = true;
-        //gunLine.SetPosition(0, transform.position);
 
         currentAmmo--;
         
@@ -174,13 +167,9 @@ public class WeaponShoot : MonoBehaviour
             {
                 shootHit.collider.GetComponent<EnemyHealth>().TakeDamage(damagePerShot);
             }
-            //gunLine.SetPosition(1, shootHit.point);
+
             GameObject instance = (GameObject)Instantiate(impactEffect, shootHit.point, Quaternion.identity);
             Destroy(instance, 2f);
-        }
-        else
-        {
-            //gunLine.SetPosition(1, shootRay.origin + shootRay.direction * range);
         }
     }
 
@@ -205,8 +194,6 @@ public class WeaponShoot : MonoBehaviour
             gunAudio.Play();
         }
 
-        ////gunLight.enabled = true;
-        ////faceLight.enabled = true;
 
         gunParticles.Stop();
         gunParticles.Play();
@@ -215,7 +202,10 @@ public class WeaponShoot : MonoBehaviour
         GameObject _proj = (GameObject)Instantiate(projectile, transform.position, transform.rotation);
         if (fireType == FireType.Launcher)
         {
-            _proj.GetComponent<Rigidbody>().AddForce(transform.forward * 2000);
+            Vector3 forceDir = new Vector3();
+            if (VR) forceDir = Quaternion.AngleAxis(-1.5f, transform.right) * transform.forward;
+            else forceDir = transform.forward;
+            _proj.GetComponent<Rigidbody>().AddForce(forceDir * 4000);
         } else if (fireType == FireType.PlasmaSniper || fireType == FireType.Sniper)
         {
             Vector3 forceDir = new Vector3();
@@ -223,10 +213,6 @@ public class WeaponShoot : MonoBehaviour
             {
                 forceDir = Quaternion.AngleAxis(-1, transform.right) * transform.forward;
             }
-            //if (VR)
-            //{
-            //    forceDir = Quaternion.AngleAxis(-50, transform.right) * transform.forward;
-            //}
             else
                 forceDir = transform.forward;
             _proj.GetComponent<Rigidbody>().AddForce(forceDir * 6000);

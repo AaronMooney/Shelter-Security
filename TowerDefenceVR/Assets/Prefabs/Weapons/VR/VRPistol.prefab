@@ -316,7 +316,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1820470221342532}
   m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071067}
-  m_LocalPosition: {x: 0.121, y: 0.4198, z: -0.576}
+  m_LocalPosition: {x: 1.1213052, y: 0.4194, z: -1.972801}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4418759229770622}
@@ -690,13 +690,12 @@ MonoBehaviour:
   range: 50
   maxAmmo: 10
   reloadTime: 1
+  scopedFov: 15
   animator: {fileID: 0}
   projectile: {fileID: 1470531940010452, guid: 792026b27a82f19459deed81aceb30e8, type: 2}
   scopeOverlay: {fileID: 0}
   weaponCamera: {fileID: 0}
-  scopedFov: 15
   gunParticles: {fileID: 198760114129504156}
-  faceLight: {fileID: 0}
   fpsCam: {fileID: 0}
   impactEffect: {fileID: 1705167270438248, guid: 10d7bc5d4cd47d6419c4e713875df3d8,
     type: 2}
