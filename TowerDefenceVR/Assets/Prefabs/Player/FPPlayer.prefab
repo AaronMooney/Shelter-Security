@@ -695,13 +695,15 @@ GameObject:
   - component: {fileID: 4637577453319784}
   - component: {fileID: 143674357575432398}
   - component: {fileID: 114644867341366478}
+  - component: {fileID: 114482009798953862}
+  - component: {fileID: 114302311254921218}
   m_Layer: 0
   m_Name: FPPlayer
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1641894428431338
 GameObject:
   m_ObjectHideFlags: 1
@@ -1799,7 +1801,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1618384198546876}
   m_LocalRotation: {x: -0, y: -0.8196191, z: -0, w: 0.57290876}
-  m_LocalPosition: {x: 100.01, y: 0, z: 22.42}
+  m_LocalPosition: {x: 85.4, y: 0, z: 17.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4686653122086610}
@@ -4707,19 +4709,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controllerEvents: {fileID: 0}
-  fireType: 1
+  VR: 0
+  fireType: 2
   damagePerShot: 75
   fireRate: 1
   range: 300
   maxAmmo: 5
   reloadTime: 2
+  scopedFov: 15
   animator: {fileID: 95624190849740202}
   projectile: {fileID: 1470531940010452, guid: 792026b27a82f19459deed81aceb30e8, type: 2}
   scopeOverlay: {fileID: 0}
   weaponCamera: {fileID: 1510365274433538}
-  scopedFov: 15
   gunParticles: {fileID: 198126140828467548}
-  faceLight: {fileID: 108350806740891190}
   fpsCam: {fileID: 20632514498217928}
   impactEffect: {fileID: 1705167270438248, guid: fec3a1f57d19a704c9bdb8c28fa4ffe3,
     type: 2}
@@ -4736,19 +4738,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controllerEvents: {fileID: 0}
+  VR: 0
   fireType: 0
   damagePerShot: 50
   fireRate: 0.45
   range: 50
   maxAmmo: 10
   reloadTime: 1
+  scopedFov: 15
   animator: {fileID: 95624190849740202}
   projectile: {fileID: 0}
   scopeOverlay: {fileID: 0}
-  weaponCamera: {fileID: 0}
-  scopedFov: 15
+  weaponCamera: {fileID: 1510365274433538}
   gunParticles: {fileID: 198898421541065870}
-  faceLight: {fileID: 108126387544888094}
   fpsCam: {fileID: 20632514498217928}
   impactEffect: {fileID: 1705167270438248, guid: 10d7bc5d4cd47d6419c4e713875df3d8,
     type: 2}
@@ -4766,6 +4768,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   amount: 0.055
   max: 0.09
+--- !u!114 &114302311254921218
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1618384198546876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TransformSyncMode: 4
+  m_SendInterval: 0.1
+  m_SyncRotationAxis: 7
+  m_RotationSyncCompression: 0
+  m_SyncSpin: 0
+  m_MovementTheshold: 0.001
+  m_VelocityThreshold: 0.0001
+  m_SnapThreshold: 5
+  m_InterpolateRotation: 1
+  m_InterpolateMovement: 1
 --- !u!114 &114334695870866824
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4791,6 +4814,38 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   amount: 0.055
   max: 0.09
+--- !u!114 &114482009798953862
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1618384198546876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 80
+    i1: 47
+    i2: 64
+    i3: 217
+    i4: 234
+    i5: 64
+    i6: 196
+    i7: 212
+    i8: 139
+    i9: 78
+    i10: 165
+    i11: 219
+    i12: 162
+    i13: 107
+    i14: 161
+    i15: 183
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 1
 --- !u!114 &114525152514027970
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4816,19 +4871,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controllerEvents: {fileID: 0}
-  fireType: 3
+  VR: 0
+  fireType: 4
   damagePerShot: 50
   fireRate: 1.5
   range: 100
   maxAmmo: 5
   reloadTime: 3
+  scopedFov: 25
   animator: {fileID: 95624190849740202}
   projectile: {fileID: 1048393321023100, guid: ee53f211db8f866409228af3270191bd, type: 2}
   scopeOverlay: {fileID: 0}
   weaponCamera: {fileID: 1510365274433538}
-  scopedFov: 7
   gunParticles: {fileID: 198361332075542068}
-  faceLight: {fileID: 108461981075346138}
   fpsCam: {fileID: 20632514498217928}
   impactEffect: {fileID: 1705167270438248, guid: fec3a1f57d19a704c9bdb8c28fa4ffe3,
     type: 2}
@@ -4877,19 +4932,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controllerEvents: {fileID: 0}
-  fireType: 2
+  VR: 0
+  fireType: 3
   damagePerShot: 100
   fireRate: 1
   range: 400
   maxAmmo: 5
   reloadTime: 2
+  scopedFov: 15
   animator: {fileID: 95624190849740202}
   projectile: {fileID: 1470531940010452, guid: 792026b27a82f19459deed81aceb30e8, type: 2}
   scopeOverlay: {fileID: 0}
   weaponCamera: {fileID: 1510365274433538}
-  scopedFov: 15
   gunParticles: {fileID: 198372450226561672}
-  faceLight: {fileID: 108058818524070330}
   fpsCam: {fileID: 20632514498217928}
   impactEffect: {fileID: 1705167270438248, guid: fec3a1f57d19a704c9bdb8c28fa4ffe3,
     type: 2}
@@ -4919,19 +4974,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controllerEvents: {fileID: 0}
+  VR: 0
   fireType: 0
   damagePerShot: 15
   fireRate: 0.1
   range: 100
   maxAmmo: 15
   reloadTime: 1
+  scopedFov: 15
   animator: {fileID: 95624190849740202}
   projectile: {fileID: 0}
   scopeOverlay: {fileID: 0}
-  weaponCamera: {fileID: 0}
-  scopedFov: 15
+  weaponCamera: {fileID: 1510365274433538}
   gunParticles: {fileID: 198456449569593780}
-  faceLight: {fileID: 108071893243685734}
   fpsCam: {fileID: 20632514498217928}
   impactEffect: {fileID: 1705167270438248, guid: fec3a1f57d19a704c9bdb8c28fa4ffe3,
     type: 2}
@@ -4948,19 +5003,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controllerEvents: {fileID: 0}
+  VR: 0
   fireType: 0
   damagePerShot: 10
   fireRate: 0.1
   range: 100
   maxAmmo: 15
   reloadTime: 1
+  scopedFov: 15
   animator: {fileID: 95624190849740202}
   projectile: {fileID: 0}
   scopeOverlay: {fileID: 0}
-  weaponCamera: {fileID: 0}
-  scopedFov: 15
+  weaponCamera: {fileID: 1510365274433538}
   gunParticles: {fileID: 198932670725343934}
-  faceLight: {fileID: 108132729923431012}
   fpsCam: {fileID: 20632514498217928}
   impactEffect: {fileID: 1705167270438248, guid: fec3a1f57d19a704c9bdb8c28fa4ffe3,
     type: 2}

@@ -91,6 +91,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4501434331225322}
+  - component: {fileID: 114252528046397488}
+  - component: {fileID: 114487596301742472}
   m_Layer: 8
   m_Name: DisruptionTower
   m_TagString: Turret
@@ -347,6 +349,59 @@ MonoBehaviour:
   range: 10
   enemyTag: Enemy
   fireRate: 1.5
+--- !u!114 &114252528046397488
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1594238435922842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 80
+    i1: 93
+    i2: 218
+    i3: 9
+    i4: 64
+    i5: 78
+    i6: 172
+    i7: 4
+    i8: 25
+    i9: 2
+    i10: 126
+    i11: 249
+    i12: 32
+    i13: 75
+    i14: 198
+    i15: 241
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
+--- !u!114 &114487596301742472
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1594238435922842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TransformSyncMode: 1
+  m_SendInterval: 0.1
+  m_SyncRotationAxis: 7
+  m_RotationSyncCompression: 0
+  m_SyncSpin: 0
+  m_MovementTheshold: 0.001
+  m_VelocityThreshold: 0.0001
+  m_SnapThreshold: 5
+  m_InterpolateRotation: 1
+  m_InterpolateMovement: 1
 --- !u!198 &198096500199684208
 ParticleSystem:
   m_ObjectHideFlags: 1

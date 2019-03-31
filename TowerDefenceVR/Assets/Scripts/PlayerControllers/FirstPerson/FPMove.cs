@@ -1,8 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class FPMove : MonoBehaviour {
+public class FPMove : NetworkBehaviour
+{
 
     private string horizontalInput = "Horizontal";
     private string verticalIput = "Vertical";
@@ -21,6 +23,10 @@ public class FPMove : MonoBehaviour {
 	
 	void Update ()
     {
+        if (!isLocalPlayer) return;
+        Cursor.visible = false;
+        if (GameObject.Find("FPPlayer") != null) GameObject.Find("FPPlayer").SetActive(false);
+
         PlayerMove();
 
         if (Input.GetKey(KeyCode.LeftShift))

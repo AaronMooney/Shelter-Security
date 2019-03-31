@@ -2,37 +2,51 @@
 using System.Collections.Generic;
 using UnityEngine;
 using VRTK;
+using UnityEngine.Networking;
 
-public class StartConfig : MonoBehaviour {
+public class StartConfig : NetworkBehaviour {
 
 
     public GameObject SDKManager;
-    public GameObject weaponHolder;
-    public GameObject scripts;
+    public GameObject playArea;
+    public GameObject controllers;
+    public GameObject teleport;
+    public GameObject armory;
+    public GameObject VRShop;
     public GameObject crosshair;
     public GameObject noVRPlayer;
 
+    private NetworkClient myClient;
+
     void Start () {
+
+        
 
         Debug.Log(VRConfig.VREnabled);
         if (VRConfig.VREnabled)
         {
-            noVRPlayer.SetActive(false);
+            //noVRPlayer.SetActive(false);
             crosshair.SetActive(false);
-            //GameObject.Find("[VRTK_SDKManager]").gameObject.SetActive(true);
             SDKManager.SetActive(true);
-            weaponHolder.gameObject.SetActive(true);
-            scripts.gameObject.SetActive(true);
+            playArea.gameObject.SetActive(true);
+            controllers.gameObject.SetActive(true);
+            teleport.gameObject.SetActive(true);
+            VRShop.gameObject.SetActive(true);
+            armory.gameObject.SetActive(true);
 
         }
         else
         {
-            noVRPlayer.SetActive(true);
+            //noVRPlayer.SetActive(true);
             crosshair.SetActive(true);
-            //GameObject.Find("[VRTK_SDKManager]").gameObject.SetActive(false);
+
             SDKManager.SetActive(false);
-            weaponHolder.SetActive(false);
-            scripts.gameObject.SetActive(false);
+            playArea.gameObject.SetActive(false);
+            controllers.gameObject.SetActive(false);
+            teleport.gameObject.SetActive(false);
+            VRShop.gameObject.SetActive(false);
+            armory.gameObject.SetActive(false);
+
         }
     }
 

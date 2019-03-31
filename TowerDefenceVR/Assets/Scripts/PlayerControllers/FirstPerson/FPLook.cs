@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class FPLook : MonoBehaviour {
+public class FPLook : NetworkBehaviour {
 
     private string mouseXInput = "Mouse X";
     private string mouseYInput = "Mouse Y";
@@ -20,17 +21,19 @@ public class FPLook : MonoBehaviour {
     private void LockCursor()
     {
         Cursor.lockState = CursorLockMode.Locked;
+        
     }
 
     private void Update()
     {
+        if (!player.gameObject.GetComponent<NetworkIdentity>().isLocalPlayer) return;
         CameraRotate();
     }
 
     private void CameraRotate()
     {
-        float mouseX = Input.GetAxis(mouseXInput) * mouseSensitivity * Time.deltaTime;
-        float mouseY = Input.GetAxis(mouseYInput) * mouseSensitivity * Time.deltaTime;
+        float mouseX = Input.GetAxis(mouseXInput);
+        float mouseY = Input.GetAxis(mouseYInput);
 
         xAxisClamp += mouseY;
 

@@ -19,7 +19,7 @@ public class TerrainData : UpdateableData
 
     public float MaxHeight { get { return meshHeightMultiplier * meshHeightCurve.Evaluate(1); } }
 
-
+#if UNITY_EDITOR
     protected override void OnValidate()
     {
         
@@ -33,4 +33,5 @@ public class TerrainData : UpdateableData
         }
         base.OnValidate();
     }
+#endif
 }

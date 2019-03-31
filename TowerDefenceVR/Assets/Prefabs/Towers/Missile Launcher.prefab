@@ -20,6 +20,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4077418540189164}
   - component: {fileID: 114695018045170888}
+  - component: {fileID: 114611709856542210}
+  - component: {fileID: 114826210870164700}
   m_Layer: 8
   m_Name: Missile Launcher
   m_TagString: Turret
@@ -274,6 +276,38 @@ MeshCollider:
   m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300002, guid: 2822f402eb1d4c74d8fa4f9a11cb6f92, type: 3}
+--- !u!114 &114611709856542210
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1253696420599978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 138
+    i1: 242
+    i2: 180
+    i3: 123
+    i4: 249
+    i5: 16
+    i6: 167
+    i7: 116
+    i8: 10
+    i9: 184
+    i10: 54
+    i11: 59
+    i12: 36
+    i13: 152
+    i14: 150
+    i15: 79
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
 --- !u!114 &114695018045170888
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -298,3 +332,24 @@ MonoBehaviour:
   bulletPrefab: {fileID: 1805585587154902, guid: 9524376d67ce9a64e9e64337e94b2593,
     type: 2}
   bulletSpawn: {fileID: 4806053488955952}
+--- !u!114 &114826210870164700
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1253696420599978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TransformSyncMode: 1
+  m_SendInterval: 0.1
+  m_SyncRotationAxis: 7
+  m_RotationSyncCompression: 0
+  m_SyncSpin: 0
+  m_MovementTheshold: 0.001
+  m_VelocityThreshold: 0.0001
+  m_SnapThreshold: 5
+  m_InterpolateRotation: 1
+  m_InterpolateMovement: 1

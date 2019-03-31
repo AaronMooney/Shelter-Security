@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using UnityEngine;
 
 public class MapGenerator : MonoBehaviour {
@@ -20,12 +22,17 @@ public class MapGenerator : MonoBehaviour {
 
     float[,] falloffMap;
 
+#if UNITY_EDITOR
     private void Awake()
     {
         falloffMap = FalloffGenerator.GenerateFalloffMap(mapWidth, terrainData.av, terrainData.bv);
-        terrainMaterial = (Material)AssetDatabase.LoadAssetAtPath("Assets/Materials/MeshMaterial.mat", typeof(Material));
+        //terrainMaterial = (Material)AssetDatabase.LoadAssetAtPath("Assets/Materials/MeshMaterial.mat", typeof(Material));
+        //Shader shader = Shader.Find("Custom/TerrainShader");
+        //Debug.Log(shader.name);
+        //terrainMaterial.shader = shader;
         GenerateMap();
     }
+#endif
 
     public void GenerateMap()
     {
