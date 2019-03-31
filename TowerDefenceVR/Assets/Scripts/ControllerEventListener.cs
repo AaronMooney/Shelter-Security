@@ -5,6 +5,9 @@ using VRTK;
 
 public class ControllerEventListener : MonoBehaviour
 {
+
+    public VRShop shop;
+
     private void Start()
     {
         if (GetComponent<VRTK_ControllerEvents>() == null)
@@ -174,7 +177,8 @@ public class ControllerEventListener : MonoBehaviour
 
     private void DoTouchpadReleased(object sender, ControllerInteractionEventArgs e)
     {
-        DebugLogger(VRTK_ControllerReference.GetRealIndex(e.controllerReference), "TOUCHPAD", "released", e);
+        shop.SpawnTurret();
+       // DebugLogger(VRTK_ControllerReference.GetRealIndex(e.controllerReference), "TOUCHPAD", "released", e);
     }
 
     private void DoTouchpadTouchStart(object sender, ControllerInteractionEventArgs e)
@@ -215,10 +219,6 @@ public class ControllerEventListener : MonoBehaviour
     private void DoButtonTwoPressed(object sender, ControllerInteractionEventArgs e)
     {
         DebugLogger(VRTK_ControllerReference.GetRealIndex(e.controllerReference), "BUTTON TWO", "pressed down", e);
-        if (this.gameObject.name == "LeftController")
-        {
-            
-        }
     }
 
     private void DoButtonTwoReleased(object sender, ControllerInteractionEventArgs e)
