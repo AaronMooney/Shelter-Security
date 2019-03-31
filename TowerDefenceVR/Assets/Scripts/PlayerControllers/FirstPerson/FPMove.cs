@@ -20,8 +20,13 @@ public class FPMove : NetworkBehaviour
     {
         charController = GetComponent<CharacterController>();
 	}
-	
-	void Update ()
+
+    public override void OnStartLocalPlayer()
+    {
+        base.OnStartLocalPlayer();
+    }
+
+    void Update ()
     {
         if (!isLocalPlayer) return;
         Cursor.visible = false;
