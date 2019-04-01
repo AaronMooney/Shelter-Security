@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 136696864145108760}
   - component: {fileID: 114260683180583264}
   - component: {fileID: 82028478449714340}
+  - component: {fileID: 114945924017215122}
   m_Layer: 0
   m_Name: HEDP_Rocket
   m_TagString: Untagged
@@ -198,6 +199,38 @@ MonoBehaviour:
     type: 2}
   explosionRadius: 5
   rb: {fileID: 54931940017995452}
+--- !u!114 &114945924017215122
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1048393321023100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 238
+    i1: 83
+    i2: 242
+    i3: 17
+    i4: 219
+    i5: 143
+    i6: 134
+    i7: 100
+    i8: 9
+    i9: 34
+    i10: 138
+    i11: 243
+    i12: 39
+    i13: 1
+    i14: 145
+    i15: 189
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
 --- !u!136 &136696864145108760
 CapsuleCollider:
   m_ObjectHideFlags: 1

@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/* Original weapon class before implemnenting multiplayer
+ * This class is still used for VR
+ * */
 public class WeaponShoot : MonoBehaviour
 {
     public VRTK.VRTK_ControllerEvents controllerEvents;
@@ -130,12 +133,16 @@ public class WeaponShoot : MonoBehaviour
         }
     }
 
-    public void DisableShooting()
+
+
+    public void RpcDisableShooting()
     {
         if (!VR) animator.SetBool("Shooting", false);
     }
 
-    void ShootRay()
+
+
+    private void ShootRay()
     {
         timer = 0f;
 
@@ -147,7 +154,8 @@ public class WeaponShoot : MonoBehaviour
 
 
         currentAmmo--;
-        
+
+
         if (VRConfig.VREnabled)
         {
             shootRay.origin = transform.position;
@@ -188,7 +196,8 @@ public class WeaponShoot : MonoBehaviour
             gunAudio.time = 0f;
             gunAudio.Play();
             gunAudio.SetScheduledEndTime(AudioSettings.dspTime + (0.55f - 0f));
-        } else
+        }
+        else
         {
             gunAudio.Play();
         }
@@ -197,6 +206,7 @@ public class WeaponShoot : MonoBehaviour
         gunParticles.Stop();
         gunParticles.Play();
         currentAmmo--;
+
 
         GameObject _proj = (GameObject)Instantiate(projectile, transform.position, transform.rotation);
         if (fireType == FireType.Launcher)

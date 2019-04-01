@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 136190049433774860}
   - component: {fileID: 114481400640399306}
   - component: {fileID: 82064766474723832}
+  - component: {fileID: 114961085411739772}
   m_Layer: 0
   m_Name: S_Bullet
   m_TagString: Untagged
@@ -198,6 +199,38 @@ MonoBehaviour:
     type: 2}
   explosionRadius: 0
   rb: {fileID: 54105221051258638}
+--- !u!114 &114961085411739772
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1470531940010452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 121
+    i1: 32
+    i2: 38
+    i3: 178
+    i4: 122
+    i5: 130
+    i6: 241
+    i7: 148
+    i8: 89
+    i9: 222
+    i10: 237
+    i11: 129
+    i12: 172
+    i13: 235
+    i14: 48
+    i15: 232
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
 --- !u!136 &136190049433774860
 CapsuleCollider:
   m_ObjectHideFlags: 1

@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 135674372921152128}
   - component: {fileID: 23697578296613566}
   - component: {fileID: 114173878228280630}
+  - component: {fileID: 114940138858441752}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Untagged
@@ -98,6 +99,39 @@ MonoBehaviour:
   speed: 70
   impactEffect: {fileID: 1705167270438248, guid: fec3a1f57d19a704c9bdb8c28fa4ffe3,
     type: 2}
+  explosionRadius: 0
+--- !u!114 &114940138858441752
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1099116835338326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 189
+    i1: 110
+    i2: 37
+    i3: 253
+    i4: 243
+    i5: 172
+    i6: 198
+    i7: 84
+    i8: 11
+    i9: 250
+    i10: 118
+    i11: 5
+    i12: 12
+    i13: 127
+    i14: 91
+    i15: 89
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
 --- !u!135 &135674372921152128
 SphereCollider:
   m_ObjectHideFlags: 1
