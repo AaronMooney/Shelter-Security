@@ -8,7 +8,7 @@ public class FPLook : NetworkBehaviour {
     private string mouseXInput = "Mouse X";
     private string mouseYInput = "Mouse Y";
     private float mouseSensitivity = 150;
-    [SerializeField] private Transform player;
+    [SerializeField] private Camera playerCam;
 
     private float xAxisClamp;
 
@@ -21,13 +21,14 @@ public class FPLook : NetworkBehaviour {
     private void LockCursor()
     {
         Cursor.lockState = CursorLockMode.Locked;
-        
+
     }
 
     private void Update()
     {
-        if (!player.gameObject.GetComponent<NetworkIdentity>().isLocalPlayer) return;
+        if (!isLocalPlayer) return;
         CameraRotate();
+        if (Application.isFocused) LockCursor();
     }
 
     private void CameraRotate()
@@ -51,8 +52,8 @@ public class FPLook : NetworkBehaviour {
             ClampXAxisRotationToValue(90.0f);
         }
 
-        transform.Rotate(Vector3.left * mouseY);
-        player.Rotate(Vector3.up * mouseX);
+        playerCam.transform.Rotate(Vector3.left * mouseY);
+        transform.Rotate(Vector3.up * mouseX);
     }
 
     //function to clamp the x axis rotation to avoid camera rotation exceeding clamp
@@ -60,6 +61,6 @@ public class FPLook : NetworkBehaviour {
     {
         Vector3 eulerRotation = transform.eulerAngles;
         eulerRotation.x = value;
-        transform.eulerAngles = eulerRotation;
+        playerCam.transform.eulerAngles = eulerRotation;
     }
 }
