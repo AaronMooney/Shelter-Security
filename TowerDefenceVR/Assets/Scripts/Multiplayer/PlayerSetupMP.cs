@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class PlayerSetup : NetworkBehaviour {
+public class PlayerSetupMP : NetworkBehaviour {
 
     [SerializeField] private Behaviour[] components;
     [SerializeField] private GameObject model;

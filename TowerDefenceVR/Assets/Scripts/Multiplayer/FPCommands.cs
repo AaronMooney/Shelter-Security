@@ -38,7 +38,7 @@ public class FPCommands : NetworkBehaviour {
     {
         if (!isLocalPlayer) return;
         gunAudio = weapon.firePoint.GetComponent<AudioSource>();
-        weapon = GetComponent<WeaponSelection>().currentWeapon.GetComponent<Weapon>();
+        weapon = GetComponent<WeaponSelectionMP>().currentWeapon.GetComponent<Weapon>();
         info = weapon.animator.GetCurrentAnimatorStateInfo(0);
 
         weapon.timer += Time.deltaTime;

@@ -53,8 +53,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4656880552069894}
   - component: {fileID: 114894207360753508}
-  - component: {fileID: 114560804393466370}
-  - component: {fileID: 114356592480350514}
   m_Layer: 8
   m_Name: Canon
   m_TagString: Turret
@@ -115,7 +113,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1555445408795738}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 71.8, y: 0, z: 68.7}
+  m_LocalPosition: {x: 61, y: 0, z: 4.8}
   m_LocalScale: {x: 6.741039, y: 6.7410483, z: 6.7410483}
   m_Children:
   - {fileID: 4932387801757754}
@@ -277,59 +275,6 @@ MeshCollider:
   m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300002, guid: 4f2814f1c7d43b046b6abb8788e54b8e, type: 3}
---- !u!114 &114356592480350514
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1555445408795738}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_TransformSyncMode: 1
-  m_SendInterval: 0.1
-  m_SyncRotationAxis: 7
-  m_RotationSyncCompression: 0
-  m_SyncSpin: 0
-  m_MovementTheshold: 0.001
-  m_VelocityThreshold: 0.0001
-  m_SnapThreshold: 5
-  m_InterpolateRotation: 1
-  m_InterpolateMovement: 1
---- !u!114 &114560804393466370
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1555445408795738}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 9
-    i1: 138
-    i2: 87
-    i3: 131
-    i4: 31
-    i5: 231
-    i6: 220
-    i7: 228
-    i8: 171
-    i9: 31
-    i10: 115
-    i11: 33
-    i12: 171
-    i13: 115
-    i14: 101
-    i15: 138
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 0
 --- !u!114 &114894207360753508
 MonoBehaviour:
   m_ObjectHideFlags: 1

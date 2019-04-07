@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class WeaponSelection : MonoBehaviour
+public class WeaponSelectionMP : NetworkBehaviour
 {
+    [SyncVar]
     public int currentWeaponIndex = 0;
     private string cycleKey = "Mouse ScrollWheel";
     public GameObject currentWeapon;
@@ -12,11 +14,13 @@ public class WeaponSelection : MonoBehaviour
 
     void Start()
     {
-        WeaponSwap();
+        if (!isLocalPlayer) return;
+        SwitchWeapon();
     }
 
     void Update()
     {
+        if (!isLocalPlayer) return;
         int previousWeapon = currentWeaponIndex;
 
         if (Input.GetAxis(cycleKey) < 0.0f)
@@ -52,8 +56,25 @@ public class WeaponSelection : MonoBehaviour
 
         if (previousWeapon != currentWeaponIndex)
         {
-            WeaponSwap();
+            SwitchWeapon();
         }
+    }
+
+    [Client]
+    private void SwitchWeapon()
+    {
+        WeaponSwap();
+        CmdEquip();
+    }
+
+    //So far this works only when the host switched weapon. maybe try looking into hooks?
+    //Client switches weapon but model stays as pistol.
+    [ClientRpc]
+    void RpcEquip()
+    {
+        if (isLocalPlayer) return;
+        WeaponSwap();
+        Debug.Log("swapped " + currentWeapon.name);
     }
 
 
@@ -73,5 +94,12 @@ public class WeaponSelection : MonoBehaviour
             }
             i++;
         }
+    }
+
+
+    [Command]
+    public void CmdEquip()
+    {
+        RpcEquip();
     }
 }

@@ -53,8 +53,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4656880552069894}
   - component: {fileID: 114894207360753508}
-  - component: {fileID: 114375325517884488}
-  - component: {fileID: 114901265435782150}
   m_Layer: 8
   m_Name: GatlingGun
   m_TagString: Turret
@@ -115,7 +113,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1555445408795738}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -18.1, y: 0, z: -20.37}
+  m_LocalPosition: {x: 76.3, y: 0, z: -37}
   m_LocalScale: {x: 6.741039, y: 6.7410483, z: 6.7410483}
   m_Children:
   - {fileID: 4932387801757754}
@@ -277,38 +275,6 @@ MeshCollider:
   m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300002, guid: 4f2814f1c7d43b046b6abb8788e54b8e, type: 3}
---- !u!114 &114375325517884488
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1555445408795738}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 72
-    i1: 226
-    i2: 23
-    i3: 234
-    i4: 36
-    i5: 52
-    i6: 20
-    i7: 100
-    i8: 187
-    i9: 49
-    i10: 43
-    i11: 213
-    i12: 203
-    i13: 131
-    i14: 159
-    i15: 78
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 0
 --- !u!114 &114894207360753508
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -333,24 +299,3 @@ MonoBehaviour:
   bulletPrefab: {fileID: 1099116835338326, guid: bd6e25fdf3acc6540bfa76050c7f5b59,
     type: 2}
   bulletSpawn: {fileID: 4413024958785482}
---- !u!114 &114901265435782150
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1555445408795738}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_TransformSyncMode: 1
-  m_SendInterval: 0.1
-  m_SyncRotationAxis: 7
-  m_RotationSyncCompression: 0
-  m_SyncSpin: 0
-  m_MovementTheshold: 0.001
-  m_VelocityThreshold: 0.0001
-  m_SnapThreshold: 5
-  m_InterpolateRotation: 1
-  m_InterpolateMovement: 1

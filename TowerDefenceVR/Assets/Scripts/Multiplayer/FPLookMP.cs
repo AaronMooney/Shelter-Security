@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class FPLook : MonoBehaviour {
+public class FPLookMP : NetworkBehaviour {
 
     private string mouseXInput = "Mouse X";
     private string mouseYInput = "Mouse Y";
@@ -25,6 +26,7 @@ public class FPLook : MonoBehaviour {
 
     private void Update()
     {
+        if (!isLocalPlayer) return;
         CameraRotate();
         if (Application.isFocused) LockCursor();
     }

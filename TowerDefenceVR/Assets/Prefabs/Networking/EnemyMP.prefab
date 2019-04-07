@@ -536,8 +536,10 @@ GameObject:
   - component: {fileID: 114142246431084796}
   - component: {fileID: 114229081300650494}
   - component: {fileID: 54377035253630892}
+  - component: {fileID: 114154545251100154}
+  - component: {fileID: 114842141521316474}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: EnemyMP
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1165,6 +1167,38 @@ MonoBehaviour:
   turnSpeed: 3
   isImmune: 0
   isSlowed: 0
+--- !u!114 &114154545251100154
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1810914267712480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 180
+    i1: 122
+    i2: 196
+    i3: 187
+    i4: 226
+    i5: 49
+    i6: 122
+    i7: 4
+    i8: 168
+    i9: 165
+    i10: 90
+    i11: 6
+    i12: 68
+    i13: 227
+    i14: 207
+    i15: 0
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
 --- !u!114 &114229081300650494
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1179,6 +1213,27 @@ MonoBehaviour:
   maxHealth: 150
   currentHealth: 0
   isDead: 0
+--- !u!114 &114842141521316474
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1810914267712480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TransformSyncMode: 3
+  m_SendInterval: 0.1
+  m_SyncRotationAxis: 7
+  m_RotationSyncCompression: 0
+  m_SyncSpin: 0
+  m_MovementTheshold: 0.001
+  m_VelocityThreshold: 0.0001
+  m_SnapThreshold: 5
+  m_InterpolateRotation: 1
+  m_InterpolateMovement: 1
 --- !u!137 &137527946298020156
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

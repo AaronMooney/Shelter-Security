@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class FPMove : MonoBehaviour
+public class FPMoveMP : NetworkBehaviour
 {
 
     private string horizontalInput = "Horizontal";
@@ -20,8 +21,14 @@ public class FPMove : MonoBehaviour
         charController = GetComponent<CharacterController>();
 	}
 
+    public override void OnStartLocalPlayer()
+    {
+        base.OnStartLocalPlayer();
+    }
+
     void Update ()
     {
+        if (!isLocalPlayer) return;
         Cursor.visible = false;
 
         PlayerMove();

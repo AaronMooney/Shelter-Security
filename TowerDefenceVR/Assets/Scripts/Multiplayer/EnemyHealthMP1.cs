@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class EnemyHealth : MonoBehaviour
+public class EnemyHealthMP : NetworkBehaviour
 {
 
     public float maxHealth = 100f;

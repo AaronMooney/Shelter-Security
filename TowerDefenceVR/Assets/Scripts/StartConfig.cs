@@ -25,7 +25,7 @@ public class StartConfig : NetworkBehaviour {
         Debug.Log(VRConfig.VREnabled);
         if (VRConfig.VREnabled)
         {
-            //noVRPlayer.SetActive(false);
+            noVRPlayer.SetActive(false);
             crosshair.SetActive(false);
             SDKManager.SetActive(true);
             playArea.gameObject.SetActive(true);
@@ -37,7 +37,7 @@ public class StartConfig : NetworkBehaviour {
         }
         else
         {
-            //noVRPlayer.SetActive(true);
+            noVRPlayer.SetActive(true);
             crosshair.SetActive(true);
 
             SDKManager.SetActive(false);
