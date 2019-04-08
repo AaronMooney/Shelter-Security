@@ -10,11 +10,19 @@ public class SpawnWave : MonoBehaviour {
     private float timer = 0f;
 
     public int wave = 0;
+    private int roundLimit = 0;
 
     private void Update()
     {
 
-        if (wave > 25) return;
+        if (wave > roundLimit)
+        {
+            if (GameObject.FindGameObjectsWithTag("Enemy").Length == 0)
+            {
+                GameObject.Find("FPPlayer").GetComponent<PlayerActions>().EndRound();
+            }
+            return;
+        }
         if (timer <= 0)
         {
             StartCoroutine(SpawnEnemies());
@@ -32,6 +40,11 @@ public class SpawnWave : MonoBehaviour {
             SpawnEnemy();
             yield return new WaitForSeconds(0.5f);
         }
+    }
+
+    public void SetRoundLimit(int limit)
+    {
+        roundLimit = limit;
     }
 
     private void SpawnEnemy()
