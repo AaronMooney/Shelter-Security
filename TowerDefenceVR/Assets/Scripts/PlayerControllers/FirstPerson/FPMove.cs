@@ -15,6 +15,7 @@ public class FPMove : MonoBehaviour
     [SerializeField] private float jumpMultiplier;
     [SerializeField] private KeyCode jumpKey = KeyCode.Space;
 
+
     void Awake ()
     {
         charController = GetComponent<CharacterController>();
@@ -34,6 +35,7 @@ public class FPMove : MonoBehaviour
         {
             moveSpeed = 6;
         }
+
 	}
 
     private void PlayerMove()
