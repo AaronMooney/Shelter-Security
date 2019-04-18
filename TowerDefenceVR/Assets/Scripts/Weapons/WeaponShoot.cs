@@ -36,7 +36,6 @@ public class WeaponShoot : MonoBehaviour
     KeyCode fireKey = KeyCode.Mouse0;
     public Camera fpsCam;
     public GameObject impactEffect;
-    public string enemyTag = "Enemy";
     private AnimatorStateInfo info; 
 
     public delegate void OnScopedChangedDelegate(bool newBool);
@@ -163,10 +162,10 @@ public class WeaponShoot : MonoBehaviour
         if (Physics.Raycast(shootRay, out shootHit, range))
         {
             Debug.DrawRay(shootRay.origin, shootRay.direction);
-            if (shootHit.collider.tag == enemyTag)
+            if (shootHit.collider.tag == "Enemy" || shootHit.collider.tag == "Aerial")
             {
                 shootHit.collider.GetComponent<EnemyHealth>().TakeDamage(damagePerShot);
-            } else if (shootHit.collider.transform.root.tag == enemyTag)
+            } else if (shootHit.collider.transform.root.tag == "Enemy" || shootHit.collider.transform.root.tag == "Aerial")
             {
                 shootHit.collider.GetComponentInParent<EnemyHealth>().TakeDamage(damagePerShot);
             }

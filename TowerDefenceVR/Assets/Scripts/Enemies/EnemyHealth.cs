@@ -43,6 +43,13 @@ public class EnemyHealth : MonoBehaviour
 
         collider.enabled = false;
 
-        Destroy(gameObject, 5f);
+        if (gameObject.tag == "Aerial")
+        {
+            Destroy(gameObject, 2f);
+        }
+        else
+        {
+            Destroy(gameObject, 5f);
+        }
     }
 }

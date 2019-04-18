@@ -42,7 +42,7 @@ public class TurretBullet : MonoBehaviour {
         GameObject instance = (GameObject)Instantiate(impactEffect, transform.position, transform.rotation);
         Destroy(instance, 5f);
         Destroy(gameObject);
-        if (target.gameObject.tag == "Enemy")
+        if (target.gameObject.tag == "Enemy" || target.gameObject.tag == "Aerial")
         {
             if (explosionRadius > 0f)
             {
@@ -60,7 +60,7 @@ public class TurretBullet : MonoBehaviour {
         Collider[] hits = Physics.OverlapSphere(transform.position, explosionRadius);
         foreach (Collider col in hits)
         {
-            if (col.tag == "Enemy")
+            if (col.tag == "Enemy" || col.tag == "Aerial")
             {
                 col.GetComponent<EnemyHealth>().TakeDamage(BulletDamage);
             }

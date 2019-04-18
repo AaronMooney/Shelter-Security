@@ -8,8 +8,6 @@ public class EnemyAI : MonoBehaviour
     private float defaultMoveSpeed = 6;
     public float moveSpeed = 6;
     public bool stunned = false;
-    public float turnDist = 5;
-    public float turnSpeed = 3;
     Vector3[] path;
     int targetIndex;
     Animator anim;
@@ -29,6 +27,7 @@ public class EnemyAI : MonoBehaviour
         targetObjects = GameObject.FindGameObjectsWithTag("Base");
         targetObject = targetObjects[Random.Range(0, targetObjects.Length)];
         target = RandomPointInBounds(targetObject.GetComponent<BoxCollider>().bounds);
+        if (gameObject.tag == "Aerial") target = new Vector3(target.x, 10f, target.z);
         GetPath();
         anim = GetComponent<Animator>();
         info = anim.GetCurrentAnimatorStateInfo(0);
@@ -55,7 +54,8 @@ public class EnemyAI : MonoBehaviour
 
                     for (int i = 0; i < path.Length; i++)
                     {
-                        path[i] = new Vector3(path[i].x, -1, path[i].z);
+                        if (gameObject.tag == "Aerial") path[i] = new Vector3(path[i].x, 10f, path[i].z);
+                        else path[i] = new Vector3(path[i].x, -1, path[i].z);
                     }
 
                     StopCoroutine("FollowPath");
@@ -78,6 +78,7 @@ public class EnemyAI : MonoBehaviour
     {
         anim.SetBool("walking", true);
         Vector3 currentWaypoint = path[0];
+
         while (true)
         {
             transform.LookAt(currentWaypoint);
@@ -123,6 +124,8 @@ public class EnemyAI : MonoBehaviour
                 Debug.Log("hit base");
                 anim.SetBool("walking", false);
                 anim.SetBool("attacking", true);
+
+                if (gameObject.tag == "Aerial") GetComponent<DroneAttack>().Laser();
             }
         }
         else
@@ -147,7 +150,7 @@ public class EnemyAI : MonoBehaviour
         if (!GetComponent<EnemyHealth>().isDead && collision.collider.tag == "Base")
         {
             attacking = true;
-            Debug.Log("hit base");
+            Debug.Log("hit base collision");
             anim.SetBool("walking", false);
             anim.SetBool("attacking", true);
         }

@@ -34,7 +34,7 @@ public class PlayerProjectile : MonoBehaviour {
             }
             else
             {
-                if (collision.gameObject.tag == "Enemy")
+                if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "Aerial")
                 {
                     collision.gameObject.GetComponent<EnemyHealth>().TakeDamage(BulletDamage);
                     Debug.Log("enemy hit");
@@ -52,7 +52,7 @@ public class PlayerProjectile : MonoBehaviour {
         Collider[] hits = Physics.OverlapSphere(transform.position, explosionRadius);
         foreach (Collider col in hits)
         {
-            if (col.tag == "Enemy")
+            if (col.tag == "Enemy" || col.tag == "Aerial")
             {
                 Debug.Log("E");
                 col.GetComponent<EnemyHealth>().TakeDamage(BulletDamage);

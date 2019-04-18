@@ -18,7 +18,6 @@ public class Turret : MonoBehaviour {
     public Light impactLight;
 
     [Header("Setup Fields")]
-    public string enemyTag = "Enemy";
     public Transform swivel;
     public float turnSpeed = 8;
     public GameObject bulletPrefab;
@@ -33,7 +32,11 @@ public class Turret : MonoBehaviour {
 
     void UpdateTarget()
     {
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag(enemyTag);
+        GameObject[] enemies;
+        if (gameObject.tag == "AntiAir")
+            enemies = GameObject.FindGameObjectsWithTag("Aerial");
+        else
+            enemies = GameObject.FindGameObjectsWithTag("Enemy");
         float shortestDistance = Mathf.Infinity;
         GameObject nearestEnemy = null;
 
@@ -111,7 +114,10 @@ public class Turret : MonoBehaviour {
         Quaternion pointDirection = Quaternion.LookRotation(direction);
         Vector3 rotation = Quaternion.Lerp(swivel.rotation, pointDirection, Time.deltaTime * turnSpeed).eulerAngles;
 
-        swivel.rotation = Quaternion.Euler(0f, rotation.y, 0f);
+        if (gameObject.tag == "AntiAir")
+            swivel.rotation = Quaternion.Euler(rotation.x, rotation.y, rotation.z);
+        else
+            swivel.rotation = Quaternion.Euler(0f, rotation.y, 0f);
     }
 
     void Laser()
