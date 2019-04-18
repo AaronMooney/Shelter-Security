@@ -17,7 +17,7 @@ public class WeaponShoot : MonoBehaviour
     public float fireRate = 0.5f;
     public float range = 100f;
     public int maxAmmo = 10;
-    private int currentAmmo;
+    public int currentAmmo;
     public float reloadTime = 1f;
     private bool isReloading = false;
     public float scopedFov = 15f;

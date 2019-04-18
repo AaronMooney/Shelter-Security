@@ -49,7 +49,7 @@ public class EnemyHealth : MonoBehaviour
         }
         else
         {
-            Destroy(gameObject, 5f);
+            Destroy(gameObject, 4f);
         }
     }
 }

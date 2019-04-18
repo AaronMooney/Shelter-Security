@@ -7,19 +7,18 @@ public class PlayerActions : MonoBehaviour {
     public bool roundActive = false;
     public GameObject spawner;
 
-    private int roundLimit = 1;
+    public int round = 1;
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Return))
         {
             Debug.Log(roundActive);
-            Debug.Log(roundLimit);
             if (!roundActive)
             {
                 roundActive = !roundActive;
-                spawner.GetComponent<SpawnWave>().SetRoundLimit(roundLimit);
-                roundLimit ++;
+                spawner.GetComponent<SpawnWave>().SetRoundLimit(round);
+                round++;
             }
         }
 

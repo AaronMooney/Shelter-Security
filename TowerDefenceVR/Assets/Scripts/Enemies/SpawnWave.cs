@@ -15,7 +15,7 @@ public class SpawnWave : MonoBehaviour {
     private Transform enemyToSpawn;
 
     public int wave = 0;
-    private int round = 0;
+    public int round = 0;
 
     private void Update()
     {
