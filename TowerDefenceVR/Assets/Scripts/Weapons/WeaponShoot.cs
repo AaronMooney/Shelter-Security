@@ -166,6 +166,9 @@ public class WeaponShoot : MonoBehaviour
             if (shootHit.collider.tag == enemyTag)
             {
                 shootHit.collider.GetComponent<EnemyHealth>().TakeDamage(damagePerShot);
+            } else if (shootHit.collider.transform.root.tag == enemyTag)
+            {
+                shootHit.collider.GetComponentInParent<EnemyHealth>().TakeDamage(damagePerShot);
             }
 
             GameObject instance = (GameObject)Instantiate(impactEffect, shootHit.point, Quaternion.identity);

@@ -9,12 +9,12 @@ public class Health : MonoBehaviour {
 
 	// Use this for initialization
 	private void Start () {
-        health = 100;
+        health = 500;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        if (health > 100) health = 100;
+        if (health > 500) health = 500;
         if (health <= 0) Die();
 	}
 

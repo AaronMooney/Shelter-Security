@@ -1264,7 +1264,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09962e3ed6f1ec34690e75cdc9c686f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 50
   currentHealth: 0
   isDead: 0
 --- !u!114 &114485689739600766
@@ -1286,7 +1286,7 @@ MonoBehaviour:
   isSlowed: 0
   attacking: 0
   targetObject: {fileID: 0}
-  damage: 10
+  damage: 5
   isRanged: 0
 --- !u!137 &137019598299259642
 SkinnedMeshRenderer:

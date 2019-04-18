@@ -7,6 +7,7 @@ public class SpawnWave : MonoBehaviour {
     public Transform meleeEnemy;
     public Transform rangedEnemy;
     public Transform siegeBrute;
+    public Transform rhino;
     public GameObject spawnPoint;
     public float spawnCooldown = 8f;
     private float timer = 0f;
@@ -65,14 +66,21 @@ public class SpawnWave : MonoBehaviour {
         if (round < 5) enemyToSpawn = meleeEnemy;
         else if (round < 10)
         {
-            if (Random.value > 0.8) enemyToSpawn = meleeEnemy;
+            if (Random.value < 0.6) enemyToSpawn = meleeEnemy;
             else enemyToSpawn = rangedEnemy;
         }
         else if (round < 15)
         {
-            if (Random.value > 0.4) enemyToSpawn = meleeEnemy;
-            else if (Random.value > 0.7) enemyToSpawn = rangedEnemy;
+            if (Random.value < 0.4) enemyToSpawn = meleeEnemy;
+            else if (Random.value < 0.7) enemyToSpawn = rangedEnemy;
             else enemyToSpawn = siegeBrute;
+        }
+        else if (round < 20)
+        {
+            if (Random.value < 0.3) enemyToSpawn = meleeEnemy;
+            else if (Random.value < 0.6) enemyToSpawn = rangedEnemy;
+            else if (Random.value < 0.8) enemyToSpawn = siegeBrute;
+            else enemyToSpawn = rhino;
         }
     }
 }

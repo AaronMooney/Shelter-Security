@@ -1167,7 +1167,7 @@ MonoBehaviour:
   isSlowed: 0
   attacking: 0
   targetObject: {fileID: 0}
-  damage: 10
+  damage: 35
   isRanged: 0
 --- !u!114 &114229081300650494
 MonoBehaviour:

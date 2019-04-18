@@ -7,13 +7,14 @@ public class EnemyHealth : MonoBehaviour
 
     public float maxHealth = 100f;
     public float currentHealth;
-    BoxCollider boxCollider;
+    Collider collider;
     public bool isDead;
     Animator anim;
 
     void Awake()
     {
-        boxCollider = GetComponent<BoxCollider>();
+        if (GetComponent<BoxCollider>() != null) collider = GetComponent<BoxCollider>();
+        if (GetComponentInChildren<MeshCollider>() != null) collider = GetComponentInChildren<MeshCollider>();
         currentHealth = maxHealth;
         anim = GetComponent<Animator>();
         anim.SetFloat("health", maxHealth);
@@ -40,7 +41,7 @@ public class EnemyHealth : MonoBehaviour
         anim.SetBool("attacking", false);
         isDead = true;
 
-        boxCollider.isTrigger = true;
+        collider.enabled = false;
 
         Destroy(gameObject, 5f);
     }
