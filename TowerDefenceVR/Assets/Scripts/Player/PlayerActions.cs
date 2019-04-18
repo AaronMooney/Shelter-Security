@@ -13,6 +13,8 @@ public class PlayerActions : MonoBehaviour {
     {
         if (Input.GetKeyDown(KeyCode.Return))
         {
+            Debug.Log(roundActive);
+            Debug.Log(roundLimit);
             if (!roundActive)
             {
                 roundActive = !roundActive;

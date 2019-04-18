@@ -20,6 +20,8 @@ public class EnemyAI : MonoBehaviour
     GameObject[] targetObjects;
     public GameObject targetObject;
     public int damage = 10;
+    public bool isRanged;
+    private float attackDistance;
 
 
     void Start()
@@ -31,6 +33,14 @@ public class EnemyAI : MonoBehaviour
         anim = GetComponent<Animator>();
         info = anim.GetCurrentAnimatorStateInfo(0);
         defaultMoveSpeed = moveSpeed;
+        if (isRanged)
+        {
+            attackDistance = 10f;
+            damage = 5;
+        } else
+        {
+            attackDistance = 3f;
+        }
     }
 
     public void OnPathFound(Vector3[] waypoints, bool pathSuccess)
@@ -53,6 +63,7 @@ public class EnemyAI : MonoBehaviour
                 } else
                 {
                     Destroy(gameObject);
+                    GameObject.Find("Spawner").GetComponent<SpawnWave>().SpawnEnemy();
                 }
             }
         }
@@ -106,11 +117,10 @@ public class EnemyAI : MonoBehaviour
 
         if (!GetComponent<EnemyHealth>().isDead)
         {
-            if (Vector3.Distance(transform.position, target) <= 3)
+            if (Vector3.Distance(transform.position, target) <= attackDistance)
             {
                 attacking = true;
-                if (transform.position.z < 40)
-                    transform.position = new Vector3(transform.position.x, -0.5f, transform.position.z);
+                Debug.Log("hit base");
                 anim.SetBool("walking", false);
                 anim.SetBool("attacking", true);
             }
@@ -136,10 +146,10 @@ public class EnemyAI : MonoBehaviour
     {
         if (!GetComponent<EnemyHealth>().isDead && collision.collider.tag == "Base")
         {
+            attacking = true;
             Debug.Log("hit base");
             anim.SetBool("walking", false);
             anim.SetBool("attacking", true);
-            InvokeRepeating("Attack", 0, 1f);
         }
     }
 

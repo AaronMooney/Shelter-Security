@@ -135,13 +135,6 @@ public class WeaponShoot : MonoBehaviour
 
 
 
-    public void RpcDisableShooting()
-    {
-        if (!VR) animator.SetBool("Shooting", false);
-    }
-
-
-
     private void ShootRay()
     {
         timer = 0f;
