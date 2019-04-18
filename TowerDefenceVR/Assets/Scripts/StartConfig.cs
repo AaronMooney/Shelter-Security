@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using VRTK;
-using UnityEngine.Networking;
 
-public class StartConfig : NetworkBehaviour {
+public class StartConfig : MonoBehaviour {
 
 
     public GameObject SDKManager;
@@ -13,10 +12,9 @@ public class StartConfig : NetworkBehaviour {
     public GameObject teleport;
     public GameObject armory;
     public GameObject VRShop;
-    public GameObject crosshair;
+    public GameObject canvas;
+    public GameObject VRcanvas;
     public GameObject noVRPlayer;
-
-    private NetworkClient myClient;
 
     void Start () {
 
@@ -26,7 +24,8 @@ public class StartConfig : NetworkBehaviour {
         if (VRConfig.VREnabled)
         {
             noVRPlayer.SetActive(false);
-            crosshair.SetActive(false);
+            canvas.SetActive(false);
+            VRcanvas.SetActive(true);
             SDKManager.SetActive(true);
             playArea.gameObject.SetActive(true);
             controllers.gameObject.SetActive(true);
@@ -38,8 +37,8 @@ public class StartConfig : NetworkBehaviour {
         else
         {
             noVRPlayer.SetActive(true);
-            crosshair.SetActive(true);
-
+            canvas.SetActive(true);
+            VRcanvas.SetActive(false);
             SDKManager.SetActive(false);
             playArea.gameObject.SetActive(false);
             controllers.gameObject.SetActive(false);

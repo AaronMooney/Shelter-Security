@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class VRConfig : MonoBehaviour {
 
-    static public bool VREnabled = false;
+    static public bool VREnabled = true;
 
 	// Use this for initialization
 	void Start () {
