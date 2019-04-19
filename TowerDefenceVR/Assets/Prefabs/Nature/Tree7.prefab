@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 64880384227413140}
   m_Layer: 8
   m_Name: Mesh1_Large_Oak_Green_Model
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 4003417838981746}
   m_Layer: 8
   m_Name: Tree7
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -50,14 +50,14 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1241092463990154}
-  m_LocalRotation: {x: -0, y: -0.9717009, z: -0, w: 0.23621462}
-  m_LocalPosition: {x: -4.1572733, y: 3.2860432, z: -150.09901}
-  m_LocalScale: {x: 1.2497056, y: 1.2497058, z: 1.2497058}
+  m_LocalRotation: {x: 0, y: 0.8942324, z: 0, w: 0.4476031}
+  m_LocalPosition: {x: -5.998457, y: 0.002216339, z: 4.940493}
+  m_LocalScale: {x: 0.24994685, y: 1.2496997, z: 0.24994153}
   m_Children:
   - {fileID: 4191025050600124}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: -152.67401, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 126.82, z: 0}
 --- !u!4 &4191025050600124
 Transform:
   m_ObjectHideFlags: 1

@@ -7,7 +7,7 @@ public class StartConfig : MonoBehaviour {
 
 
     public GameObject SDKManager;
-    public GameObject playArea;
+    //public GameObject playArea;
     public GameObject controllers;
     public GameObject teleport;
     public GameObject armory;
@@ -27,7 +27,7 @@ public class StartConfig : MonoBehaviour {
             canvas.SetActive(false);
             VRcanvas.SetActive(true);
             SDKManager.SetActive(true);
-            playArea.gameObject.SetActive(true);
+            //playArea.gameObject.SetActive(true);
             controllers.gameObject.SetActive(true);
             teleport.gameObject.SetActive(true);
             VRShop.gameObject.SetActive(true);
@@ -40,7 +40,7 @@ public class StartConfig : MonoBehaviour {
             canvas.SetActive(true);
             VRcanvas.SetActive(false);
             SDKManager.SetActive(false);
-            playArea.gameObject.SetActive(false);
+            //playArea.gameObject.SetActive(false);
             controllers.gameObject.SetActive(false);
             teleport.gameObject.SetActive(false);
             VRShop.gameObject.SetActive(false);

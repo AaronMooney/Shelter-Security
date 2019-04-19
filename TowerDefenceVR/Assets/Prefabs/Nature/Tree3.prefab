@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4478172123426920}
   m_Layer: 8
   m_Name: Tree3
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 64120058732674186}
   m_Layer: 8
   m_Name: Mesh1_Group1_Model
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
