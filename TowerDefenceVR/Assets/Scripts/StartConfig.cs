@@ -7,7 +7,8 @@ public class StartConfig : MonoBehaviour {
 
 
     public GameObject SDKManager;
-    //public GameObject playArea;
+    public GameObject updateUI;
+    public GameObject VRUpdateUI;
     public GameObject controllers;
     public GameObject teleport;
     public GameObject armory;
@@ -25,26 +26,28 @@ public class StartConfig : MonoBehaviour {
         {
             noVRPlayer.SetActive(false);
             canvas.SetActive(false);
+            updateUI.SetActive(false);
             VRcanvas.SetActive(true);
             SDKManager.SetActive(true);
-            //playArea.gameObject.SetActive(true);
-            controllers.gameObject.SetActive(true);
-            teleport.gameObject.SetActive(true);
-            VRShop.gameObject.SetActive(true);
-            armory.gameObject.SetActive(true);
+            VRUpdateUI.SetActive(true);
+            controllers.SetActive(true);
+            teleport.SetActive(true);
+            VRShop.SetActive(true);
+            armory.SetActive(true);
 
         }
         else
         {
             noVRPlayer.SetActive(true);
             canvas.SetActive(true);
+            updateUI.SetActive(true);
             VRcanvas.SetActive(false);
             SDKManager.SetActive(false);
-            //playArea.gameObject.SetActive(false);
-            controllers.gameObject.SetActive(false);
-            teleport.gameObject.SetActive(false);
-            VRShop.gameObject.SetActive(false);
-            armory.gameObject.SetActive(false);
+            VRUpdateUI.SetActive(false);
+            controllers.SetActive(false);
+            teleport.SetActive(false);
+            VRShop.SetActive(false);
+            armory.SetActive(false);
 
         }
     }

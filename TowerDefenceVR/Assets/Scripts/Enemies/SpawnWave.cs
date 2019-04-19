@@ -16,6 +16,14 @@ public class SpawnWave : MonoBehaviour {
 
     public int wave = 0;
     public int round = 0;
+    private bool VR;
+    [SerializeField] private GameObject player;
+    [SerializeField] private GameObject VRConsole;
+
+    private void Start()
+    {
+        VR = VRConfig.VREnabled;
+    }
 
     private void Update()
     {
@@ -24,7 +32,10 @@ public class SpawnWave : MonoBehaviour {
         {
             if (GameObject.FindGameObjectsWithTag("Enemy").Length == 0)
             {
-                GameObject.Find("FPPlayer").GetComponent<PlayerActions>().EndRound();
+                if (!VR)
+                    player.GetComponent<PlayerActions>().EndRound();
+                else
+                    VRConsole.GetComponent<VRWaveManager>().EndRound();
                 Debug.Log("end round");
             }
             return;

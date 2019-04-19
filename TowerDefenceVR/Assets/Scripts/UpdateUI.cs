@@ -11,12 +11,10 @@ public class UpdateUI : MonoBehaviour {
     public Text EnemiesRemainingText;
     public GameObject player;
     private PlayerActions playerActions;
-    private bool VR;
 
 	// Use this for initialization
 	void Start () {
         playerActions = player.GetComponent<PlayerActions>();
-        VR = VRConfig.VREnabled;
 	}
 	
 	// Update is called once per frame
@@ -30,8 +28,7 @@ public class UpdateUI : MonoBehaviour {
         } else
         {
             beginWaveText.enabled = true;
-            if (!VR)
-                beginWaveText.text = "Press [ENTER] To Start Wave " + (playerActions.round);
+            beginWaveText.text = "Press [ENTER] To Start Wave " + (playerActions.round);
             EnemiesRemainingText.enabled = false;
         }
         waveNumber.text = "Wave: " + (playerActions.round -1);
