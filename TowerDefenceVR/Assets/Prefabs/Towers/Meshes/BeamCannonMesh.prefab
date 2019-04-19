@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 23001454218468386}
   m_Layer: 8
   m_Name: Base
-  m_TagString: Turret
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 120255917055988140}
   m_Layer: 8
   m_Name: BeamCannonMesh
-  m_TagString: Turret
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 4827733273396346}
   m_Layer: 8
   m_Name: Swivel
-  m_TagString: Turret
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -72,7 +72,7 @@ GameObject:
   - component: {fileID: 23110633721687208}
   m_Layer: 8
   m_Name: Head
-  m_TagString: Turret
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -84,7 +84,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1276653821290488}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -22.1, y: -2, z: -65.2}
+  m_LocalPosition: {x: -43.16143, y: -0.96832097, z: 17.79731}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4441079176301966}
@@ -235,7 +235,6 @@ MonoBehaviour:
   lineRenderer: {fileID: 120255917055988140}
   impact: {fileID: 0}
   impactLight: {fileID: 0}
-  enemyTag: Enemy
   swivel: {fileID: 4827733273396346}
   turnSpeed: 8
   bulletPrefab: {fileID: 0}

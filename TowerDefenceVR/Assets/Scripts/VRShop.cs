@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 using VRTK;
 
 public class VRShop : MonoBehaviour {
@@ -9,16 +10,41 @@ public class VRShop : MonoBehaviour {
     public GameObject cannonMesh;
     public GameObject gatlingMesh;
     public GameObject missileLauncherMesh;
+    public GameObject punisherMesh;
+    public GameObject antiAirMesh;
     public GameObject beamCannonMesh;
     public GameObject shockwaveMesh;
     public GameObject disruptionMesh;
     public GameObject selectedTurret;
 
     public GameObject cannon;
+    public GameObject gatling;
+    public GameObject missileLauncher;
+    public GameObject punisher;
+    public GameObject antiAir;
+    public GameObject beamCannon;
+    public GameObject shockwave;
+    public GameObject disruptor;
 
-    public bool isCanonPurchased = false;
+    private bool isCanonPurchased = true;
+    private bool isGatlingPurchased = true;
+    private bool isMissilePurchased = true;
+    private bool isPunisherPurchased = true;
+    private bool isAntiAirPurchased = true;
+    private bool isBeamPurchased = true;
+    private bool isShockwavePurchased = true;
+    private bool isDisruptorPurchased = true;
+
+    public Sprite canonImage;
+    public Sprite gatlingImage;
+    public Sprite missileImage;
+    public Sprite punisherImage;
+    public Sprite antiAirImage;
+    public Sprite beamImage;
+    public Sprite shockwaveImage;
+    public Sprite disruptorImage;
+
     public VRTK_RadialMenu menu;
-    public Sprite image;
     private bool canPlace = false;
 
     private GameObject surfacePlotInstance;
@@ -39,7 +65,42 @@ public class VRShop : MonoBehaviour {
     {
         if (isCanonPurchased)
         {
-            menu.buttons[0].ButtonIcon = image;
+            menu.buttons[0].ButtonIcon = canonImage;
+            menu.RegenerateButtons();
+        }
+        if (isGatlingPurchased)
+        {
+            menu.buttons[1].ButtonIcon = gatlingImage;
+            menu.RegenerateButtons();
+        }
+        if (isPunisherPurchased)
+        {
+            menu.buttons[2].ButtonIcon = punisherImage;
+            menu.RegenerateButtons();
+        }
+        if (isMissilePurchased)
+        {
+            menu.buttons[3].ButtonIcon = missileImage;
+            menu.RegenerateButtons();
+        }
+        if (isAntiAirPurchased)
+        {
+            menu.buttons[4].ButtonIcon = antiAirImage;
+            menu.RegenerateButtons();
+        }
+        if (isBeamPurchased)
+        {
+            menu.buttons[5].ButtonIcon = beamImage;
+            menu.RegenerateButtons();
+        }
+        if (isShockwavePurchased)
+        {
+            menu.buttons[6].ButtonIcon = shockwaveImage;
+            menu.RegenerateButtons();
+        }
+        if (isDisruptorPurchased)
+        {
+            menu.buttons[7].ButtonIcon = disruptorImage;
             menu.RegenerateButtons();
         }
     }
@@ -64,35 +125,76 @@ public class VRShop : MonoBehaviour {
 
     public void SetCursorGatling()
     {
-        TogglePointer(gatlingMesh);
+        if (isGatlingPurchased)
+        {
+            TogglePointer(gatlingMesh);
+            selectedTurret = gatling;
+        }
     }
 
     public void SetCursorBeamCanon()
     {
-        TogglePointer(beamCannonMesh);
+        if (isBeamPurchased)
+        {
+            TogglePointer(beamCannonMesh);
+            selectedTurret = beamCannon;
+        }
     }
 
     public void SetCursorMissile()
     {
-        TogglePointer(missileLauncherMesh);
+        if (isMissilePurchased)
+        {
+            TogglePointer(missileLauncherMesh);
+            selectedTurret = missileLauncher;
+        }
+    }
+
+    public void SetCursorAntiAir()
+    {
+        if (isAntiAirPurchased)
+        {
+            TogglePointer(antiAirMesh);
+            selectedTurret = antiAir;
+        }
+    }
+
+    public void SetCursorPunisher()
+    {
+        if (isPunisherPurchased)
+        {
+            TogglePointer(punisherMesh);
+            selectedTurret = punisher;
+        }
     }
 
     public void SetCursorShockwave()
     {
-        TogglePointer(shockwaveMesh);
+        if (isShockwavePurchased)
+        {
+            TogglePointer(shockwaveMesh);
+            selectedTurret = shockwave;
+        }
     }
 
     public void SetCursorDisrupt()
     {
-        TogglePointer(disruptionMesh);
+        if (isDisruptorPurchased)
+        {
+            TogglePointer(disruptionMesh);
+            selectedTurret = disruptor;
+        }
     }
 
     public void SpawnTurret()
     {
         if (selectedTurret != null)
         {
+            Debug.Log("Selected Turret" + selectedTurret.name);
+            GameObject[] turrets = GameObject.FindGameObjectsWithTag("Turret");
+            GameObject[] antiairs = GameObject.FindGameObjectsWithTag("AntiAir");
 
-            GameObject[] objs = GameObject.FindGameObjectsWithTag("Turret");
+            GameObject[] objs = turrets.Concat(antiairs).ToArray();
             surfacePlotInstance = new GameObject();
             surfacePlotInstance.transform.position = pointer.pointerRenderer.GetDestinationHit().point;
 

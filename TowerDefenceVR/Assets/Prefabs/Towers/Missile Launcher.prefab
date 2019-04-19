@@ -100,7 +100,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1796835255393738}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: 0, y: -0.084907055, z: 0}
+  m_LocalPosition: {x: 0, y: -1.294907, z: 0}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_Children: []
   m_Father: {fileID: 4077418540189164}
@@ -113,7 +113,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1253696420599978}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -40.363167, y: -0.9776457, z: 30.460754}
+  m_LocalPosition: {x: -44.875572, y: 0, z: 21.426983}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4819409551109296}
@@ -154,7 +154,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1653906940252922}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.71, z: 0}
+  m_LocalPosition: {x: 0, y: 1.5, z: 0}
   m_LocalScale: {x: 100, y: 99.99991, z: 99.99991}
   m_Children:
   - {fileID: 4806053488955952}
@@ -292,7 +292,6 @@ MonoBehaviour:
   lineRenderer: {fileID: 0}
   impact: {fileID: 0}
   impactLight: {fileID: 0}
-  enemyTag: Enemy
   swivel: {fileID: 4819409551109296}
   turnSpeed: 8
   bulletPrefab: {fileID: 1805585587154902, guid: 9524376d67ce9a64e9e64337e94b2593,

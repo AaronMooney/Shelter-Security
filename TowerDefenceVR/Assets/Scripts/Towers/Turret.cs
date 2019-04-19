@@ -70,8 +70,9 @@ public class Turret : MonoBehaviour {
             if (useLaser && lineRenderer.enabled)
             {
                 lineRenderer.enabled = false;
-                impact.Stop();
-                impactLight.enabled = false;
+                if (impact != null) impact.Stop();
+
+                if (impactLight != null) impactLight.enabled = false;
             }
             return;
         }

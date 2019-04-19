@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4854816639781556}
   m_Layer: 8
   m_Name: GatlingGunMesh
-  m_TagString: Turret
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 23849888169568834}
   m_Layer: 8
   m_Name: Base
-  m_TagString: Turret
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -53,7 +53,7 @@ GameObject:
   - component: {fileID: 4642938500486280}
   m_Layer: 8
   m_Name: Swivel
-  m_TagString: Turret
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -70,7 +70,7 @@ GameObject:
   - component: {fileID: 23571040438541672}
   m_Layer: 8
   m_Name: Head
-  m_TagString: Turret
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -122,7 +122,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1337483838715332}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -18.1, y: -0.99370587, z: -27.17}
+  m_LocalPosition: {x: -41.47608, y: -0.9721279, z: 20.23961}
   m_LocalScale: {x: 6.741039, y: 6.7410483, z: 6.7410483}
   m_Children:
   - {fileID: 4642938500486280}

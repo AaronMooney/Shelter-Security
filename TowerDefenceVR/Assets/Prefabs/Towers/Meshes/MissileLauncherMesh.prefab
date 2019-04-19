@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4509577400777360}
   m_Layer: 8
   m_Name: MissileLauncherMesh
-  m_TagString: Turret
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 23651534128971946}
   m_Layer: 8
   m_Name: Head
-  m_TagString: Turret
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -53,7 +53,7 @@ GameObject:
   - component: {fileID: 4627915449539134}
   m_Layer: 8
   m_Name: Swivel
-  m_TagString: Turret
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -70,7 +70,7 @@ GameObject:
   - component: {fileID: 23145881451863826}
   m_Layer: 8
   m_Name: Base
-  m_TagString: Turret
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -108,7 +108,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1093948611094232}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -40.363167, y: -0.9776457, z: 36.99}
+  m_LocalPosition: {x: -37.949364, y: -0.983681, z: 23.110151}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4627915449539134}
