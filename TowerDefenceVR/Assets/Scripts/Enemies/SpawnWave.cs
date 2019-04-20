@@ -30,7 +30,7 @@ public class SpawnWave : MonoBehaviour {
         Debug.Log("wave" + wave);
         if (wave > round)
         {
-            if (GameObject.FindGameObjectsWithTag("Enemy").Length == 0)
+            if (GameObject.FindGameObjectsWithTag("Enemy").Length == 0 && GameObject.FindGameObjectsWithTag("Aerial").Length == 0)
             {
                 if (!VR)
                     player.GetComponent<PlayerActions>().EndRound();

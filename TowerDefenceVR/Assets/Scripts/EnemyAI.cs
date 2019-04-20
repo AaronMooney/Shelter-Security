@@ -78,9 +78,10 @@ public class EnemyAI : MonoBehaviour
     {
         anim.SetBool("walking", true);
         Vector3 currentWaypoint = path[0];
-
+        Debug.Log("Current Waypoint" + currentWaypoint);
         while (true)
         {
+            Debug.Log("following");
             transform.LookAt(currentWaypoint);
             while (stunned) yield return null;
             while (attacking) yield return null;
@@ -98,6 +99,12 @@ public class EnemyAI : MonoBehaviour
             transform.position = Vector3.MoveTowards(transform.position, currentWaypoint, moveSpeed * Time.deltaTime);
             yield return null;
         }
+    }
+
+    public void UpdatePath()
+    {
+        Debug.Log("updating path");
+        GetPath();
     }
 
     void Update()

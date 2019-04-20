@@ -16,6 +16,9 @@ public class StartConfig : MonoBehaviour {
     public GameObject canvas;
     public GameObject VRcanvas;
     public GameObject noVRPlayer;
+    public GameObject VRWaveConsole;
+    public GameObject VRBoundaries;
+    public GameObject boundaries;
 
     void Start () {
 
@@ -27,6 +30,7 @@ public class StartConfig : MonoBehaviour {
             noVRPlayer.SetActive(false);
             canvas.SetActive(false);
             updateUI.SetActive(false);
+            boundaries.SetActive(false);
             VRcanvas.SetActive(true);
             SDKManager.SetActive(true);
             VRUpdateUI.SetActive(true);
@@ -34,10 +38,13 @@ public class StartConfig : MonoBehaviour {
             teleport.SetActive(true);
             VRShop.SetActive(true);
             armory.SetActive(true);
+            VRWaveConsole.SetActive(true);
+            VRBoundaries.SetActive(true);
 
         }
         else
         {
+            boundaries.SetActive(true);
             noVRPlayer.SetActive(true);
             canvas.SetActive(true);
             updateUI.SetActive(true);
@@ -48,6 +55,8 @@ public class StartConfig : MonoBehaviour {
             teleport.SetActive(false);
             VRShop.SetActive(false);
             armory.SetActive(false);
+            VRWaveConsole.SetActive(false);
+            VRBoundaries.SetActive(false);
 
         }
     }

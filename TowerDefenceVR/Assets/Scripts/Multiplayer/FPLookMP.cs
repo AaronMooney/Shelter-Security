@@ -20,7 +20,7 @@ public class FPLookMP : NetworkBehaviour {
 
     private void LockCursor()
     {
-        Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.lockState = CursorLockMode.Locked;
 
     }
 

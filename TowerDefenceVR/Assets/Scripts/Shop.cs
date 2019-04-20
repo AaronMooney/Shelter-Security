@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class VRConfig : MonoBehaviour {
-
-    static public bool VREnabled = false;
+public class Shop : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		
 	}
 	
 	// Update is called once per frame

@@ -13,20 +13,14 @@ public class FPLook : MonoBehaviour {
 
     private void Awake()
     {
-        LockCursor();
         xAxisClamp = 0.0f;
-    }
-
-    private void LockCursor()
-    {
-        Cursor.lockState = CursorLockMode.Locked;
-
     }
 
     private void Update()
     {
-        CameraRotate();
-        if (Application.isFocused) LockCursor();
+        if (!GetComponent<PlayerActions>().shopActive)
+            CameraRotate();
+        
     }
 
     private void CameraRotate()

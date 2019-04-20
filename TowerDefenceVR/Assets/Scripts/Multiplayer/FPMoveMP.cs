@@ -29,7 +29,7 @@ public class FPMoveMP : NetworkBehaviour
     void Update ()
     {
         if (!isLocalPlayer) return;
-        Cursor.visible = false;
+        //Cursor.visible = false;
 
         PlayerMove();
 

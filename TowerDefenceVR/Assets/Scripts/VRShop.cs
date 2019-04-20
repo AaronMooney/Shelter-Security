@@ -211,11 +211,27 @@ public class VRShop : MonoBehaviour {
             {
                 Vector3 newPos = new Vector3(surfacePlotInstance.transform.position.x, 0, surfacePlotInstance.transform.position.z);
                 Instantiate(selectedTurret, newPos, Quaternion.identity);
+                UpdateEnemyPaths();
             } else
             {
                 Debug.Log("Turret too close");
             }
             Destroy(surfacePlotInstance);
+        }
+    }
+
+    private void UpdateEnemyPaths()
+    {
+        if (GameObject.FindGameObjectsWithTag("Enemy").Length > 0 || GameObject.FindGameObjectsWithTag("Aerial").Length > 0){
+            GameObject[] groundUnits = GameObject.FindGameObjectsWithTag("Enemy");
+            GameObject[] drones = GameObject.FindGameObjectsWithTag("Aerial");
+
+            GameObject[] enemies = groundUnits.Concat(drones).ToArray();
+
+            for (int i = 0; i < enemies.Length; i++)
+            {
+                enemies[i].GetComponent<EnemyAI>().UpdatePath();
+            }
         }
     }
 }

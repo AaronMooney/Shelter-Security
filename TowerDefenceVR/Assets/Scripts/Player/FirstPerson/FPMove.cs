@@ -23,7 +23,7 @@ public class FPMove : MonoBehaviour
 
     void Update ()
     {
-        Cursor.visible = false;
+        //Cursor.visible = false;
 
         PlayerMove();
 

@@ -123,11 +123,17 @@ public class WeaponShoot : MonoBehaviour
         {
             if (fireType == FireType.Ray)
             {
-                ShootRay();
+                if (!VR && !GetComponentInParent<PlayerActions>().shopActive)
+                    ShootRay();
+                else if (VR)
+                    ShootRay();
             }
             else
             {
-                ShootProjectile();
+                if (!VR && !GetComponentInParent<PlayerActions>().shopActive)
+                    ShootProjectile();
+                else if (VR)
+                    ShootProjectile();
             }
         }
     }
