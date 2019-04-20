@@ -43,7 +43,6 @@ public class PlayerActions : MonoBehaviour {
 
         if (Input.GetKeyDown(KeyCode.Tab))
         {
-            shopActive = !shopActive;
             ToggleShop();
         }
 
@@ -74,8 +73,9 @@ public class PlayerActions : MonoBehaviour {
         roundActive = false;
     }
 
-    private void ToggleShop()
+    public void ToggleShop()
     {
+        shopActive = !shopActive;
         shopPanel.SetActive(shopActive);
     }
 }

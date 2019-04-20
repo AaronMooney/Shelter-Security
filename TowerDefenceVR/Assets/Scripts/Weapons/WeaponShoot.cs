@@ -94,7 +94,7 @@ public class WeaponShoot : MonoBehaviour
             return;
         }
 
-        if ((Input.GetKey(fireKey)))
+        if ((Input.GetKey(fireKey) && !GetComponentInParent<PickupAndPlace>().carrying))
         {
 
             Fire();
