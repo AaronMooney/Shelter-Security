@@ -60,5 +60,9 @@ public class EnemyHealth : MonoBehaviour
         }
         if (!VR)
             GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerActions>().AddCoins(coinWorth);
+        else
+        {
+            GameObject.Find("VRShopScripts").GetComponent<VRShop>().AddCoins(coinWorth);
+        }
     }
 }

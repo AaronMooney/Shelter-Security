@@ -45,6 +45,8 @@ public class VRShop : MonoBehaviour
     [SerializeField] private Sprite shockwaveImage;
     [SerializeField] private Sprite disruptorImage;
 
+    private ShopCosts costs;
+
     public VRTK_RadialMenu menu;
     private bool canPlace = false;
 
@@ -54,25 +56,11 @@ public class VRShop : MonoBehaviour
 
     public int coinBalance;
 
-    private int cannonCost = 60;
-    private int gatlingCost = 85;
-    private int missileLauncherCost = 100;
-    private int beamCannonCost = 100;
-    private int punisherCost = 110;
-    private int antiAirCost = 120;
-    private int shockwaveCost = 50;
-    private int disruptorCost = 40;
-
-    private int assaultRifleCost = 120;
-    private int laserRifleCost = 250;
-    private int sniperCost = 150;
-    private int plasmaSniperCost = 270;
-    private int launcherCost = 300;
-
     // Use this for initialization
     void Start()
     {
         pointer = rightController.GetComponent<VRTK_Pointer>();
+        costs = GetComponent<ShopCosts>();
 
     }
 
@@ -129,7 +117,7 @@ public class VRShop : MonoBehaviour
 
     public void SetCursorCanon()
     {
-        if (coinBalance >= cannonCost)
+        if (coinBalance >= costs.cannonCost)
         {
             TogglePointer(cannonMesh);
             selectedTurret = cannon;
@@ -142,7 +130,7 @@ public class VRShop : MonoBehaviour
 
     public void SetCursorGatling()
     {
-        if (coinBalance >= gatlingCost)
+        if (coinBalance >= costs.gatlingCost)
         {
             TogglePointer(gatlingMesh);
             selectedTurret = gatling;
@@ -156,7 +144,7 @@ public class VRShop : MonoBehaviour
 
     public void SetCursorBeamCanon()
     {
-        if (coinBalance >= beamCannonCost)
+        if (coinBalance >= costs.beamCannonCost)
         {
             TogglePointer(beamCannonMesh);
             selectedTurret = beamCannon;
@@ -170,7 +158,7 @@ public class VRShop : MonoBehaviour
 
     public void SetCursorMissile()
     {
-        if (coinBalance >= missileLauncherCost)
+        if (coinBalance >= costs.missileLauncherCost)
         {
             TogglePointer(missileLauncherMesh);
             selectedTurret = missileLauncher;
@@ -184,7 +172,7 @@ public class VRShop : MonoBehaviour
 
     public void SetCursorAntiAir()
     {
-        if (coinBalance >= antiAirCost)
+        if (coinBalance >= costs.antiAirCost)
         {
             TogglePointer(antiAirMesh);
             selectedTurret = antiAir;
@@ -198,7 +186,7 @@ public class VRShop : MonoBehaviour
 
     public void SetCursorPunisher()
     {
-        if (coinBalance >= punisherCost)
+        if (coinBalance >= costs.punisherCost)
         {
             TogglePointer(punisherMesh);
             selectedTurret = punisher;
@@ -212,7 +200,7 @@ public class VRShop : MonoBehaviour
 
     public void SetCursorShockwave()
     {
-        if (coinBalance >= shockwaveCost)
+        if (coinBalance >= costs.shockwaveCost)
         {
             TogglePointer(shockwaveMesh);
             selectedTurret = shockwave;
@@ -226,7 +214,7 @@ public class VRShop : MonoBehaviour
 
     public void SetCursorDisrupt()
     {
-        if (coinBalance >= disruptorCost)
+        if (coinBalance >= costs.disruptorCost)
         {
             TogglePointer(disruptionMesh);
             selectedTurret = disruptor;
@@ -279,42 +267,42 @@ public class VRShop : MonoBehaviour
     {
         if (g.GetComponent<TurretType>().turret == TurretType.TurretKind.Cannon)
         {
-            coinBalance -= cannonCost;
+            coinBalance -= costs.cannonCost;
             isCanonPurchased = false;
         }
         if (g.GetComponent<TurretType>().turret == TurretType.TurretKind.Gatling)
         {
-            coinBalance -= gatlingCost;
+            coinBalance -= costs.gatlingCost;
             isGatlingPurchased = false;
         }
         if (g.GetComponent<TurretType>().turret == TurretType.TurretKind.Missile)
         {
-            coinBalance -= missileLauncherCost;
+            coinBalance -= costs.missileLauncherCost;
             isMissilePurchased = false;
         }
         if (g.GetComponent<TurretType>().turret == TurretType.TurretKind.Beam)
         {
-            coinBalance -= beamCannonCost;
+            coinBalance -= costs.beamCannonCost;
             isBeamPurchased = false;
         }
         if (g.GetComponent<TurretType>().turret == TurretType.TurretKind.Punisher)
         {
-            coinBalance -= punisherCost;
+            coinBalance -= costs.punisherCost;
             isPunisherPurchased = false;
         }
         if (g.GetComponent<TurretType>().turret == TurretType.TurretKind.AntiAir)
         {
-            coinBalance -= antiAirCost;
+            coinBalance -= costs.antiAirCost;
             isAntiAirPurchased = false;
         }
         if (g.GetComponent<TurretType>().turret == TurretType.TurretKind.Shockwave)
         {
-            coinBalance -= shockwaveCost;
+            coinBalance -= costs.shockwaveCost;
             isShockwavePurchased = false;
         }
         if (g.GetComponent<TurretType>().turret == TurretType.TurretKind.Disruption)
         {
-            coinBalance -= disruptorCost;
+            coinBalance -= costs.disruptorCost;
             isDisruptorPurchased = false;
         }
     }
@@ -355,6 +343,11 @@ public class VRShop : MonoBehaviour
             }
             Destroy(surfacePlotInstance);
         }
+    }
+
+    public void AddCoins(int amount)
+    {
+        coinBalance += amount;
     }
 
     private void UpdateEnemyPaths()
