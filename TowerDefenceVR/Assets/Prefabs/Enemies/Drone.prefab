@@ -701,6 +701,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   currentHealth: 0
+  coinWorth: 50
   isDead: 0
 --- !u!114 &114666939240257512
 MonoBehaviour:

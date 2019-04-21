@@ -5,6 +5,7 @@ using UnityEngine;
 public class WeaponSelection : MonoBehaviour
 {
     public int currentWeaponIndex = 0;
+    private int previousIndex;
     private string cycleKey = "Mouse ScrollWheel";
     public GameObject currentWeapon;
     public GameObject previous;
@@ -17,7 +18,8 @@ public class WeaponSelection : MonoBehaviour
 
     void Update()
     {
-        int previousWeapon = currentWeaponIndex;
+        previousIndex = currentWeaponIndex;
+        //Debug.Log(currentWeaponIndex + " " + currentWeapon.name);
 
         if (Input.GetAxis(cycleKey) < 0.0f)
         {
@@ -50,7 +52,7 @@ public class WeaponSelection : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha5) && weaponHolder.transform.childCount >= 5) currentWeaponIndex = 4;
         if (Input.GetKeyDown(KeyCode.Alpha6) && weaponHolder.transform.childCount >= 5) currentWeaponIndex = 5;
 
-        if (previousWeapon != currentWeaponIndex)
+        if (previousIndex != currentWeaponIndex)
         {
             WeaponSwap();
         }
@@ -64,8 +66,19 @@ public class WeaponSelection : MonoBehaviour
         {
             if (i == currentWeaponIndex)
             {
-                weapon.gameObject.SetActive(true);
-                currentWeapon = weapon.gameObject;
+
+                if (weapon.GetComponent<WeaponPurchased>().isPurchased)
+                {
+                    weapon.gameObject.SetActive(true);
+                    currentWeapon = weapon.gameObject;
+                } else
+                {
+                    if (previousIndex < currentWeaponIndex)
+                        currentWeaponIndex++;
+                    else if (previousIndex > currentWeaponIndex)
+                        currentWeaponIndex--;
+                    WeaponSwap();
+                }
             }
             else
             {

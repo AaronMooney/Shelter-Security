@@ -7,6 +7,8 @@ public class EnemyHealth : MonoBehaviour
 
     public float maxHealth = 100f;
     public float currentHealth;
+    public int coinWorth;
+    private bool VR;
     Collider collider;
     public bool isDead;
     Animator anim;
@@ -18,6 +20,11 @@ public class EnemyHealth : MonoBehaviour
         currentHealth = maxHealth;
         anim = GetComponent<Animator>();
         anim.SetFloat("health", maxHealth);
+    }
+
+    private void Start()
+    {
+        VR = VRConfig.VREnabled;
     }
 
     public void TakeDamage(float amount)
@@ -51,5 +58,7 @@ public class EnemyHealth : MonoBehaviour
         {
             Destroy(gameObject, 4f);
         }
+        if (!VR)
+            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerActions>().AddCoins(coinWorth);
     }
 }

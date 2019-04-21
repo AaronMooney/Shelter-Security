@@ -1266,6 +1266,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 50
   currentHealth: 0
+  coinWorth: 10
   isDead: 0
 --- !u!114 &114485689739600766
 MonoBehaviour:
@@ -1280,8 +1281,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 6
   stunned: 0
-  turnDist: 5
-  turnSpeed: 3
   isImmune: 0
   isSlowed: 0
   attacking: 0

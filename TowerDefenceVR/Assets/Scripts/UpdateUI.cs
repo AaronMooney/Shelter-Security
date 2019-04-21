@@ -9,6 +9,7 @@ public class UpdateUI : MonoBehaviour {
     public Text beginWaveText;
     public Text ammoRemainingText;
     public Text EnemiesRemainingText;
+    public Text CoinAmountText;
     public GameObject player;
     private PlayerActions playerActions;
 
@@ -34,5 +35,7 @@ public class UpdateUI : MonoBehaviour {
         waveNumber.text = "Wave: " + (playerActions.round -1);
         GameObject currentWeapon = player.GetComponent<WeaponSelection>().currentWeapon;
         ammoRemainingText.text = currentWeapon.GetComponentInChildren<WeaponShoot>().currentAmmo.ToString();
+
+        CoinAmountText.text = player.GetComponent<PlayerActions>().coinBalance.ToString();
 	}
 }

@@ -18,7 +18,7 @@ public class FPLook : MonoBehaviour {
 
     private void Update()
     {
-        if (!GetComponent<PlayerActions>().shopActive)
+        if (!GetComponent<PlayerActions>().turretShopActive && !GetComponent<PlayerActions>().gunShopActive)
             CameraRotate();
         
     }

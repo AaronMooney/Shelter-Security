@@ -6,8 +6,12 @@ public class PlayerActions : MonoBehaviour {
 
     public bool roundActive = false;
     public GameObject spawner;
-    public GameObject shopPanel;
-    public bool shopActive = false;
+    public GameObject turretShopPanel;
+    public GameObject gunShopPanel;
+    public bool turretShopActive = false;
+    public bool gunShopActive = false;
+
+    public int coinBalance = 0;
 
     public int round = 1;
 
@@ -20,7 +24,7 @@ public class PlayerActions : MonoBehaviour {
     {
 
         
-        if (shopActive)
+        if (turretShopActive || gunShopActive)
         {
             UnlockCursor();
         }
@@ -41,12 +45,17 @@ public class PlayerActions : MonoBehaviour {
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Tab))
+        if (Input.GetKeyDown(KeyCode.Tab) && !gunShopActive)
         {
-            ToggleShop();
+            ToggleTurretShop();
         }
 
-        
+        if (Input.GetKeyDown(KeyCode.Q) && !turretShopActive)
+        {
+            ToggleGunShop();
+        }
+
+
 
         spawner.SetActive(roundActive);
     }
@@ -73,9 +82,25 @@ public class PlayerActions : MonoBehaviour {
         roundActive = false;
     }
 
-    public void ToggleShop()
+    public void ToggleTurretShop()
     {
-        shopActive = !shopActive;
-        shopPanel.SetActive(shopActive);
+        turretShopActive = !turretShopActive;
+        turretShopPanel.SetActive(turretShopActive);
+    }
+
+    public void ToggleGunShop()
+    {
+        gunShopActive = !gunShopActive;
+        gunShopPanel.SetActive(gunShopActive);
+    }
+
+    public void AddCoins(int amount)
+    {
+        coinBalance += amount;
+    }
+
+    public void RemoveCoins(int amount)
+    {
+        coinBalance -= amount;
     }
 }

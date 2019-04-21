@@ -10,9 +10,12 @@ public class VRUpdateUI : MonoBehaviour
     public Text waveNumber;
     public Text beginWaveText;
     public Text ammoRemainingText;
-    public Text EnemiesRemainingText;
+    public Text enemiesRemainingText;
+    public Text coinAmountText;
     public VRTK_ControllerEvents controllerEvents;
     public VRWaveManager waveManager;
+    public GameObject shop;
+
 
     // Use this for initialization
     void Start()
@@ -25,15 +28,15 @@ public class VRUpdateUI : MonoBehaviour
         if (waveManager.roundActive)
         {
             beginWaveText.enabled = false;
-            EnemiesRemainingText.enabled = true;
+            enemiesRemainingText.enabled = true;
             int enemiesAlive = GameObject.FindGameObjectsWithTag("Enemy").Length + GameObject.FindGameObjectsWithTag("Aerial").Length;
-            EnemiesRemainingText.text = "Enemies Alive: " + enemiesAlive;
+            enemiesRemainingText.text = "Enemies Alive: " + enemiesAlive;
         }
         else
         {
             beginWaveText.enabled = true;
             beginWaveText.text = "Interact with console to start wave " + (waveManager.round);
-            EnemiesRemainingText.enabled = false;
+            enemiesRemainingText.enabled = false;
         }
         waveNumber.text = "Wave: " + (waveManager.round - 1);
         if (controllerEvents.GetComponent<VRTK_InteractGrab>().GetGrabbedObject() != null)
@@ -41,5 +44,7 @@ public class VRUpdateUI : MonoBehaviour
             GameObject currentWeapon = controllerEvents.gameObject.GetComponent<VRTK_InteractGrab>().GetGrabbedObject();
             ammoRemainingText.text = currentWeapon.GetComponentInChildren<WeaponShoot>().currentAmmo.ToString();
         }
+
+        coinAmountText.text = shop.GetComponent<VRShop>().coinBalance.ToString();
     }
 }

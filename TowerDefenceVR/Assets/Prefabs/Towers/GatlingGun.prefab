@@ -53,6 +53,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4656880552069894}
   - component: {fileID: 114894207360753508}
+  - component: {fileID: 114986878366868266}
   m_Layer: 8
   m_Name: GatlingGun
   m_TagString: Turret
@@ -298,3 +299,15 @@ MonoBehaviour:
   bulletPrefab: {fileID: 1099116835338326, guid: bd6e25fdf3acc6540bfa76050c7f5b59,
     type: 2}
   bulletSpawn: {fileID: 4413024958785482}
+--- !u!114 &114986878366868266
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1555445408795738}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 871a6a6c77428704583672035cbc5e34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  turret: 1

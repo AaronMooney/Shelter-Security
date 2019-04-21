@@ -122,6 +122,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4951328679067996}
   - component: {fileID: 114625815879881038}
+  - component: {fileID: 114724280779662696}
   m_Layer: 8
   m_Name: AntiAir
   m_TagString: AntiAir
@@ -469,3 +470,15 @@ MonoBehaviour:
   bulletPrefab: {fileID: 1099116835338326, guid: bd6e25fdf3acc6540bfa76050c7f5b59,
     type: 2}
   bulletSpawn: {fileID: 4648834647065278}
+--- !u!114 &114724280779662696
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1923159852522220}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 871a6a6c77428704583672035cbc5e34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  turret: 5
