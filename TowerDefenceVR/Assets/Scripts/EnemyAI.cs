@@ -8,7 +8,7 @@ public class EnemyAI : MonoBehaviour
     private float defaultMoveSpeed = 6;
     public float moveSpeed = 6;
     public bool stunned = false;
-    Vector3[] path;
+    public Vector3[] path;
     int targetIndex;
     Animator anim;
     AnimatorStateInfo info;
@@ -103,7 +103,7 @@ public class EnemyAI : MonoBehaviour
 
     public void UpdatePath()
     {
-        Debug.Log("updating path");
+
         GetPath();
     }
 

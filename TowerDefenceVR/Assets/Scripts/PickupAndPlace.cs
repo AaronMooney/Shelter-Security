@@ -37,6 +37,7 @@ public class PickupAndPlace : MonoBehaviour {
         if (canPlace) {
             Vector3 pos = selectedTurretMesh.transform.position;
             Instantiate(selectedTurret, pos, Quaternion.identity);
+            //UpdateEnemyPaths();
             Destroy(selectedTurretMesh);
             carrying = false;
         }
@@ -65,6 +66,22 @@ public class PickupAndPlace : MonoBehaviour {
                 canPlace = true;
             else
                 canPlace = false;
+        }
+    }
+
+    private void UpdateEnemyPaths()
+    {
+        if (GameObject.FindGameObjectsWithTag("Enemy").Length > 0 || GameObject.FindGameObjectsWithTag("Aerial").Length > 0)
+        {
+            GameObject[] groundUnits = GameObject.FindGameObjectsWithTag("Enemy");
+            GameObject[] drones = GameObject.FindGameObjectsWithTag("Aerial");
+
+            GameObject[] enemies = groundUnits.Concat(drones).ToArray();
+
+            for (int i = 0; i < enemies.Length; i++)
+            {
+                enemies[i].GetComponent<EnemyAI>().UpdatePath();
+            }
         }
     }
 }

@@ -335,7 +335,7 @@ public class VRShop : MonoBehaviour
                 Vector3 newPos = new Vector3(surfacePlotInstance.transform.position.x, 0, surfacePlotInstance.transform.position.z);
                 Instantiate(selectedTurret, newPos, Quaternion.identity);
                 Purchase(selectedTurret);
-                UpdateEnemyPaths();
+                //UpdateEnemyPaths();
             }
             else
             {
