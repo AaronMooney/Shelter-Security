@@ -90,16 +90,16 @@ public class SpawnWave : MonoBehaviour {
         else if (round < 20)
         {
             if (Random.value < 0.3) enemyToSpawn = meleeEnemy;
-            else if (Random.value < 0.6) enemyToSpawn = rangedEnemy;
-            else if (Random.value < 0.9) enemyToSpawn = siegeBrute;
+            else if (Random.value < 0.5) enemyToSpawn = rangedEnemy;
+            else if (Random.value < 0.8) enemyToSpawn = siegeBrute;
             else enemyToSpawn = rhino;
         }
-        else if (round < 25)
+        else
         {
             if (Random.value < 0.2) enemyToSpawn = meleeEnemy;
-            else if (Random.value < 0.5) enemyToSpawn = rangedEnemy;
+            else if (Random.value < 0.4) enemyToSpawn = rangedEnemy;
             else if (Random.value < 0.6) enemyToSpawn = siegeBrute;
-            else if (Random.value < 0.9) enemyToSpawn = drone;
+            else if (Random.value < 0.8) enemyToSpawn = drone;
             else enemyToSpawn = rhino;
         }
     }

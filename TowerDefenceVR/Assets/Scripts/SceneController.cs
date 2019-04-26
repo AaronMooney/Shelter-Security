@@ -2,26 +2,34 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class SceneController : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    [SerializeField] private Toggle VRToggle;
 
-        if (Input.GetKeyDown(KeyCode.V))
-        {
-            VRConfig.VREnabled = true;
-            SceneManager.LoadScene("Prototype");
-        } else if (Input.GetKeyDown(KeyCode.N))
-        {
-            VRConfig.VREnabled = false;
-            SceneManager.LoadScene("Prototype");
-        }
-		
-	}
+    public void ToggleVR()
+    {
+        VRConfig.VREnabled = VRToggle.isOn;
+    }
+
+    public void PlayGame()
+    {
+        SceneManager.LoadScene("Level1");
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
+    public void PlayMultiplayer()
+    {
+        SceneManager.LoadScene("NetworkingPrototype");
+    }
+
+    public void Controls()
+    {
+        SceneManager.LoadScene("Controls");
+    }
 }

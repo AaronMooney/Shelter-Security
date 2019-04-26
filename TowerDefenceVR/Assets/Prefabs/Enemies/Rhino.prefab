@@ -1699,6 +1699,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 8
   stunned: 0
+  path: []
   isImmune: 0
   isSlowed: 0
   attacking: 0

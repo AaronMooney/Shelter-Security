@@ -300,7 +300,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   range: 25
   fireRate: 0.25
-  damage: 100
+  damage: 35
   useLaser: 0
   lineRenderer: {fileID: 0}
   impact: {fileID: 0}

@@ -1161,11 +1161,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 6
   stunned: 0
+  path: []
   isImmune: 0
   isSlowed: 0
   attacking: 0
   targetObject: {fileID: 0}
-  damage: 35
+  damage: 75
   isRanged: 0
 --- !u!114 &114229081300650494
 MonoBehaviour:
@@ -1178,9 +1179,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09962e3ed6f1ec34690e75cdc9c686f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 150
+  maxHealth: 300
   currentHealth: 0
-  coinWorth: 40
+  coinWorth: 30
   isDead: 0
 --- !u!137 &137527946298020156
 SkinnedMeshRenderer:

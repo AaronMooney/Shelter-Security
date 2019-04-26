@@ -682,11 +682,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 8
   stunned: 0
+  path: []
   isImmune: 0
   isSlowed: 0
   attacking: 0
   targetObject: {fileID: 0}
-  damage: 10
+  damage: 30
   isRanged: 1
 --- !u!114 &114594269437234966
 MonoBehaviour:
@@ -701,7 +702,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   currentHealth: 0
-  coinWorth: 50
+  coinWorth: 30
   isDead: 0
 --- !u!114 &114666939240257512
 MonoBehaviour:

@@ -140,7 +140,7 @@ public class Turret : MonoBehaviour {
         EnemyHealth enemyHealth = target.gameObject.GetComponent<EnemyHealth>();
         if (laserRate > 1f)
         {
-            enemyHealth.TakeDamage(enemyHealth.maxHealth / 20);
+            enemyHealth.TakeDamage(enemyHealth.maxHealth * 0.1f);
             laserRate = 0;
         }
         laserRate += Time.deltaTime;

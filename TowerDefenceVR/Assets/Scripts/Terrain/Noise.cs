@@ -26,6 +26,7 @@ public class Noise {
         float halfWidth = mapWidth / 2f;
         float halfHeight = mapHeight / 2f;
 
+
         for (int y = 0; y < mapHeight; y++)
         {
             for (int x = 0; x < mapWidth; x++)
