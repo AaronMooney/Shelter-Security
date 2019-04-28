@@ -123,14 +123,14 @@ public class WeaponShoot : MonoBehaviour
         {
             if (fireType == FireType.Ray)
             {
-                if (!VR && !GetComponentInParent<PlayerActions>().gunShopActive && !GetComponentInParent<PlayerActions>().turretShopActive)
+                if (!VR && !GetComponentInParent<PlayerActions>().gunShopActive && !GetComponentInParent<PlayerActions>().turretShopActive && !GetComponentInParent<PlayerActions>().menuActive)
                     ShootRay();
                 else if (VR && GetComponentInParent<VRToggleWeapon>().isPurchased)
                     ShootRay();
             }
             else
             {
-                if (!VR && !GetComponentInParent<PlayerActions>().gunShopActive && !GetComponentInParent<PlayerActions>().turretShopActive)
+                if (!VR && !GetComponentInParent<PlayerActions>().gunShopActive && !GetComponentInParent<PlayerActions>().turretShopActive && !GetComponentInParent<PlayerActions>().menuActive)
                     ShootProjectile();
                 else if (VR && GetComponentInParent<VRToggleWeapon>().isPurchased)
                     ShootProjectile();

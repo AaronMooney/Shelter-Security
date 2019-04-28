@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerActions : MonoBehaviour {
 
@@ -10,6 +11,10 @@ public class PlayerActions : MonoBehaviour {
     public GameObject gunShopPanel;
     public bool turretShopActive = false;
     public bool gunShopActive = false;
+    public GameObject menuCanvas;
+    public GameObject winCanvas;
+    public bool menuActive;
+    private bool continueGame;
 
     public int coinBalance = 0;
 
@@ -23,8 +28,12 @@ public class PlayerActions : MonoBehaviour {
     private void Update()
     {
 
-        
-        if (turretShopActive || gunShopActive)
+        if (!roundActive && !continueGame && round > 30)
+        {
+            winCanvas.SetActive(true);
+        }
+
+        if (turretShopActive || gunShopActive || menuActive || winCanvas.activeInHierarchy)
         {
             UnlockCursor();
         }
@@ -54,6 +63,13 @@ public class PlayerActions : MonoBehaviour {
         {
             ToggleGunShop();
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            menuActive = !menuActive;
+        }
+
+        menuCanvas.SetActive(menuActive);
 
 
 
@@ -102,5 +118,21 @@ public class PlayerActions : MonoBehaviour {
     public void RemoveCoins(int amount)
     {
         coinBalance -= amount;
+    }
+
+    public void Resume()
+    {
+        menuActive = false;
+    }
+
+    public void ContinueGame()
+    {
+        winCanvas.SetActive(false);
+        continueGame = true;
+    }
+
+    public void Quit()
+    {
+        SceneManager.LoadScene("Menu");
     }
 }

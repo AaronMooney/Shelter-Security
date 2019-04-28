@@ -25,20 +25,7 @@ public class Shop : MonoBehaviour {
     public GameObject disruptorMesh;
 
     private int coinBalance;
-    private int cannonCost = 60;
-    private int gatlingCost = 85;
-    private int missileLauncherCost = 100;
-    private int beamCannonCost = 100;
-    private int punisherCost = 110;
-    private int antiAirCost = 120;
-    private int shockwaveCost = 50;
-    private int disruptorCost = 40;
-
-    private int assaultRifleCost = 120;
-    private int laserRifleCost = 250;
-    private int sniperCost = 150;
-    private int plasmaSniperCost = 270;
-    private int launcherCost = 300;
+    public ShopCosts costs;
 
 
     private void Update()
@@ -66,118 +53,118 @@ public class Shop : MonoBehaviour {
 
     public void PurchaseCannon()
     {
-        if (coinBalance >= cannonCost)
+        if (coinBalance >= costs.cannonCost)
         {
             PickupTurret(cannonMesh, cannon);
-            player.GetComponent<PlayerActions>().RemoveCoins(cannonCost);
+            player.GetComponent<PlayerActions>().RemoveCoins(costs.cannonCost);
         }
     }
 
     public void PurchaseGatling()
     {
-        if (coinBalance >= gatlingCost)
+        if (coinBalance >= costs.gatlingCost)
         {
             PickupTurret(gatlingMesh, gatling);
-            player.GetComponent<PlayerActions>().RemoveCoins(gatlingCost);
+            player.GetComponent<PlayerActions>().RemoveCoins(costs.gatlingCost);
         }
     }
 
     public void PurchaseMissile()
     {
-        if (coinBalance >= missileLauncherCost)
+        if (coinBalance >= costs.missileLauncherCost)
         {
             PickupTurret(missileLauncherMesh, missileLauncher);
-            player.GetComponent<PlayerActions>().RemoveCoins(missileLauncherCost);
+            player.GetComponent<PlayerActions>().RemoveCoins(costs.missileLauncherCost);
         }
     }
 
     public void PurchasePunisher()
     {
-        if (coinBalance >= punisherCost)
+        if (coinBalance >= costs.punisherCost)
         {
             PickupTurret(punisherMesh, punisher);
-            player.GetComponent<PlayerActions>().RemoveCoins(punisherCost);
+            player.GetComponent<PlayerActions>().RemoveCoins(costs.punisherCost);
         }
     }
 
     public void PurchaseBeamCannon()
     {
-        if (coinBalance >= beamCannonCost)
+        if (coinBalance >= costs.beamCannonCost)
         {
             PickupTurret(beamCannonMesh, beamCannon);
-            player.GetComponent<PlayerActions>().RemoveCoins(beamCannonCost);
+            player.GetComponent<PlayerActions>().RemoveCoins(costs.beamCannonCost);
         }
     }
 
     public void PurchaseAntiAir()
     {
-        if (coinBalance >= antiAirCost)
+        if (coinBalance >= costs.antiAirCost)
         {
             PickupTurret(antiAirMesh, antiAir);
-            player.GetComponent<PlayerActions>().RemoveCoins(antiAirCost);
+            player.GetComponent<PlayerActions>().RemoveCoins(costs.antiAirCost);
         }
     }
 
     public void PurchaseShockwave()
     {
-        if (coinBalance >= shockwaveCost)
+        if (coinBalance >= costs.shockwaveCost)
         {
             PickupTurret(shockwaveMesh, shockwave);
-            player.GetComponent<PlayerActions>().RemoveCoins(shockwaveCost);
+            player.GetComponent<PlayerActions>().RemoveCoins(costs.shockwaveCost);
         }
     }
 
     public void PurchaseDisruptor()
     {
-        if (coinBalance >= disruptorCost)
+        if (coinBalance >= costs.disruptorCost)
         {
             PickupTurret(disruptorMesh, disruptor);
-            player.GetComponent<PlayerActions>().RemoveCoins(disruptorCost);
+            player.GetComponent<PlayerActions>().RemoveCoins(costs.disruptorCost);
         }
     }
 
     public void PurchaseAssaultRifle()
     {
-        if (coinBalance >= assaultRifleCost)
+        if (coinBalance >= costs.assaultRifleCost)
         {
             PurchaseWeapon(WeaponPurchased.WeaponType.AssaultRifle);
-            player.GetComponent<PlayerActions>().RemoveCoins(assaultRifleCost);
+            player.GetComponent<PlayerActions>().RemoveCoins(costs.assaultRifleCost);
         }
     }
 
     public void PurchaseLaserRifle()
     {
-        if (coinBalance >= laserRifleCost)
+        if (coinBalance >= costs.laserRifleCost)
         {
             PurchaseWeapon(WeaponPurchased.WeaponType.LaserRifle);
-            player.GetComponent<PlayerActions>().RemoveCoins(laserRifleCost);
+            player.GetComponent<PlayerActions>().RemoveCoins(costs.laserRifleCost);
         }
     }
 
     public void PurchaseSniper()
     {
-        if (coinBalance >= sniperCost)
+        if (coinBalance >= costs.sniperCost)
         {
             PurchaseWeapon(WeaponPurchased.WeaponType.Sniper);
-            player.GetComponent<PlayerActions>().RemoveCoins(sniperCost);
+            player.GetComponent<PlayerActions>().RemoveCoins(costs.sniperCost);
         }
     }
 
     public void PurchasePlasmaSniper()
     {
-        if (coinBalance >= plasmaSniperCost)
+        if (coinBalance >= costs.plasmaSniperCost)
         {
             PurchaseWeapon(WeaponPurchased.WeaponType.PlasmaSniper);
-            player.GetComponent<PlayerActions>().RemoveCoins(plasmaSniperCost);
+            player.GetComponent<PlayerActions>().RemoveCoins(costs.plasmaSniperCost);
         }
     }
 
     public void PurchaseLauncher()
     {
-        if (coinBalance >= launcherCost)
+        if (coinBalance >= costs.launcherCost)
         {
             PurchaseWeapon(WeaponPurchased.WeaponType.Launcher);
-            player.GetComponent<PlayerActions>().RemoveCoins(launcherCost);
+            player.GetComponent<PlayerActions>().RemoveCoins(costs.launcherCost);
         }
     }
 }

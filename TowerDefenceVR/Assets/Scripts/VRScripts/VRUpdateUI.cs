@@ -12,9 +12,15 @@ public class VRUpdateUI : MonoBehaviour
     public Text ammoRemainingText;
     public Text enemiesRemainingText;
     public Text coinAmountText;
+    public Text gateOneText;
+    public Text gateTwoText;
+    public Text gateThreeText;
     public VRTK_ControllerEvents controllerEvents;
     public VRWaveManager waveManager;
     public GameObject shop;
+    public GameObject gate1;
+    public GameObject gate2;
+    public GameObject gate3;
 
 
     // Use this for initialization
@@ -42,9 +48,23 @@ public class VRUpdateUI : MonoBehaviour
         if (controllerEvents.GetComponent<VRTK_InteractGrab>().GetGrabbedObject() != null)
         {
             GameObject currentWeapon = controllerEvents.gameObject.GetComponent<VRTK_InteractGrab>().GetGrabbedObject();
-            ammoRemainingText.text = currentWeapon.GetComponentInChildren<WeaponShoot>().currentAmmo.ToString();
+            if (controllerEvents.GetComponent<VRTK_InteractGrab>().GetGrabbedObject().GetComponent<WeaponShoot>() != null)
+                ammoRemainingText.text = currentWeapon.GetComponentInChildren<WeaponShoot>().currentAmmo.ToString();
         }
 
         coinAmountText.text = shop.GetComponent<VRShop>().coinBalance.ToString();
+
+        if (gate1 != null)
+        {
+            gateOneText.text = gate1.GetComponent<Health>().health + "/" + gate1.GetComponent<Health>().maxHealth;
+        }
+        if (gate2 != null)
+        {
+            gateTwoText.text = gate2.GetComponent<Health>().health + "/" + gate2.GetComponent<Health>().maxHealth;
+        }
+        if (gate3 != null)
+        {
+            gateThreeText.text = gate3.GetComponent<Health>().health + "/" + gate3.GetComponent<Health>().maxHealth;
+        }
     }
 }

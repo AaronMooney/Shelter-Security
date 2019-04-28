@@ -20,6 +20,7 @@ public class StartConfig : MonoBehaviour {
     public GameObject VRWaveConsole;
     public GameObject VRBoundaries;
     public GameObject boundaries;
+    public GameObject VRPrices;
 
     void Start () {
 
@@ -42,6 +43,7 @@ public class StartConfig : MonoBehaviour {
             armory.SetActive(true);
             VRWaveConsole.SetActive(true);
             VRBoundaries.SetActive(true);
+            VRPrices.SetActive(true);
 
         }
         else
@@ -60,6 +62,7 @@ public class StartConfig : MonoBehaviour {
             armory.SetActive(false);
             VRWaveConsole.SetActive(false);
             VRBoundaries.SetActive(false);
+            VRPrices.SetActive(false);
 
         }
     }

@@ -5,16 +5,17 @@ using UnityEngine;
 public class Health : MonoBehaviour {
 
     public int health;
+    public int maxHealth = 500;
 
 
 	// Use this for initialization
 	private void Start () {
-        health = 500;
+        health = maxHealth;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        if (health > 500) health = 500;
+        if (health > maxHealth) health = maxHealth;
         if (health <= 0) Die();
 	}
 
