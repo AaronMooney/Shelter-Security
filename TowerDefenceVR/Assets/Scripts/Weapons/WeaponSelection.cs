@@ -2,25 +2,33 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * Aaron Mooney
+ * 
+ * WeaponSelection script that switches between purchased weapons
+ * */
+
 public class WeaponSelection : MonoBehaviour
 {
-    public int currentWeaponIndex = 0;
-    private int previousIndex;
-    private string cycleKey = "Mouse ScrollWheel";
+    [Header("Object fields")]
     public GameObject currentWeapon;
     public GameObject previous;
     public GameObject weaponHolder;
 
-    void Start()
+    private int currentWeaponIndex = 0;
+    private int previousIndex;
+    private string cycleKey = "Mouse ScrollWheel";
+
+    private void Start()
     {
         WeaponSwap();
     }
 
-    void Update()
+    private void Update()
     {
         previousIndex = currentWeaponIndex;
-        //Debug.Log(currentWeaponIndex + " " + currentWeapon.name);
 
+        // Change the weapon index on scrollwheel scroll
         if (Input.GetAxis(cycleKey) < 0.0f)
         {
             if (currentWeaponIndex >= weaponHolder.transform.childCount - 1)
@@ -45,6 +53,7 @@ public class WeaponSelection : MonoBehaviour
             }
         }
 
+        // Change current weapon with numpad
         if (Input.GetKeyDown(KeyCode.Alpha1)) currentWeaponIndex = 0;
         if (Input.GetKeyDown(KeyCode.Alpha2) && weaponHolder.transform.childCount >= 2) currentWeaponIndex = 1;
         if (Input.GetKeyDown(KeyCode.Alpha3) && weaponHolder.transform.childCount >= 3) currentWeaponIndex = 2;
@@ -52,16 +61,19 @@ public class WeaponSelection : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha5) && weaponHolder.transform.childCount >= 5) currentWeaponIndex = 4;
         if (Input.GetKeyDown(KeyCode.Alpha6) && weaponHolder.transform.childCount >= 5) currentWeaponIndex = 5;
 
+        // if the previous index and current are different then switch weapons
         if (previousIndex != currentWeaponIndex)
         {
             WeaponSwap();
         }
     }
 
-
+    // Switch weapons if possible
     private void WeaponSwap()
     {
         int i = 0;
+
+        // loop through weapons and if the weapon is purchased then equip it
         foreach (Transform weapon in weaponHolder.transform)
         {
             if (i == currentWeaponIndex)
@@ -73,6 +85,7 @@ public class WeaponSelection : MonoBehaviour
                     currentWeapon = weapon.gameObject;
                 } else
                 {
+                    // if not then change the index and re equip
                     if (previousIndex < currentWeaponIndex)
                         currentWeaponIndex++;
                     else if (previousIndex > currentWeaponIndex)

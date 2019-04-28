@@ -1,33 +1,41 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/*
+ * Aaron Mooney
+ * 
+ * SpawnWave script that spawns enemies while a round is active
+ * */
 public class SpawnWave : MonoBehaviour {
 
+    [Header("Enemies")]
     public Transform meleeEnemy;
     public Transform rangedEnemy;
     public Transform siegeBrute;
     public Transform rhino;
     public Transform drone;
+
+    [Header("Setup fields")]
     public GameObject spawnPoint;
     public float spawnCooldown = 8f;
-    private float timer = 0f;
-    private Transform enemyToSpawn;
-
     public int wave = 0;
     public int round = 0;
-    private bool VR;
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject VRConsole;
 
+    private float timer = 0f;
+    private Transform enemyToSpawn;
+    private bool VR;
+
     private void Start()
     {
+        // check if VR
         VR = VRConfig.VREnabled;
     }
 
     private void Update()
     {
-        Debug.Log("wave" + wave);
+        // if the wave number is greater than the round number then wait until no enemies are left and end the round
         if (wave > round)
         {
             if (GameObject.FindGameObjectsWithTag("Enemy").Length == 0 && GameObject.FindGameObjectsWithTag("Aerial").Length == 0)
@@ -36,10 +44,11 @@ public class SpawnWave : MonoBehaviour {
                     player.GetComponent<PlayerActions>().EndRound();
                 else
                     VRConsole.GetComponent<VRWaveManager>().EndRound();
-                Debug.Log("end round");
             }
             return;
         }
+
+        // Spawn enemies on a cooldown
         if (timer <= 0)
         {
             StartCoroutine(SpawnEnemies());
@@ -49,6 +58,7 @@ public class SpawnWave : MonoBehaviour {
         timer -= Time.deltaTime;
     }
 
+    // Spawn enemies coroutine
     private IEnumerator SpawnEnemies()
     {
         wave++;
@@ -59,12 +69,14 @@ public class SpawnWave : MonoBehaviour {
         }
     }
 
+    // Set the round and reset timer
     public void SetRoundLimit(int limit)
     {
         round = limit;
         timer = 0f;
     }
 
+    // Spawn an enemy at a random point in spawner collider
     public void SpawnEnemy()
     {
         ChooseEnemy();
@@ -73,6 +85,7 @@ public class SpawnWave : MonoBehaviour {
         Instantiate(enemyToSpawn, spawn, Quaternion.identity);
     }
 
+    // Choose enemy to spawn based on round number and probability
     private void ChooseEnemy()
     {
         if (round < 5) enemyToSpawn = meleeEnemy;

@@ -1292,7 +1292,7 @@ RectTransform:
   m_GameObject: {fileID: 935489877}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children:
   - {fileID: 352374769}
   m_Father: {fileID: 1415768828}
@@ -1300,7 +1300,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 10, y: -10}
+  m_AnchoredPosition: {x: -10, y: -30.9}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &935489879
@@ -1383,7 +1383,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.97794116, g: 0.97794116, b: 0.97794116, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1394,10 +1394,10 @@ MonoBehaviour:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 14
     m_FontStyle: 0
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 10
     m_MaxSize: 40
-    m_Alignment: 0
+    m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -1441,7 +1441,7 @@ RectTransform:
   - {fileID: 561311216}
   - {fileID: 735631370}
   m_Father: {fileID: 2064492543}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
@@ -1492,19 +1492,19 @@ RectTransform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1415768827}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3.7397401, y: 3.7397406, z: 3.7397406}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 935489878}
   - {fileID: 1014818763}
-  m_Father: {fileID: 2064492543}
-  m_RootOrder: 3
+  m_Father: {fileID: 2142473753}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 706, y: 88}
-  m_SizeDelta: {x: 160, y: 20}
+  m_AnchoredPosition: {x: 638, y: 26.05}
+  m_SizeDelta: {x: 423.45, y: 61.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1415768829
 MonoBehaviour:
@@ -1631,7 +1631,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 0679bfbf0ba4b554ca35b36e8271478a, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.421
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -1812,7 +1812,6 @@ RectTransform:
   - {fileID: 571442030}
   - {fileID: 531016437}
   - {fileID: 641217241}
-  - {fileID: 1415768828}
   - {fileID: 1327098765}
   m_Father: {fileID: 0}
   m_RootOrder: 2
@@ -1851,6 +1850,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 314971354}
+  - {fileID: 1415768828}
   m_Father: {fileID: 1327098765}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

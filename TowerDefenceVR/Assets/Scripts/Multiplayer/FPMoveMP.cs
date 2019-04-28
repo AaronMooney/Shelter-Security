@@ -2,10 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+/*
+ * Aaron Mooney
+ * 
+ * FPMoveMP script that handles player movement in multiplayer
+ * Script is adapted from the tutorial "[Unity C#] First Person Controller (E01: Basic FPS Controller and Jumping)" by Acacia Developer
+ * link at https://www.youtube.com/watch?v=n-KX8AeGK7E
+ * 
+ * parts taken from the tutorial are marked with 
+ * // ** ACACIA DEVELOPER ** //
+ *       his code here...
+ *       any modifications within his code are marked with
+ *       // ** AARON MOONEY ** //
+ *       my code here
+ *       // ** AARON MOONEY END ** //
+ * // ** ACACIA DEVELOPER END ** //
+ * 
+ * */
+
 
 public class FPMoveMP : NetworkBehaviour
 {
-
+    // ** ACACIA DEVELOPER ** //
     private string horizontalInput = "Horizontal";
     private string verticalIput = "Vertical";
     [SerializeField] private float moveSpeed = 6;
@@ -20,7 +38,7 @@ public class FPMoveMP : NetworkBehaviour
     {
         charController = GetComponent<CharacterController>();
 	}
-
+    // ** AARON MOONEY ** //
     public override void OnStartLocalPlayer()
     {
         base.OnStartLocalPlayer();
@@ -29,7 +47,6 @@ public class FPMoveMP : NetworkBehaviour
     void Update ()
     {
         if (!isLocalPlayer) return;
-        //Cursor.visible = false;
 
         PlayerMove();
 
@@ -42,6 +59,7 @@ public class FPMoveMP : NetworkBehaviour
             moveSpeed = 6;
         }
 	}
+    // ** AARON MOONEY ** //
 
     private void PlayerMove()
     {
@@ -82,3 +100,4 @@ public class FPMoveMP : NetworkBehaviour
         isJumping = false;
     }
 }
+// ** ACACIA DEVELOPER END ** //

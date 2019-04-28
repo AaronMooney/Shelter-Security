@@ -3,10 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using VRTK;
-
+/*
+ * Aaron Mooney
+ * 
+ * VRUpdateUI script that handles all UI updates while playing in VR.
+ * */
 public class VRUpdateUI : MonoBehaviour
 {
-
+    [Header("UI Text Attributes")]
     public Text waveNumber;
     public Text beginWaveText;
     public Text ammoRemainingText;
@@ -15,6 +19,8 @@ public class VRUpdateUI : MonoBehaviour
     public Text gateOneText;
     public Text gateTwoText;
     public Text gateThreeText;
+
+    [Header("Other Game Objects")]
     public VRTK_ControllerEvents controllerEvents;
     public VRWaveManager waveManager;
     public GameObject shop;
@@ -22,15 +28,11 @@ public class VRUpdateUI : MonoBehaviour
     public GameObject gate2;
     public GameObject gate3;
 
-
-    // Use this for initialization
-    void Start()
-    {
-    }
-
     // Update is called once per frame
     void Update()
     {
+        // If a round is in progress remove the begin wave text and update the enemies alive text.
+        // Otherwise disable the enemies alive text and enable the begin wave text.
         if (waveManager.roundActive)
         {
             beginWaveText.enabled = false;
@@ -44,6 +46,8 @@ public class VRUpdateUI : MonoBehaviour
             beginWaveText.text = "Interact with console to start wave " + (waveManager.round);
             enemiesRemainingText.enabled = false;
         }
+
+        // Update wave number, ammo and coins
         waveNumber.text = "Wave: " + (waveManager.round - 1);
         if (controllerEvents.GetComponent<VRTK_InteractGrab>().GetGrabbedObject() != null)
         {
@@ -54,6 +58,7 @@ public class VRUpdateUI : MonoBehaviour
 
         coinAmountText.text = shop.GetComponent<VRShop>().coinBalance.ToString();
 
+        // Update the health of each gate
         if (gate1 != null)
         {
             gateOneText.text = gate1.GetComponent<Health>().health + "/" + gate1.GetComponent<Health>().maxHealth;

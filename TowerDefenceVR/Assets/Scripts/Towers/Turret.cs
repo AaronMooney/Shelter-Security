@@ -6,37 +6,41 @@ public class Turret : MonoBehaviour {
 
     private Transform target;
 
-    [Header("Attributes")]
+    [Header("Turret Stats")]
     public float range = 15f;
     public float fireRate = 1f;
     private float fireCooldown = 0f;
     public float damage;
+    public float turnSpeed = 8;
 
+    [Header("Setup Fields")]
     public bool useLaser = false;
     public LineRenderer lineRenderer;
     public ParticleSystem impact;
     public Light impactLight;
-
-    [Header("Setup Fields")]
     public Transform swivel;
-    public float turnSpeed = 8;
     public GameObject bulletPrefab;
     public Transform bulletSpawn;
+
     private float laserRate = 0;
 
 
     // Use this for initialization
-    void Start () {
+    private void Start () {
+        // update target every half second
         InvokeRepeating("UpdateTarget", 0f, 0.5f);
 	}
 
-    void UpdateTarget()
+    // Update current target
+    private void UpdateTarget()
     {
         GameObject[] enemies;
         if (gameObject.tag == "AntiAir")
             enemies = GameObject.FindGameObjectsWithTag("Aerial");
         else
             enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+        // init shortest distance to infinity
         float shortestDistance = Mathf.Infinity;
         GameObject nearestEnemy = null;
 
@@ -44,6 +48,7 @@ public class Turret : MonoBehaviour {
         {
             if (!enemy.GetComponent<EnemyHealth>().isDead)
             {
+                // calculate distance and overwrite shortest distance
                 float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
                 if (distanceToEnemy < shortestDistance)
                 {
@@ -53,6 +58,7 @@ public class Turret : MonoBehaviour {
             }
         }
 
+        // set target to nearest enemy
         if (nearestEnemy != null && shortestDistance <= range)
         {
             target = nearestEnemy.transform;
@@ -65,6 +71,8 @@ public class Turret : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
+
+        // if no target then return and disable laser
         if (target == null)
         {
             if (useLaser && lineRenderer.enabled)
@@ -86,7 +94,7 @@ public class Turret : MonoBehaviour {
         }
         else
         {
-
+            // shoot when ready and reset cooldown
             if (fireCooldown <= 0f)
             {
                 Shoot();
@@ -98,8 +106,10 @@ public class Turret : MonoBehaviour {
 
     }
 
-    void Shoot()
+    // Shoot method
+    private void Shoot()
     {
+        // Spawn bullet and set its damage
         GameObject newBullet = (GameObject)Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
         TurretBullet bullet = newBullet.GetComponent<TurretBullet>();
         bullet.BulletDamage = damage;
@@ -109,7 +119,8 @@ public class Turret : MonoBehaviour {
         }
     }
 
-    void FollowTarget()
+    // Rotate turret head to follow its target
+    private void FollowTarget()
     {
         Vector3 direction = target.position - transform.position;
         Quaternion pointDirection = Quaternion.LookRotation(direction);
@@ -121,22 +132,30 @@ public class Turret : MonoBehaviour {
             swivel.rotation = Quaternion.Euler(0f, rotation.y, 0f);
     }
 
-    void Laser()
+    // Fire laser method
+    private void Laser()
     {
+        // play effects
         if (!lineRenderer.enabled)
         {
             lineRenderer.enabled = true;
             impact.Play();
             impactLight.enabled = true;
         }
+        // set origin of laser
         lineRenderer.SetPosition(0, bulletSpawn.position);
+
+        // set other end of laser to enemy
         Vector3 targetOffset = new Vector3(target.position.x, target.position.y + 1, target.position.z);
         lineRenderer.SetPosition(1, targetOffset);
 
         Vector3 direction = transform.position - targetOffset;
 
+        // set impact effect potision and rotation
         impact.transform.position = targetOffset +  direction.normalized;
         impact.transform.rotation = Quaternion.LookRotation(direction);
+
+        // Deal 10% of enemy health as damage each second
         EnemyHealth enemyHealth = target.gameObject.GetComponent<EnemyHealth>();
         if (laserRate > 1f)
         {
@@ -146,6 +165,7 @@ public class Turret : MonoBehaviour {
         laserRate += Time.deltaTime;
     }
 
+    // helper method that draws the turret range in the scene
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;

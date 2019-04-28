@@ -2,7 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
-
+/*
+ * Aaron Mooney
+ * 
+ * FPCommands Script that handles player commands in multiplayer
+ * */
 public class FPCommands : NetworkBehaviour {
 
     public Weapon weapon;
@@ -14,7 +18,7 @@ public class FPCommands : NetworkBehaviour {
     private AnimatorStateInfo info;
     public AudioSource gunAudio;
 
-
+    // Command method that calls the replacate fire methods
     [Command]
     public void CmdShoot()
     {
@@ -28,6 +32,7 @@ public class FPCommands : NetworkBehaviour {
         }
     }
 
+    // Command method that calls the replicate impact method
     [Command]
     public void CmdImpact()
     {
@@ -58,9 +63,6 @@ public class FPCommands : NetworkBehaviour {
             weapon.IsScoped = !weapon.IsScoped;
         }
 
-
-
-
         if (!weapon.isReloading && weapon.currentAmmo < weapon.maxAmmo && Input.GetKeyDown(KeyCode.R))
         {
             StartCoroutine(Reload());
@@ -82,24 +84,28 @@ public class FPCommands : NetworkBehaviour {
         
     }
 
+    // Client method that calls the command to stop shooting
     [Client]
     private void StopShooting()
     {
         CmdStopShoot();
     }
 
+    // Command method that calls the replicate method to stop shooting
     [Command]
     private void CmdStopShoot()
     {
         RpcStopShoot();
     }
 
+    // repliacte method that replicated the stop shooting animation to all clients
     [ClientRpc]
     private void RpcStopShoot()
     {
         weapon.animator.SetBool("Shoot", false);
     }
 
+    // the client fire method that calls the shoot method
     [Client]
     private void Fire()
     {
@@ -116,6 +122,7 @@ public class FPCommands : NetworkBehaviour {
         }
     }
 
+    // The replicate method that replicates weapon firing across all clients
     [ClientRpc]
     public void RpcShootEffectsRay()
     {
@@ -125,13 +132,14 @@ public class FPCommands : NetworkBehaviour {
         weapon.gunParticles.Play();
     }
 
+    // The replicate method that replicates stop shooting
     [ClientRpc]
     public void RpcDisableShooting()
     {
         weapon.animator.SetBool("Shooting", false);
     }
 
-
+    // The replicate method that replicates impacts across clients
     [ClientRpc]
     public void RpcImpact()
     {
@@ -139,16 +147,11 @@ public class FPCommands : NetworkBehaviour {
         Destroy(instance, 2f);
     }
 
+    // The client shoot method that calls the command shoot and command impact
     [Client]
     private void ShootRay()
     {
         weapon.timer = 0f;
-
-        //gunAudio.Play();
-        //if (!VR) animator.SetBool("Shoot", true);
-
-        //gunParticles.Stop();
-        //gunParticles.Play();
 
 
         weapon.currentAmmo--;
@@ -174,12 +177,11 @@ public class FPCommands : NetworkBehaviour {
                 shootHit.collider.GetComponent<EnemyHealth>().TakeDamage(weapon.damagePerShot);
             }
 
-            //GameObject instance = (GameObject)Instantiate(weapon.impactEffect, shootHit.point, Quaternion.identity);
-            //Destroy(instance, 2f);
             CmdImpact();
         }
     }
 
+    // The replicate method that replicates shoot effects for projectile weapons
     [ClientRpc]
     public void RpcShootEffectsProjectile()
     {
@@ -202,7 +204,8 @@ public class FPCommands : NetworkBehaviour {
         weapon.gunParticles.Play();
 
     }
-    
+
+    // The client shoot method that calls the command shoot and command impact
     [Client]
     void ShootProjectile()
     {
@@ -210,24 +213,7 @@ public class FPCommands : NetworkBehaviour {
         Debug.Log("firew");
         weapon.timer = 0f;
 
-        //if (!info.IsName("SniperScoped") && !info.IsName("PlasmaScoped") && !info.IsName("LauncherScoped"))
-        //{
-        //    if (!VR) animator.SetBool("Shoot", true);
-        //}
-
-        //if (fireType == FireType.Launcher)
-        //{
-        //    gunAudio.time = 0f;
-        //    gunAudio.Play();
-        //    gunAudio.SetScheduledEndTime(AudioSettings.dspTime + (0.55f - 0f));
-        //} else
-        //{
-        //    gunAudio.Play();
-        //}
-
-
-        //gunParticles.Stop();
-        //gunParticles.Play();
+        
         weapon.currentAmmo--;
 
         CmdShoot();

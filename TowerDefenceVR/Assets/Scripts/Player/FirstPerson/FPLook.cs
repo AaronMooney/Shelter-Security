@@ -2,8 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * Aaron Mooney
+ * 
+ * FPLook script that deals with camera rotation with the mouse
+ * Script is adapted from the tutorial "[Unity C#] First Person Controller (E01: Basic FPS Controller and Jumping)" by Acacia Developer
+ * link at https://www.youtube.com/watch?v=n-KX8AeGK7E
+ * 
+ * parts taken from the tutorial are marked with 
+ * // ** ACACIA DEVELOPER ** //
+ *       his code here...
+ *       any modifications within his code are marked with
+ *       // ** AARON MOONEY ** //
+ *       my code here
+ *       // ** AARON MOONEY END ** //
+ * // ** ACACIA DEVELOPER END ** //
+ * 
+ * */
 public class FPLook : MonoBehaviour {
 
+    // ** ACACIA DEVELOPER ** //
     private string mouseXInput = "Mouse X";
     private string mouseYInput = "Mouse Y";
     private float mouseSensitivity = 150;
@@ -18,11 +36,15 @@ public class FPLook : MonoBehaviour {
 
     private void Update()
     {
-        if (!GetComponent<PlayerActions>().turretShopActive && !GetComponent<PlayerActions>().gunShopActive)
+        // ** AARON MOONEY ** //
+        // rotate camera while no menu is open
+        if (!GetComponent<PlayerActions>().turretShopActive && !GetComponent<PlayerActions>().gunShopActive && !GetComponent<PlayerActions>().menuActive)
             CameraRotate();
+        // ** AARON MOONEY END ** //
         
     }
 
+    // Rotate camera method
     private void CameraRotate()
     {
         float mouseX = Input.GetAxis(mouseXInput);
@@ -44,6 +66,7 @@ public class FPLook : MonoBehaviour {
             ClampXAxisRotationToValue(90.0f);
         }
 
+        // rotate player
         playerCam.transform.Rotate(Vector3.left * mouseY);
         transform.Rotate(Vector3.up * mouseX);
     }
@@ -55,4 +78,5 @@ public class FPLook : MonoBehaviour {
         eulerRotation.x = value;
         playerCam.transform.eulerAngles = eulerRotation;
     }
+    // ** ACACIA DEVELOPER END ** //
 }

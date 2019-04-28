@@ -4,10 +4,17 @@ using UnityEngine;
 using System.Linq;
 using VRTK;
 
+/*
+ * Aaron Mooney
+ * 
+ * VRShop script handles all turret shop actions in VR
+ * */
 public class VRShop : MonoBehaviour
 {
-
+    [Header("Controller")]
     public GameObject rightController;
+
+    [Header("Turret Meshes")]
     [SerializeField] private GameObject cannonMesh;
     [SerializeField] private GameObject gatlingMesh;
     [SerializeField] private GameObject missileLauncherMesh;
@@ -18,6 +25,7 @@ public class VRShop : MonoBehaviour
     [SerializeField] private GameObject disruptionMesh;
     [SerializeField] private GameObject selectedTurret;
 
+    [Header("Turret Objects")]
     public GameObject cannon;
     public GameObject gatling;
     public GameObject missileLauncher;
@@ -27,15 +35,7 @@ public class VRShop : MonoBehaviour
     public GameObject shockwave;
     public GameObject disruptor;
 
-    private bool isCanonPurchased = true;
-    private bool isGatlingPurchased = true;
-    private bool isMissilePurchased = true;
-    private bool isPunisherPurchased = true;
-    private bool isAntiAirPurchased = true;
-    private bool isBeamPurchased = true;
-    private bool isShockwavePurchased = true;
-    private bool isDisruptorPurchased = true;
-
+    [Header("Turret Images")]
     [SerializeField] private Sprite canonImage;
     [SerializeField] private Sprite gatlingImage;
     [SerializeField] private Sprite missileImage;
@@ -45,31 +45,33 @@ public class VRShop : MonoBehaviour
     [SerializeField] private Sprite shockwaveImage;
     [SerializeField] private Sprite disruptorImage;
 
-    private ShopCosts costs;
-
+    [Header("Other")]
     public VRTK_RadialMenu menu;
-    private bool canPlace = false;
-
-    private GameObject surfacePlotInstance;
-    private VRTK_Pointer pointer;
     public GameObject invisibleCursor;
-
     public int coinBalance;
 
+    private bool canPlace = false;
+    private GameObject surfacePlotInstance;
+    private VRTK_Pointer pointer;
+    private ShopCosts costs;
+
+    private bool isCanonPurchased = false;
+    private bool isGatlingPurchased = false;
+    private bool isMissilePurchased = false;
+    private bool isPunisherPurchased = false;
+    private bool isAntiAirPurchased = false;
+    private bool isBeamPurchased = false;
+    private bool isShockwavePurchased = false;
+    private bool isDisruptorPurchased = false;
+
     // Use this for initialization
-    void Start()
+    private void Start()
     {
         pointer = rightController.GetComponent<VRTK_Pointer>();
         costs = GetComponent<ShopCosts>();
-
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
+    // Set the images for the radial menu on the right controller
     public void SetMenuItems()
     {
         menu.buttons[0].ButtonIcon = canonImage;
@@ -97,6 +99,7 @@ public class VRShop : MonoBehaviour
         menu.RegenerateButtons();
     }
 
+    // Change the pointer of the controller to render the selected turret mesh
     private void TogglePointer(GameObject g)
     {
         pointer.enabled = false;
@@ -106,6 +109,7 @@ public class VRShop : MonoBehaviour
         pointer.pointerRenderer.enabled = true;
     }
 
+    // Reset the pointer to default
     private void ResetPointer()
     {
         pointer.enabled = false;
@@ -115,6 +119,7 @@ public class VRShop : MonoBehaviour
         pointer.pointerRenderer.enabled = true;
     }
 
+    // Purchase cannon and set the pointer to cannon if the player can purchase
     public void SetCursorCanon()
     {
         if (coinBalance >= costs.cannonCost)
@@ -128,6 +133,7 @@ public class VRShop : MonoBehaviour
         }
     }
 
+    // Purchase gatling gun and set the pointer to gatling gun if the player can purchase
     public void SetCursorGatling()
     {
         if (coinBalance >= costs.gatlingCost)
@@ -142,6 +148,7 @@ public class VRShop : MonoBehaviour
         }
     }
 
+    // Purchase beam cannon and set the pointer to beam cannon if the player can purchase
     public void SetCursorBeamCanon()
     {
         if (coinBalance >= costs.beamCannonCost)
@@ -156,6 +163,7 @@ public class VRShop : MonoBehaviour
         }
     }
 
+    // Purchase missile launcher and set the pointer to missile launcher if the player can purchase
     public void SetCursorMissile()
     {
         if (coinBalance >= costs.missileLauncherCost)
@@ -170,6 +178,7 @@ public class VRShop : MonoBehaviour
         }
     }
 
+    // Purchase anti air turret and set the pointer to anti air turret if the player can purchase
     public void SetCursorAntiAir()
     {
         if (coinBalance >= costs.antiAirCost)
@@ -184,6 +193,7 @@ public class VRShop : MonoBehaviour
         }
     }
 
+    // Purchase punisher and set the pointer to punisher if the player can purchase
     public void SetCursorPunisher()
     {
         if (coinBalance >= costs.punisherCost)
@@ -198,6 +208,7 @@ public class VRShop : MonoBehaviour
         }
     }
 
+    // Purchase shockwave turrey and set the pointer to shockwave turret if the player can purchase
     public void SetCursorShockwave()
     {
         if (coinBalance >= costs.shockwaveCost)
@@ -212,6 +223,7 @@ public class VRShop : MonoBehaviour
         }
     }
 
+    // Purchase disruptor and set the pointer to disruptor if the player can purchase
     public void SetCursorDisrupt()
     {
         if (coinBalance >= costs.disruptorCost)
@@ -226,6 +238,7 @@ public class VRShop : MonoBehaviour
         }
     }
 
+    // Check if a turret is purchased
     private bool IsPurchased(GameObject g)
     {
         if (g.GetComponent<TurretType>().turret == TurretType.TurretKind.Cannon)
@@ -263,6 +276,7 @@ public class VRShop : MonoBehaviour
         return false;
     }
 
+    // Purchase turret
     private void Purchase(GameObject g)
     {
         if (g.GetComponent<TurretType>().turret == TurretType.TurretKind.Cannon)
@@ -307,29 +321,33 @@ public class VRShop : MonoBehaviour
         }
     }
 
-
+    // Instantiate turret on a valid position
     public void SpawnTurret()
     {
         if (selectedTurret != null)
         {
-            Debug.Log("Selected Turret" + selectedTurret.name);
             GameObject[] turrets = GameObject.FindGameObjectsWithTag("Turret");
             GameObject[] antiairs = GameObject.FindGameObjectsWithTag("AntiAir");
 
             GameObject[] objs = turrets.Concat(antiairs).ToArray();
+
+            // Create new object at pointer position
             surfacePlotInstance = new GameObject();
             surfacePlotInstance.transform.position = pointer.pointerRenderer.GetDestinationHit().point;
 
+            // if no turrets exist then position is valid
             if (objs.Length == 0) canPlace = true;
+
+            // loop through each turret and if the distance between them and the pointer position is greater than 10 then the position is valid
             foreach (GameObject g in objs)
             {
-                Debug.Log("name " + g.name);
                 if (Vector3.Distance(surfacePlotInstance.transform.position, g.transform.position) > 10)
                     canPlace = true;
                 else
                     canPlace = false;
             }
 
+            // Spawn the turret
             if (canPlace && IsPurchased(selectedTurret))
             {
                 Vector3 newPos = new Vector3(surfacePlotInstance.transform.position.x, 0, surfacePlotInstance.transform.position.z);
@@ -345,11 +363,13 @@ public class VRShop : MonoBehaviour
         }
     }
 
+    // Add coins to balance
     public void AddCoins(int amount)
     {
         coinBalance += amount;
     }
 
+    // Method that updated enemy paths, currently unused due to a bug with some enemies freezing.
     private void UpdateEnemyPaths()
     {
         if (GameObject.FindGameObjectsWithTag("Enemy").Length > 0 || GameObject.FindGameObjectsWithTag("Aerial").Length > 0)
@@ -359,6 +379,7 @@ public class VRShop : MonoBehaviour
 
             GameObject[] enemies = groundUnits.Concat(drones).ToArray();
 
+            // loop through all enemies and update their path
             for (int i = 0; i < enemies.Length; i++)
             {
                 enemies[i].GetComponent<EnemyAI>().UpdatePath();

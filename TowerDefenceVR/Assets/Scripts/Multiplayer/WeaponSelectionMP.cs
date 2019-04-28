@@ -2,7 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
-
+/*
+ * Aaron Mooney
+ * 
+ * WeaponSelectionMP script that switches between purchased weapons for multiplayer
+ * */
 public class WeaponSelectionMP : NetworkBehaviour
 {
     [SyncVar]
@@ -20,9 +24,11 @@ public class WeaponSelectionMP : NetworkBehaviour
 
     void Update()
     {
+        // if it is not the local player then return
         if (!isLocalPlayer) return;
         int previousWeapon = currentWeaponIndex;
 
+        // Change the weapon index on scrollwheel scroll
         if (Input.GetAxis(cycleKey) < 0.0f)
         {
             if (currentWeaponIndex >= weaponHolder.transform.childCount - 1)
@@ -47,6 +53,7 @@ public class WeaponSelectionMP : NetworkBehaviour
             }
         }
 
+        // Change current weapon with numpad
         if (Input.GetKeyDown(KeyCode.Alpha1)) currentWeaponIndex = 0;
         if (Input.GetKeyDown(KeyCode.Alpha2) && weaponHolder.transform.childCount >= 2) currentWeaponIndex = 1;
         if (Input.GetKeyDown(KeyCode.Alpha3) && weaponHolder.transform.childCount >= 3) currentWeaponIndex = 2;
@@ -54,12 +61,14 @@ public class WeaponSelectionMP : NetworkBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha5) && weaponHolder.transform.childCount >= 5) currentWeaponIndex = 4;
         if (Input.GetKeyDown(KeyCode.Alpha6) && weaponHolder.transform.childCount >= 5) currentWeaponIndex = 5;
 
+        // if the previous index and current are different then switch weapons
         if (previousWeapon != currentWeaponIndex)
         {
             SwitchWeapon();
         }
     }
 
+    // Client method to switch weapons that calls a command
     [Client]
     private void SwitchWeapon()
     {
@@ -67,17 +76,16 @@ public class WeaponSelectionMP : NetworkBehaviour
         CmdEquip();
     }
 
-    //So far this works only when the host switched weapon. maybe try looking into hooks?
-    //Client switches weapon but model stays as pistol.
+    // Replicate the equip to all clients
+    // Client switches weapon but model stays as pistol.
     [ClientRpc]
     void RpcEquip()
     {
         if (isLocalPlayer) return;
         WeaponSwap();
-        Debug.Log("swapped " + currentWeapon.name);
     }
 
-
+    // Switch weapon
     private void WeaponSwap()
     {
         int i = 0;
@@ -96,7 +104,7 @@ public class WeaponSelectionMP : NetworkBehaviour
         }
     }
 
-
+    // Command method that calls the replicate method
     [Command]
     public void CmdEquip()
     {

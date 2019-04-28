@@ -4,17 +4,22 @@ using UnityEngine;
 using VRTK;
 using VRTK.UnityEventHelper;
 
+/*
+ * Aaron Mooney
+ * 
+ * VRPurchaseWeapon script that sets a weapon as purchased when its respective button is pushed
+ * */
 public class VRPurchaseWeapon : MonoBehaviour
 {
 
     private VRTK_Button_UnityEvents buttonEvents;
+
+    [Header("Script References")]
     [SerializeField] private GameObject weapon;
     [SerializeField] private VRShop shop;
     [SerializeField] private ShopCosts costs;
     [SerializeField] private VRTK_ObjectTooltip tooltip;
 
-    //public enum GunType { Assault, LaserRifle, Sniper, PlasmaSniper, Launcher };
-    //public GunType gunType;
 
     private VRToggleWeapon gun;
 
@@ -37,14 +42,13 @@ public class VRPurchaseWeapon : MonoBehaviour
         UpdateTooltip();
     }
 
+    // This method is called when a button is pushed
     private void HandlePush(object sender, Control3DEventArgs e)
     {
-        VRTK_Logger.Info("Pushed");
-
-
         PurchaseWeapon();
     }
 
+    // Check the weapon type and compare cost with coin balance and purchase weapon if possible
     private void PurchaseWeapon()
     {
         if (gun.gunType == VRToggleWeapon.GunType.Assault)
@@ -84,14 +88,16 @@ public class VRPurchaseWeapon : MonoBehaviour
         }
     }
 
+    // Purchases a weapon and destroys a button and its tooltip
     private void Toggle(int cost)
     {
         shop.coinBalance -= cost;
         Destroy(gameObject.transform.parent.gameObject);
-        //SetPurchased();
         gun.isPurchased = true;
     }
 
+
+    // Update the tooltip of each button with the cost of each weapon
     private void UpdateTooltip()
     {
         string text = "";
@@ -119,30 +125,4 @@ public class VRPurchaseWeapon : MonoBehaviour
 
         tooltip.displayText = text;
     }
-
-    //private void SetPurchased()
-    //{
-    //    if (gun.gunType == VRToggleWeapon.GunType.Assault)
-    //    {
-    //        gun.isPurchased = true;
-    //    }
-    //    if (gun.gunType == VRToggleWeapon.GunType.LaserRifle)
-    //    {
-    //        laserRiflePurchased = true;
-    //    }
-    //    if (gun.gunType == VRToggleWeapon.GunType.Sniper)
-    //    {
-    //        sniperPurchased = true;
-    //    }
-    //    if (gun.gunType == VRToggleWeapon.GunType.PlasmaSniper)
-    //    {
-    //        plasmaSniperPurchased = true;
-    //    }
-    //    if (gun.gunType == VRToggleWeapon.GunType.Launcher)
-    //    {
-    //        launcherPurchased = true;
-    //    }
-    //}
-
-
 }

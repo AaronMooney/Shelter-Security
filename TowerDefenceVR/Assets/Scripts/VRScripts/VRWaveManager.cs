@@ -4,6 +4,11 @@ using UnityEngine;
 using VRTK;
 using VRTK.UnityEventHelper;
 
+/*
+ * Aaron Mooney
+ * 
+ * VRWaveManager script that starts each round
+ * */
 public class VRWaveManager : MonoBehaviour {
 
     public bool roundActive = false;
@@ -12,6 +17,7 @@ public class VRWaveManager : MonoBehaviour {
 
     private VRTK_Button_UnityEvents buttonEvents;
 
+    // Initialise button and add a listener to the OnPushed event
     private void Start()
     {
         buttonEvents = GetComponent<VRTK_Button_UnityEvents>();
@@ -24,13 +30,14 @@ public class VRWaveManager : MonoBehaviour {
 
     private void Update()
     {
+        // enable the spawner while a round is active
         spawner.SetActive(roundActive);
     }
 
+    // Called when button is pushed
     private void HandlePush(object sender, Control3DEventArgs e)
     {
-        VRTK_Logger.Info("Pushed");
-
+        // Set round active and start spawning enemies
         if (!roundActive)
         {
             roundActive = !roundActive;
@@ -39,6 +46,7 @@ public class VRWaveManager : MonoBehaviour {
         }
     }
 
+    // Ends the round
     public void EndRound()
     {
         roundActive = false;

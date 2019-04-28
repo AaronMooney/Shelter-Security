@@ -3,7 +3,23 @@ using System.Collections;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
+/*
+ * MapDisplay script that draws texture or meshes.
+ * 
+ * This script is from the tutorial "Procedural Terrain Generation" by Sebastian Lague
+ * link: https://www.youtube.com/playlist?list=PLFt_AvWsXl0eBW2EiBtl_sxmDtSgZBxB3
+ * 
+ *  * parts taken from the tutorial are marked with 
+ * // ** SEBASTIAN LAGUE ** //
+ *       his code here...
+ *       any modifications within his code are marked with
+ *       // ** AARON MOONEY ** //
+ *       my code here
+ *       // ** AARON MOONEY END ** //
+ * // ** SEBASTIAN LAGUE END ** //
+ * */
 
+// ** SEBASTIAN LAGUE ** //
 public class MapDisplay : MonoBehaviour
 {
 
@@ -25,3 +41,4 @@ public class MapDisplay : MonoBehaviour
     }
 
 }
+// ** SEBASTIAN LAGUE END ** //

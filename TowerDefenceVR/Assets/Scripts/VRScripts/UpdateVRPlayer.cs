@@ -1,13 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/*
+ * Aaron Mooney
+ * 
+ * UpdateVRPlayer that keeps the player at the y=0 position at all times to avoid issue where height changes when teleporting
+ * */
 public class UpdateVRPlayer : MonoBehaviour {
-
-	// Use this for initialization
-	void Start () {
-		
-	}
 	
 	// Update is called once per frame
 	void Update () {

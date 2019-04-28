@@ -2,9 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
-
+/*
+ * Aaron Mooney
+ * 
+ * FPLookMP script that deals with camera rotation with the mouse for multiplayer
+ * Script is adapted from the tutorial "[Unity C#] First Person Controller (E01: Basic FPS Controller and Jumping)" by Acacia Developer
+ * link at https://www.youtube.com/watch?v=n-KX8AeGK7E
+ * 
+ * parts taken from the tutorial are marked with 
+ * // ** ACACIA DEVELOPER ** //
+ *       his code here...
+ *       any modifications within his code are marked with
+ *       // ** AARON MOONEY ** //
+ *       my code here
+ *       // ** AARON MOONEY END ** //
+ * // ** ACACIA DEVELOPER END ** //
+ * 
+ * */
 public class FPLookMP : NetworkBehaviour {
 
+    // ** ACACIA DEVELOPER ** //
     private string mouseXInput = "Mouse X";
     private string mouseYInput = "Mouse Y";
     private float mouseSensitivity = 150;
@@ -20,16 +37,19 @@ public class FPLookMP : NetworkBehaviour {
 
     private void LockCursor()
     {
-        //Cursor.lockState = CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.Locked;
 
     }
 
+    // ** AARON MOONEY ** //
     private void Update()
     {
+        // return if not local player
         if (!isLocalPlayer) return;
         CameraRotate();
         if (Application.isFocused) LockCursor();
     }
+    // ** AARON MOONEY ** //
 
     private void CameraRotate()
     {
@@ -64,3 +84,4 @@ public class FPLookMP : NetworkBehaviour {
         playerCam.transform.eulerAngles = eulerRotation;
     }
 }
+// ** ACACIA DEVELOPER END ** //

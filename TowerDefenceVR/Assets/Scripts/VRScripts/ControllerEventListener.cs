@@ -3,9 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using VRTK;
 
+/*
+ * Aaron Mooney
+ * 
+ * This is a script provided by VRTK that has been modified by myself slightly.
+ * These locations are marked with "// ** Modification **" comments.
+ * 
+ * This script listens for VR controller events and I have modified the touchpad released event to spawn turrets.
+ * 
+ * */
+
 public class ControllerEventListener : MonoBehaviour
 {
-
+    // ** Modification **
     public VRShop shop;
 
     private void Start()
@@ -175,8 +185,10 @@ public class ControllerEventListener : MonoBehaviour
         DebugLogger(VRTK_ControllerReference.GetRealIndex(e.controllerReference), "TOUCHPAD", "pressed down", e);
     }
 
+    // ** Modification **
     private void DoTouchpadReleased(object sender, ControllerInteractionEventArgs e)
     {
+        // Spawn turret if the touchpad is released
         shop.SpawnTurret();
        // DebugLogger(VRTK_ControllerReference.GetRealIndex(e.controllerReference), "TOUCHPAD", "released", e);
     }

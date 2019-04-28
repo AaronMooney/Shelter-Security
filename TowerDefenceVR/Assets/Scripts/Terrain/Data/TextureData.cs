@@ -2,7 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+/*
+ * TextureData Scriptable object that stores all the data regarding texture for the terrain
+ * This ended up being un used due to issues rendering the generated textures in the standalone build.
+ * 
+ * This script is from the tutorial "Procedural Terrain Generation" by Sebastian Lague
+ * link: https://www.youtube.com/playlist?list=PLFt_AvWsXl0eBW2EiBtl_sxmDtSgZBxB3
+ * 
+ *  * parts taken from the tutorial are marked with 
+ * // ** SEBASTIAN LAGUE ** //
+ *       his code here...
+ *       any modifications within his code are marked with
+ *       // ** AARON MOONEY ** //
+ *       my code here
+ *       // ** AARON MOONEY END ** //
+ * // ** SEBASTIAN LAGUE END ** //
+ * */
 
+// ** SEBASTIAN LAGUE ** //
 [CreateAssetMenu()]
 public class TextureData : UpdateableData {
 
@@ -63,3 +80,4 @@ public class TextureData : UpdateableData {
         public float textureScale;
     }
 }
+// ** SEBASTIAN LAGUE END ** //

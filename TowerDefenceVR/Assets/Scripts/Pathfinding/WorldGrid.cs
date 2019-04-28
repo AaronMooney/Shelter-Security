@@ -1,7 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+/*
+ * WorldGrid Script that creates the grid for A* pathfinding
+ * 
+ * This script is from the tutorial "A* Pathfinding Tutorial (Unity)" by Sebastian Lague
+ * link: https://www.youtube.com/playlist?list=PLFt_AvWsXl0cq5Umv3pMC9SPnKjfp9eGW
+ * 
+ *  * parts taken from the tutorial are marked with 
+ * // ** SEBASTIAN LAGUE ** //
+ *       his code here...
+ *       any modifications within his code are marked with
+ *       // ** AARON MOONEY ** //
+ *       my code here
+ *       // ** AARON MOONEY END ** //
+ * // ** SEBASTIAN LAGUE END ** //
+ * */
 
+
+// ** SEBASTIAN LAGUE ** //
 public class WorldGrid : MonoBehaviour
 {
     public bool displayGridGizmos;
@@ -13,7 +30,7 @@ public class WorldGrid : MonoBehaviour
     float nodeDiameter;
     int gridSizeX, gridSizeY;
 
-    void Awake()
+    private void Awake()
     {
         nodeDiameter = nodeRadius * 2;
         gridSizeX = Mathf.RoundToInt(gridWorldSize.x / nodeDiameter);
@@ -29,7 +46,8 @@ public class WorldGrid : MonoBehaviour
         }
     }
 
-    void CreateGrid()
+    // Create the grid and set each node as walkable or unwalkable
+    private void CreateGrid()
     {
         grid = new Node[gridSizeX, gridSizeY];
         Vector3 worldBottomLeft = transform.position - Vector3.right * gridWorldSize.x / 2 - Vector3.forward * gridWorldSize.y / 2;
@@ -45,6 +63,7 @@ public class WorldGrid : MonoBehaviour
         }
     }
 
+    // Get neighbours of a node
     public List<Node> GetNeighbours(Node node)
     {
         List<Node> neighbours = new List<Node>();
@@ -69,7 +88,7 @@ public class WorldGrid : MonoBehaviour
         return neighbours;
     }
 
-
+    // Get node from world position
     public Node NodeFromWorldPoint(Vector3 worldPosition)
     {
         float percentX = (worldPosition.x + gridWorldSize.x / 2) / gridWorldSize.x;
@@ -82,7 +101,8 @@ public class WorldGrid : MonoBehaviour
         return grid[x, y];
     }
 
-    void OnDrawGizmos()
+    // Helper method that draws the grid and color codes walkable and unwalkable nodes
+    private void OnDrawGizmos()
     {
         Gizmos.DrawWireCube(transform.position, new Vector3(gridWorldSize.x, 1, gridWorldSize.y));
         if (grid != null && displayGridGizmos)
@@ -95,3 +115,4 @@ public class WorldGrid : MonoBehaviour
         }
     }
 }
+// ** SEBASTIAN LAGUE END ** //

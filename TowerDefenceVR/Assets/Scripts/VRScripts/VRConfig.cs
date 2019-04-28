@@ -2,16 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * Aaron Mooney
+ * 
+ * VRConfig script containing static boolean VREnabled that is referenced by many scripts to determine if the game is in VR
+ * */
 public class VRConfig : MonoBehaviour {
 
-    static public bool VREnabled = false;
+    public static bool VREnabled = false;
 
-	// Use this for initialization
-	void Start () {
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }

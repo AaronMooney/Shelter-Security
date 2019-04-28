@@ -2,8 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * Aaron Mooney
+ * 
+ * Health script that manages the health of a friendly object
+ * 
+ * */
+
 public class Health : MonoBehaviour {
 
+    [Header("Stats")]
     public int health;
     public int maxHealth = 500;
 
@@ -19,13 +27,16 @@ public class Health : MonoBehaviour {
         if (health <= 0) Die();
 	}
 
+    // Take damage and reduce health
     public void TakeDamage(int amount)
     {
         health -= amount;
     }
 
+    // Die and destroy self
     public void Die()
     {
+        GameObject.Find("LoseGame").GetComponent<LoseGame>().Lose();
         Destroy(gameObject);
     }
 }

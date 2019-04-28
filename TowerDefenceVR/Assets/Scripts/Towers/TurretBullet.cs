@@ -2,22 +2,31 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * Aaron Mooney
+ * 
+ * TurretBullet script that handles events relating to bullets shot from turrets
+ * */
 public class TurretBullet : MonoBehaviour {
 
     private Transform target;
+
+    [Header("BulletStats")]
     public float speed = 70f;
     public GameObject impactEffect;
-    public float BulletDamage { get; set; }
     public float explosionRadius = 0;
+    public float BulletDamage { get; set; }
 
+    // Sets the target of a bullet
     public void Focus(Transform newTarget)
     {
         target = newTarget;
     }
 	
 	// Update is called once per frame
-	void Update () {
+	private void Update () {
 		
+        // if there is no target, destroy the bullet
         if (target == null)
         {
             Destroy(gameObject);
@@ -26,22 +35,28 @@ public class TurretBullet : MonoBehaviour {
 
         Vector3 direction = target.position - transform.position;
 
+        // Test to see if a bullet has reached its target
         if (direction.magnitude <= speed * Time.deltaTime)
         {
             HitTarget();
             return;
         }
 
+        // move bullet towards target
         transform.Translate(direction.normalized * (speed * Time.deltaTime), Space.World);
         transform.LookAt(target);
 
 	}
 
-    void HitTarget()
+    // Hit the target
+    private void HitTarget()
     {
+        // create impact
         GameObject instance = (GameObject)Instantiate(impactEffect, transform.position, transform.rotation);
         Destroy(instance, 5f);
         Destroy(gameObject);
+
+        // Explode or deal damage upon hitting an enemy
         if (target.gameObject.tag == "Enemy" || target.gameObject.tag == "Aerial")
         {
             if (explosionRadius > 0f)
@@ -55,8 +70,10 @@ public class TurretBullet : MonoBehaviour {
         }
     }
 
-    void Explode()
+    // Explode method
+    private void Explode()
     {
+        // Deal damage to enemies within explosion radius
         Collider[] hits = Physics.OverlapSphere(transform.position, explosionRadius);
         foreach (Collider col in hits)
         {
@@ -67,6 +84,7 @@ public class TurretBullet : MonoBehaviour {
         }
     }
 
+    // Helper method that draws the range of the turret
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;

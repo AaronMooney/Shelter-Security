@@ -1,7 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+/*
+ * Noise Script that generates a noise map using perlin noise
+ * 
+ * This script is from the tutorial "Procedural Terrain Generation" by Sebastian Lague
+ * link: https://www.youtube.com/playlist?list=PLFt_AvWsXl0eBW2EiBtl_sxmDtSgZBxB3
+ * 
+ *  * parts taken from the tutorial are marked with 
+ * // ** SEBASTIAN LAGUE ** //
+ *       his code here...
+ *       any modifications within his code are marked with
+ *       // ** AARON MOONEY ** //
+ *       my code here
+ *       // ** AARON MOONEY END ** //
+ * // ** SEBASTIAN LAGUE END ** //
+ * */
 
+// ** SEBASTIAN LAGUE ** //
 public class Noise {
 
     public static float [,] GenerateNoiseMap(int mapWidth, int mapHeight, int seed, float scale, int octaves, float persistance, float lacunarity, Vector2 offset)
@@ -25,7 +41,6 @@ public class Noise {
 
         float halfWidth = mapWidth / 2f;
         float halfHeight = mapHeight / 2f;
-
 
         for (int y = 0; y < mapHeight; y++)
         {
@@ -68,3 +83,4 @@ public class Noise {
         return noiseMap;
     }
 }
+// ** SEBASTIAN LAGUE END ** //

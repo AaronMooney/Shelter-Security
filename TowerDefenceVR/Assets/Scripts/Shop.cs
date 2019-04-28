@@ -2,10 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * Aaron Mooney
+ * 
+ * Shop script for the non-VR game allowing players to purchase weapons and turrets.
+ * 
+ * */
+
 public class Shop : MonoBehaviour {
 
-    public GameObject player;
-
+    // Turret objects to be placed
+    [Header("Turrets")]
     public GameObject cannon;
     public GameObject gatling;
     public GameObject missileLauncher;
@@ -15,6 +22,8 @@ public class Shop : MonoBehaviour {
     public GameObject shockwave;
     public GameObject disruptor;
 
+    // Turret mesh that is carried until placed so that turrets do not shoot while carrying
+    [Header("Turret Meshes")]
     public GameObject cannonMesh;
     public GameObject gatlingMesh;
     public GameObject missileLauncherMesh;
@@ -24,23 +33,29 @@ public class Shop : MonoBehaviour {
     public GameObject shockwaveMesh;
     public GameObject disruptorMesh;
 
-    private int coinBalance;
+    [Header("Other")]
+    public GameObject player;
     public ShopCosts costs;
 
+    private int coinBalance;
 
+    // Update is called once per frame
     private void Update()
     {
         coinBalance = player.GetComponent<PlayerActions>().coinBalance;
     }
 
+    // Purchase a turret and carry it in front of the player 
     public void PickupTurret(GameObject mesh, GameObject turret)
     {
         player.GetComponent<PickupAndPlace>().Pickup(mesh, turret);
         player.GetComponent<PlayerActions>().ToggleTurretShop();
     }
 
+    // Purchase a weapon
     public void PurchaseWeapon(WeaponPurchased.WeaponType type)
     {
+        // loop through each weapon available and compare its type and set weapon as purchased if the type matches
         foreach (Transform weapon in player.GetComponent<WeaponSelection>().weaponHolder.transform)
         {
             if (weapon.GetComponent<WeaponPurchased>().weaponType == type)
@@ -51,6 +66,7 @@ public class Shop : MonoBehaviour {
         player.GetComponent<PlayerActions>().ToggleGunShop();
     }
 
+    // Purchase Cannon
     public void PurchaseCannon()
     {
         if (coinBalance >= costs.cannonCost)
@@ -60,6 +76,7 @@ public class Shop : MonoBehaviour {
         }
     }
 
+    // Purchase Gatling Gun
     public void PurchaseGatling()
     {
         if (coinBalance >= costs.gatlingCost)
@@ -69,6 +86,7 @@ public class Shop : MonoBehaviour {
         }
     }
 
+    // Purchase Missile Launcher
     public void PurchaseMissile()
     {
         if (coinBalance >= costs.missileLauncherCost)
@@ -78,6 +96,7 @@ public class Shop : MonoBehaviour {
         }
     }
 
+    // Purchase Punisher
     public void PurchasePunisher()
     {
         if (coinBalance >= costs.punisherCost)
@@ -87,6 +106,7 @@ public class Shop : MonoBehaviour {
         }
     }
 
+    // Purchase Beam Cannon
     public void PurchaseBeamCannon()
     {
         if (coinBalance >= costs.beamCannonCost)
@@ -96,6 +116,7 @@ public class Shop : MonoBehaviour {
         }
     }
 
+    // Purchase Anti Air Turret
     public void PurchaseAntiAir()
     {
         if (coinBalance >= costs.antiAirCost)
@@ -105,6 +126,7 @@ public class Shop : MonoBehaviour {
         }
     }
 
+    // Purchase Shockwave Turret
     public void PurchaseShockwave()
     {
         if (coinBalance >= costs.shockwaveCost)
@@ -114,6 +136,7 @@ public class Shop : MonoBehaviour {
         }
     }
 
+    // Purchase Disruptor Turret
     public void PurchaseDisruptor()
     {
         if (coinBalance >= costs.disruptorCost)
@@ -123,6 +146,7 @@ public class Shop : MonoBehaviour {
         }
     }
 
+    // Purchase Assault Rifle
     public void PurchaseAssaultRifle()
     {
         if (coinBalance >= costs.assaultRifleCost)
@@ -132,6 +156,7 @@ public class Shop : MonoBehaviour {
         }
     }
 
+    // Purchase Laser Rifle
     public void PurchaseLaserRifle()
     {
         if (coinBalance >= costs.laserRifleCost)
@@ -141,6 +166,7 @@ public class Shop : MonoBehaviour {
         }
     }
 
+    // Purchase Sniper Rifle
     public void PurchaseSniper()
     {
         if (coinBalance >= costs.sniperCost)
@@ -150,6 +176,7 @@ public class Shop : MonoBehaviour {
         }
     }
 
+    // Purchase Plasma Sniper Rifle
     public void PurchasePlasmaSniper()
     {
         if (coinBalance >= costs.plasmaSniperCost)
@@ -159,6 +186,7 @@ public class Shop : MonoBehaviour {
         }
     }
 
+    // Purchase Rocket Launcher
     public void PurchaseLauncher()
     {
         if (coinBalance >= costs.launcherCost)

@@ -2,7 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+/*
+ * Heap Script that uses a heap to optimize the A* algorithm
+ * This reduced the time taken to run the algorithm by up to 20 ms
+ * 
+ * This script is from the tutorial "A* Pathfinding Tutorial (Unity)" by Sebastian Lague
+ * link: https://www.youtube.com/playlist?list=PLFt_AvWsXl0cq5Umv3pMC9SPnKjfp9eGW
+ * 
+ *  * parts taken from the tutorial are marked with 
+ * // ** SEBASTIAN LAGUE ** //
+ *       his code here...
+ *       any modifications within his code are marked with
+ *       // ** AARON MOONEY ** //
+ *       my code here
+ *       // ** AARON MOONEY END ** //
+ * // ** SEBASTIAN LAGUE END ** //
+ * */
 
+// ** SEBASTIAN LAGUE ** //
 public class Heap<T> where T : IHeapItem<T>
 {
 
@@ -122,3 +139,4 @@ public interface IHeapItem<T> : IComparable<T>
         set;
     }
 }
+// ** SEBASTIAN LAGUE END ** //

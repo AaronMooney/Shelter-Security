@@ -3,7 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /*
- * Weapon Class for Non VR weapons
+ * Aaron Mooney 
+ * 
+ * Weapon script used for multiplayer
+ * 
+ * Functions the same as the WeaponShoot script without the shooting mechanics
  * */
 public class Weapon : MonoBehaviour {
 

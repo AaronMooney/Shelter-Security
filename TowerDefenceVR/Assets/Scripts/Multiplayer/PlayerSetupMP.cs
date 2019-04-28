@@ -2,7 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
-
+/*
+ * Aaron Mooney
+ * 
+ * PlayerSetupMP script that initialises a player upon entering the game
+ * */
 public class PlayerSetupMP : NetworkBehaviour {
 
     [SerializeField] private Behaviour[] components;
@@ -12,6 +16,7 @@ public class PlayerSetupMP : NetworkBehaviour {
     private void Start()
     {
         lobbyCam = Camera.main;
+        // set player that is not the local player to the Player2 layer to that their model can be seen by the local player
         if (!isLocalPlayer)
         {
             model.layer = 10;
@@ -33,8 +38,7 @@ public class PlayerSetupMP : NetworkBehaviour {
         
     }
 
-
-
+    // Toggle the lobby camera
     private void OnDisable()
     {
         if (lobbyCam != null){
